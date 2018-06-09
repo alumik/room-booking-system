@@ -65,7 +65,7 @@ class Admin extends ActiveRecord implements IdentityInterface
         return [
             'admin_id' => '账号',
             'admin_name' => '姓名',
-            'email' => '电子邮箱地址',
+            'email' => 'Email',
         ];
     }
 

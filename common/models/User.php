@@ -54,6 +54,10 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+            ['email', 'required'],
+            ['email', 'email'],
+            ['email', 'string', 'max' => 255],
+            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => '该邮箱已注册！'],
         ];
     }
 
@@ -65,7 +69,10 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             'student_id' => '学号',
             'username' => '姓名',
-            'email' => '电子邮箱地址',
+            'email' => 'Email',
+            'status' => '状态',
+            'created_at' => '注册时间',
+            'updated_at' => '修改时间',
         ];
     }
 
@@ -198,5 +205,14 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    public static function allStatus()
+    {
+        return [self::STATUS_ACTIVE => '正常', self::STATUS_DELETED => '已删除'];
+    }
+
+    public function getStatusStr() {
+        return $this->status == self::STATUS_ACTIVE ? '正常' : '已删除';
     }
 }

@@ -36,7 +36,7 @@ class PasswordResetRequestForm extends Model
     public function attributeLabels()
     {
         return [
-            'email' => '电子邮箱地址',
+            'email' => 'Email',
         ];
     }
 

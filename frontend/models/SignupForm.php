@@ -51,7 +51,7 @@ class SignupForm extends Model
         return [
             'student_id' => '学号',
             'username' => '姓名',
-            'email' => '电子邮箱地址',
+            'email' => 'Email',
             'password' => '密码',
             'password2' => '重新输入密码',
         ];
