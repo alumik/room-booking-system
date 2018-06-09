@@ -9,10 +9,11 @@ use common\models\User;
  */
 class SignupForm extends Model
 {
+    public $student_id;
     public $username;
     public $email;
     public $password;
-
+    public $password2;
 
     /**
      * {@inheritdoc}
@@ -20,19 +21,39 @@ class SignupForm extends Model
     public function rules()
     {
         return [
+            ['student_id', 'trim'],
+            ['student_id', 'required'],
+            ['student_id', 'unique', 'targetClass' => '\common\models\User', 'message' => '该学号已注册！'],
+            ['student_id', 'string', 'length' => 7],
+
             ['username', 'trim'],
             ['username', 'required'],
-            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
-            ['username', 'string', 'min' => 2, 'max' => 255],
+            ['username', 'string', 'max' => 255],
 
             ['email', 'trim'],
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
+            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => '该邮箱已注册！'],
 
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
+
+            ['password2', 'compare', 'compareAttribute' => 'password'],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'student_id' => '学号',
+            'username' => '姓名',
+            'email' => '电子邮箱地址',
+            'password' => '密码',
+            'password2' => '重新输入密码',
         ];
     }
 
@@ -48,6 +69,7 @@ class SignupForm extends Model
         }
         
         $user = new User();
+        $user->student_id = $this->student_id;
         $user->username = $this->username;
         $user->email = $this->email;
         $user->setPassword($this->password);

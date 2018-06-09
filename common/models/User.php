@@ -11,6 +11,7 @@ use yii\web\IdentityInterface;
  * User model
  *
  * @property integer $id
+ * @property string $student_id
  * @property string $username
  * @property string $password_hash
  * @property string $password_reset_token
@@ -57,6 +58,18 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'student_id' => '学号',
+            'username' => '姓名',
+            'email' => '电子邮箱地址',
+        ];
+    }
+
+    /**
      * {@inheritdoc}
      */
     public static function findIdentity($id)
@@ -73,14 +86,14 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Finds user by username
+     * Finds user by student_id
      *
-     * @param string $username
+     * @param string $student_id
      * @return static|null
      */
-    public static function findByUsername($username)
+    public static function findByStudentId($student_id)
     {
-        return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
+        return static::findOne(['student_id' => $student_id, 'status' => self::STATUS_ACTIVE]);
     }
 
     /**

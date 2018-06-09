@@ -11,6 +11,8 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
+    'language' => 'zh-CN',
+    'name' => '图书馆研讨室预约系统',
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',

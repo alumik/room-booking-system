@@ -9,7 +9,7 @@ use yii\base\Model;
  */
 class LoginForm extends Model
 {
-    public $username;
+    public $student_id;
     public $password;
     public $rememberMe = true;
 
@@ -22,12 +22,25 @@ class LoginForm extends Model
     public function rules()
     {
         return [
-            // username and password are both required
-            [['username', 'password'], 'required'],
+            // student_id and password are both required
+            [['student_id', 'password'], 'required'],
+            ['student_id', 'string', 'length' => 7],
             // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'student_id' => '学号',
+            'password' => '密码',
+            'rememberMe' => '保持登录状态',
         ];
     }
 
@@ -43,13 +56,13 @@ class LoginForm extends Model
         if (!$this->hasErrors()) {
             $user = $this->getUser();
             if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
+                $this->addError($attribute, '学号或密码不正确！');
             }
         }
     }
 
     /**
-     * Logs in a user using the provided username and password.
+     * Logs in a user using the provided student_id and password.
      *
      * @return bool whether the user is logged in successfully
      */
@@ -63,14 +76,14 @@ class LoginForm extends Model
     }
 
     /**
-     * Finds user by [[username]]
+     * Finds user by [[student_id]]
      *
      * @return User|null
      */
     protected function getUser()
     {
         if ($this->_user === null) {
-            $this->_user = User::findByUsername($this->username);
+            $this->_user = User::findByStudentId($this->student_id);
         }
 
         return $this->_user;

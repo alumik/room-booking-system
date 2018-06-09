@@ -31,6 +31,16 @@ class PasswordResetRequestForm extends Model
     }
 
     /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'email' => '电子邮箱地址',
+        ];
+    }
+
+    /**
      * Sends an email with a link, for resetting the password.
      *
      * @return bool whether the email was send
@@ -62,7 +72,7 @@ class PasswordResetRequestForm extends Model
             )
             ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
             ->setTo($this->email)
-            ->setSubject('Password reset for ' . Yii::$app->name)
+            ->setSubject('密码重置邮件 ' . Yii::$app->name)
             ->send();
     }
 }
