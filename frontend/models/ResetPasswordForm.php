@@ -46,7 +46,7 @@ class ResetPasswordForm extends Model
         return [
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
-            ['password2', 'compare', 'compareAttribute' => 'password'],
+            ['password2', 'compare', 'compareAttribute' => 'password', 'message' => '两次输入密码不一致！'],
         ];
     }
 

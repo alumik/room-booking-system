@@ -20,7 +20,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            'student_id',
+            [
+                'attribute' => 'student_id',
+                'contentOptions'=>['width'=>'80px'],
+            ],
             'username',
             'email:email',
             [
@@ -31,10 +34,12 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'created_at',
                 'format' => ['date', 'php: Y-m-d H:i:s'],
+                'filter' => '',
             ],
             [
                 'attribute' => 'updated_at',
                 'format' => ['date', 'php: Y-m-d H:i:s'],
+                'filter' => '',
             ],
 
             [

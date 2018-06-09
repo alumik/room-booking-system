@@ -25,9 +25,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $form->field($model, 'email')->textInput(['spellcheck' => false]) ?>
 
-                <?= $form->field($model, 'password')->passwordInput() ?>
+                <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'password2')->passwordInput() ?>
+                <?= $form->field($model, 'password2')->passwordInput(['maxlength' => true]) ?>
 
                 <div class="form-group">
                     <?= Html::submitButton('注册', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>

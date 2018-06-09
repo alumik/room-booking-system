@@ -20,7 +20,6 @@ use yii\web\IdentityInterface;
  * @property string $admin_id
  * @property string $admin_name
  * @property string $password_hash
- * @property string $password_reset_token
  * @property string $email
  * @property string $auth_key
  * @property integer $created_at
@@ -63,9 +62,11 @@ class Admin extends ActiveRecord implements IdentityInterface
     public function attributeLabels()
     {
         return [
-            'admin_id' => '账号',
+            'admin_id' => '管理员账号',
             'admin_name' => '姓名',
             'email' => 'Email',
+            'created_at' => '注册时间',
+            'updated_at' => '修改时间',
         ];
     }
 
@@ -94,40 +95,6 @@ class Admin extends ActiveRecord implements IdentityInterface
     public static function findByAdminId($admin_id)
     {
         return static::findOne(['admin_id' => $admin_id]);
-    }
-
-    /**
-     * Finds user by password reset token
-     *
-     * @param string $token password reset token
-     * @return static|null
-     */
-    public static function findByPasswordResetToken($token)
-    {
-        if (!static::isPasswordResetTokenValid($token)) {
-            return null;
-        }
-
-        return static::findOne([
-            'password_reset_token' => $token,
-        ]);
-    }
-
-    /**
-     * Finds out if password reset token is valid
-     *
-     * @param string $token password reset token
-     * @return bool
-     */
-    public static function isPasswordResetTokenValid($token)
-    {
-        if (empty($token)) {
-            return false;
-        }
-
-        $timestamp = (int) substr($token, strrpos($token, '_') + 1);
-        $expire = Yii::$app->params['user.passwordResetTokenExpire'];
-        return $timestamp + $expire >= time();
     }
 
     /**
@@ -183,19 +150,12 @@ class Admin extends ActiveRecord implements IdentityInterface
         $this->auth_key = Yii::$app->security->generateRandomString();
     }
 
-    /**
-     * Generates new password reset token
-     */
-    public function generatePasswordResetToken()
+    public function beforeSave($insert)
     {
-        $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
-    }
-
-    /**
-     * Removes password reset token
-     */
-    public function removePasswordResetToken()
-    {
-        $this->password_reset_token = null;
+        if (parent::beforeSave($insert)) {
+            $this->updated_at = time();
+            return true;
+        }
+        return false;
     }
 }

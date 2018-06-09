@@ -5,12 +5,12 @@ namespace common\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\User;
+use common\models\Admin;
 
 /**
- * UserSearch represents the model behind the search form of `common\models\User`.
+ * AdminSearch represents the model behind the search form of `common\models\Admin`.
  */
-class UserSearch extends User
+class AdminSearch extends Admin
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class UserSearch extends User
     public function rules()
     {
         return [
-            [['id', 'status', 'created_at', 'updated_at'], 'integer'],
-            [['student_id', 'username', 'auth_key', 'password_hash', 'password_reset_token', 'email'], 'safe'],
+            [['id', 'created_at', 'updated_at'], 'integer'],
+            [['admin_id', 'admin_name', 'auth_key', 'password_hash', 'password_reset_token', 'email'], 'safe'],
         ];
     }
 
@@ -41,13 +41,13 @@ class UserSearch extends User
      */
     public function search($params)
     {
-        $query = User::find();
+        $query = Admin::find();
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort' => ['defaultOrder' => ['student_id' => SORT_ASC]],
+            'sort' => ['defaultOrder' => ['admin_id' => SORT_ASC]],
             'pagination'=>['pageSize' => 30],
         ]);
 
@@ -60,12 +60,9 @@ class UserSearch extends User
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
-            'status' => $this->status,
-        ]);
 
-        $query->andFilterWhere(['like', 'student_id', $this->student_id])
-            ->andFilterWhere(['like', 'username', $this->username])
+        $query->andFilterWhere(['like', 'admin_id', $this->admin_id])
+            ->andFilterWhere(['like', 'admin_name', $this->admin_name])
             ->andFilterWhere(['like', 'email', $this->email]);
 
         return $dataProvider;

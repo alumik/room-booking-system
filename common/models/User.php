@@ -215,4 +215,13 @@ class User extends ActiveRecord implements IdentityInterface
     public function getStatusStr() {
         return $this->status == self::STATUS_ACTIVE ? '正常' : '已删除';
     }
+
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            $this->updated_at = time();
+            return true;
+        }
+        return false;
+    }
 }
