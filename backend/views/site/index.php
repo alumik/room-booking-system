@@ -2,16 +2,14 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+$this->title = '图书馆研讨室预约系统';
 ?>
 <div class="site-index">
 
     <div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
+        <h1><?= Yii::$app->name ?></h1>
+        <br />
+        <p><a class="btn btn-lg btn-success">开始使用</a></p>
     </div>
 
     <div class="body-content">

@@ -1,4 +1,10 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Zhong
+ * Date: 2018/6/9
+ * Time: 23:04
+ */
 namespace common\models;
 
 use Yii;
@@ -11,29 +17,25 @@ use yii\web\IdentityInterface;
  * User model
  *
  * @property integer $id
- * @property string $student_id
- * @property string $username
+ * @property string $admin_id
+ * @property string $admin_name
  * @property string $password_hash
  * @property string $password_reset_token
  * @property string $email
  * @property string $auth_key
- * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password
  */
-class User extends ActiveRecord implements IdentityInterface
+class Admin extends ActiveRecord implements IdentityInterface
 {
-    const STATUS_DELETED = 0;
-    const STATUS_ACTIVE = 10;
-
 
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return '{{%user}}';
+        return '{{%admin}}';
     }
 
     /**
@@ -52,8 +54,6 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            ['status', 'default', 'value' => self::STATUS_ACTIVE],
-            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
         ];
     }
 
@@ -63,8 +63,8 @@ class User extends ActiveRecord implements IdentityInterface
     public function attributeLabels()
     {
         return [
-            'student_id' => '学号',
-            'username' => '姓名',
+            'admin_id' => '账号',
+            'admin_name' => '姓名',
             'email' => '电子邮箱地址',
         ];
     }
@@ -74,7 +74,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentity($id)
     {
-        return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
+        return static::findOne(['id' => $id]);
     }
 
     /**
@@ -86,14 +86,14 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Finds user by student_id
+     * Finds user by admin_id
      *
-     * @param string $student_id
+     * @param string $admin_id
      * @return static|null
      */
-    public static function findByStudentId($student_id)
+    public static function findByAdminId($admin_id)
     {
-        return static::findOne(['student_id' => $student_id, 'status' => self::STATUS_ACTIVE]);
+        return static::findOne(['admin_id' => $admin_id]);
     }
 
     /**
@@ -110,7 +110,6 @@ class User extends ActiveRecord implements IdentityInterface
 
         return static::findOne([
             'password_reset_token' => $token,
-            'status' => self::STATUS_ACTIVE,
         ]);
     }
 
