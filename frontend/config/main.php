@@ -12,7 +12,7 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'language' => 'zh-CN',
-    'name' => '图书馆研讨室预约系统',
+    'name' => '学生活动中心房间预约系统',
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
