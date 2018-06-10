@@ -218,11 +218,11 @@ class User extends ActiveRecord implements IdentityInterface
 
     public static function allStatus()
     {
-        return [self::STATUS_ACTIVE => '正常', self::STATUS_DELETED => '已删除'];
+        return [self::STATUS_ACTIVE => '正常', self::STATUS_DELETED => '已禁用'];
     }
 
     public function getStatusStr() {
-        return $this->status == self::STATUS_ACTIVE ? '正常' : '已删除';
+        return $this->status == self::STATUS_ACTIVE ? '正常' : '已禁用';
     }
 
     public function beforeSave($insert)

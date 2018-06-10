@@ -43,8 +43,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{view}{update}{resetpwd}{privilege}',
+                'template' => '{view} {update} {resetpwd} {privilege}',
                 'buttons' => [
+
                     'resetpwd' => function($url, $model, $key)
                     {
                         $options = [
@@ -52,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'aria-label' => '修改密码',
                             'data-pjax' => '0',
                         ];
-                        return Html::a('<span class="glyphicon glyphicon-lock"></span>', $url, $options);
+                        return Html::a('<span class="glyphicon glyphicon-cog"></span>', $url, $options);
                     },
                     'privilege' => function($url, $model, $key)
                     {

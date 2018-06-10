@@ -50,12 +50,23 @@ $this->params['breadcrumbs'][] = $this->title;
                 'buttons' => [
                     'changestatus' => function($url, $model, $key)
                     {
+                        if ($model->status == User::STATUS_ACTIVE) {
+                            $options = [
+                                'title' => '禁用学生',
+                                'aria-label' => '禁用学生',
+                                'data-pjax' => '0',
+                                'data-method' => 'post',
+                                'data-confirm' => '你确定要禁用该学生吗？该学生的所有预约都将被取消。',
+                            ];
+                            return Html::a('<span class="glyphicon glyphicon-remove"></span>', $url, $options);
+                        }
                         $options = [
-                            'title' => '切换状态',
-                            'aria-label' => '切换状态',
+                            'title' => '启用学生',
+                            'aria-label' => '启用学生',
                             'data-pjax' => '0',
+                            'data-method' => 'post',
                         ];
-                        return Html::a('<span class="glyphicon glyphicon-refresh"></span>', $url, $options);
+                        return Html::a('<span class="glyphicon glyphicon-ok"></span>', $url, $options);
                     },
                 ]
             ],
