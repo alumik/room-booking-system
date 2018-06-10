@@ -54,10 +54,19 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
             ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => '该邮箱已注册！'],
+
+            ['student_id', 'required'],
+            ['student_id', 'string', 'length' => 7],
+            ['student_id', 'unique', 'targetClass' => '\common\models\User', 'message' => '该账号已注册！'],
+
+            ['username', 'trim'],
+            ['username', 'required'],
+            ['username', 'string', 'max' => 255],
         ];
     }
 
