@@ -1,4 +1,5 @@
 <?php
+
 namespace frontend\models;
 
 use Yii;
@@ -6,12 +7,11 @@ use yii\base\Model;
 use common\models\User;
 
 /**
- * Password reset request form
+ * 学生密码重置申请表单模型
  */
 class PasswordResetRequestForm extends Model
 {
     public $email;
-
 
     /**
      * {@inheritdoc}
@@ -25,7 +25,7 @@ class PasswordResetRequestForm extends Model
             ['email', 'exist',
                 'targetClass' => '\common\models\User',
                 'filter' => ['status' => User::STATUS_ACTIVE],
-                'message' => 'There is no user with this email address.'
+                'message' => '该Email未注册或无效！'
             ],
         ];
     }
@@ -41,13 +41,13 @@ class PasswordResetRequestForm extends Model
     }
 
     /**
-     * Sends an email with a link, for resetting the password.
+     * 发送一封含有密码重置链接的邮件
      *
-     * @return bool whether the email was send
+     * @return bool 邮件发送是否成功
+     * @throws \Exception
      */
     public function sendEmail()
     {
-        /* @var $user User */
         $user = User::findOne([
             'status' => User::STATUS_ACTIVE,
             'email' => $this->email,

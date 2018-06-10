@@ -1,11 +1,12 @@
 <?php
+
 namespace frontend\models;
 
 use yii\base\Model;
 use common\models\User;
 
 /**
- * Signup form
+ * 学生注册表单模型
  */
 class SignupForm extends Model
 {
@@ -58,9 +59,10 @@ class SignupForm extends Model
     }
 
     /**
-     * Signs user up.
+     * 注册学生
      *
-     * @return User|null the saved model or null if saving fails
+     * @return User|null
+     * @throws \Exception
      */
     public function signup()
     {

@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="site-signup">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>请填写以下信息注册新账号：</p>
+    <p>请填写以下信息：</p>
 
     <div class="row">
         <div class="col-lg-5">

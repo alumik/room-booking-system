@@ -1,11 +1,12 @@
 <?php
+
 namespace frontend\models;
 
 use yii\base\Model;
 use common\models\User;
 
 /**
- * Reset password form
+ * 学生登录后修改密码表单模型
  */
 class LoginResetPasswordForm extends Model
 {
@@ -37,10 +38,11 @@ class LoginResetPasswordForm extends Model
     }
 
     /**
-     * Reset password.
+     * 修改密码
      *
      * @param integer $id
-     * @return boolean
+     * @return bool
+     * @throws \Exception
      */
     public function resetPassword($id)
     {

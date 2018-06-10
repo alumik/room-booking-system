@@ -43,6 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'class' => 'yii\grid\ActionColumn',
+                'contentOptions'=>['align'=>'center'],
                 'template' => '{view} {update} {resetpwd} {privilege}',
                 'buttons' => [
 

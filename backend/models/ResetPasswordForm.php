@@ -41,7 +41,7 @@ class ResetPasswordForm extends Model
      * 修改密码
      *
      * @param integer $id
-     * @return boolean
+     * @return bool
      * @throws \Exception
      */
     public function resetPassword($id)
