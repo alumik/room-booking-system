@@ -35,13 +35,13 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    $menuItems = [
-
-    ];
+    $menuItems = [];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => '注册', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => '登录', 'url' => ['/site/login']];
     } else {
+        $menuItems[] = ['label' => '预约房间', 'url' => ['/apply/newapply']];
+        $menuItems[] = ['label' => '我的预约', 'url' => ['/user/myapply']];
         $menuItems[] = ['label' => '我的账号', 'url' => ['/user/view']];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')

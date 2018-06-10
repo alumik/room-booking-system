@@ -7,7 +7,7 @@ use yii\widgets\ActiveForm;
 /* @var $model common\models\Admin */
 
 $this->title = '修改管理员资料：' . $model->admin_name;
-$this->params['breadcrumbs'][] = ['label' => '管理员', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => '管理员管理', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->admin_id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = '修改';
 ?>

@@ -7,7 +7,7 @@ use yii\widgets\ActiveForm;
 /* @var $model common\models\Admin */
 
 $this->title = '新增管理员';
-$this->params['breadcrumbs'][] = ['label' => '管理员', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => '管理员管理', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="admin-create">

@@ -2,11 +2,11 @@
     <a href="https://github.com/yiisoft" target="_blank">
         <img src="https://avatars0.githubusercontent.com/u/993323" height="100px">
     </a>
-    <h1 align="center">图书馆研讨室预约系统</h1>
+    <h1 align="center">学生活动中心房间预约及管理系统</h1>
     <br>
 </p>
 
-本项目为一个简易的图书馆研讨室预约系统Demo
+本项目为一个简易的学生活动中心房间预约系统（学生端）以及一个对应的管理系统（教师端）
 
 目录结构
 -------------------

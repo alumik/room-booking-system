@@ -46,6 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'class' => 'yii\grid\ActionColumn',
+                'contentOptions'=>['align'=>'center'],
                 'template' => '{changestatus}',
                 'buttons' => [
                     'changestatus' => function($url, $model, $key)

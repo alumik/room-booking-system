@@ -10,7 +10,7 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\AdminSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = '管理员';
+$this->title = '管理员管理';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="admin-index">

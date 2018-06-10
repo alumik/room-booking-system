@@ -9,7 +9,7 @@ use yii\widgets\DetailView;
 /* @var $model common\models\Admin */
 
 $this->title = $model->admin_name;
-$this->params['breadcrumbs'][] = ['label' => '管理员', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => '管理员管理', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $model->admin_id;
 ?>
 <div class="admin-view">

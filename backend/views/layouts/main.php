@@ -39,11 +39,15 @@ AppAsset::register($this);
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => '登录', 'url' => ['/site/login']];
     } else {
+        if (Yii::$app->user->can('manageRoom')) {
+            $menuItems[] = ['label' => '房间管理', 'url' => ['/room/index']];
+            $menuItems[] = ['label' => '预约管理', 'url' => ['/apply/index']];
+        }
         if (Yii::$app->user->can('viewStudentList')) {
             $menuItems[] = ['label' => '学生管理', 'url' => ['/user/index']];
         }
         if (Yii::$app->user->can('viewAdminList')) {
-            $menuItems[] = ['label' => '管理员', 'url' => ['/admin/index']];
+            $menuItems[] = ['label' => '管理员管理', 'url' => ['/admin/index']];
         }
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
