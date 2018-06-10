@@ -22,7 +22,7 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error'],
+                        'actions' => ['login', 'error', 'about'],
                         'allow' => true,
                     ],
                     [
@@ -61,6 +61,16 @@ class SiteController extends Controller
     public function actionIndex()
     {
         return $this->render('index');
+    }
+
+    /**
+     * Displays about page.
+     *
+     * @return mixed
+     */
+    public function actionAbout()
+    {
+        return $this->render('about');
     }
 
     /**

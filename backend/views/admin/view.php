@@ -15,7 +15,9 @@ $this->params['breadcrumbs'][] = $model->admin_id;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('修改', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('修改信息', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('修改密码', ['resetpwd', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('修改权限', ['privilege', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('删除', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [

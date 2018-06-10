@@ -47,8 +47,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     'resetpwd' => function($url, $model, $key)
                     {
                         $options = [
-                            'title' => '重置密码',
-                            'aria-label' => '重置密码',
+                            'title' => '修改密码',
+                            'aria-label' => '修改密码',
                             'data-pjax' => '0',
                         ];
                         return Html::a('<span class="glyphicon glyphicon-lock"></span>', $url, $options);

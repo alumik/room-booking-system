@@ -18,10 +18,10 @@ $this->title = $name;
     </div>
 
     <p>
-        The above error occurred while the Web server was processing your request.
+        上述错误信息表明该请求不能得到正确执行。
     </p>
     <p>
-        Please contact us if you think this is a server error. Thank you.
+        如果你觉得这是服务端错误，请联系我们，谢谢。
     </p>
 
 </div>

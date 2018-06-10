@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = '修改';
             ['prompt' => '请选择状态']) ?>
 
         <div class="form-group">
-            <?= Html::submitButton('修改', ['class' => 'btn btn-success']) ?>
+            <?= Html::submitButton('保存', ['class' => 'btn btn-success']) ?>
         </div>
 
         <?php ActiveForm::end(); ?>

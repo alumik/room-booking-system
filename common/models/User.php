@@ -224,4 +224,15 @@ class User extends ActiveRecord implements IdentityInterface
         }
         return false;
     }
+
+    public function changeStatus()
+    {
+        if ($this->status == self::STATUS_ACTIVE) {
+            $this->status = self::STATUS_DELETED;
+        } else {
+            $this->status = self::STATUS_ACTIVE;
+        }
+
+        return true;
+    }
 }

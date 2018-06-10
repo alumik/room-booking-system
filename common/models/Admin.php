@@ -53,6 +53,18 @@ class Admin extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
+            ['email', 'required'],
+            ['email', 'email'],
+            ['email', 'string', 'max' => 255],
+            ['email', 'unique', 'targetClass' => '\common\models\Admin', 'message' => '该邮箱已注册！'],
+
+            ['admin_id', 'required'],
+            ['admin_id', 'string', 'length' => 7],
+            ['admin_id', 'unique', 'targetClass' => '\common\models\Admin', 'message' => '该账号已注册！'],
+
+            ['admin_name', 'trim'],
+            ['admin_name', 'required'],
+            ['admin_name', 'string', 'max' => 255],
         ];
     }
 

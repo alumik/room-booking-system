@@ -44,7 +44,18 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{update}'
+                'template' => '{changestatus}',
+                'buttons' => [
+                    'changestatus' => function($url, $model, $key)
+                    {
+                        $options = [
+                            'title' => '切换状态',
+                            'aria-label' => '切换状态',
+                            'data-pjax' => '0',
+                        ];
+                        return Html::a('<span class="glyphicon glyphicon-refresh"></span>', $url, $options);
+                    },
+                ]
             ],
         ],
     ]); ?>

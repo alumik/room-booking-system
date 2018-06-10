@@ -6,6 +6,7 @@ use Yii;
 use common\models\User;
 use common\models\UserSearch;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -31,10 +32,16 @@ class UserController extends Controller
 
     /**
      * Lists all User models.
+     *
+     * @throws ForbiddenHttpException
      * @return mixed
      */
     public function actionIndex()
     {
+        if (!Yii::$app->user->can('viewStudentList')) {
+            throw new ForbiddenHttpException('对不起，你没有进行该操作的权限。');
+        }
+
         $searchModel = new UserSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -64,6 +71,20 @@ class UserController extends Controller
         ]);
     }
 
+    public function actionChangestatus($id)
+    {
+        if (!Yii::$app->user->can('manageStudent')) {
+            throw new ForbiddenHttpException('对不起，你没有进行该操作的权限。');
+        }
+
+        $model = $this->findModel($id);
+
+        $model->changeStatus();
+        $model->save();
+
+        return $this->redirect(['index']);
+    }
+
     /**
      * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
@@ -77,6 +98,6 @@ class UserController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+        throw new NotFoundHttpException('对不起，未找到你查询的数据');
     }
 }
