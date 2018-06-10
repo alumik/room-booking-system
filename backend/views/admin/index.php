@@ -19,6 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('新增管理员', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('权限对照表', ['viewprivilege'], ['class' => 'btn btn-primary']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -26,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             [
                 'attribute' => 'admin_id',
-                'contentOptions'=>['width'=>'120px'],
+                'contentOptions' => ['width' => '120px'],
             ],
             'admin_name',
             'email:email',
@@ -35,33 +36,33 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => '超级管理员',
                 'value' => 'superAdminStr',
                 'filter' => ['0' => '不是', '1' => '是'],
-                'contentOptions'=>['align'=>'center'],
+                'contentOptions' => ['align' => 'center'],
             ],
             [
                 'attribute' => 'web_admin',
                 'label' => '网站管理员',
                 'value' => 'webAdminStr',
                 'filter' => ['0' => '不是', '1' => '是'],
-                'contentOptions'=>['align'=>'center'],
+                'contentOptions' => ['align' => 'center'],
             ],
             [
                 'attribute' => 'student_admin',
                 'label' => '学生管理员',
                 'value' => 'studentAdminStr',
                 'filter' => ['0' => '不是', '1' => '是'],
-                'contentOptions'=>['align'=>'center'],
+                'contentOptions' => ['align' => 'center'],
             ],
             [
                 'attribute' => 'room_admin',
                 'label' => '预约管理员',
                 'value' => 'roomAdminStr',
                 'filter' => ['0' => '不是', '1' => '是'],
-                'contentOptions'=>['align'=>'center'],
+                'contentOptions' => ['align' => 'center'],
             ],
 
             [
                 'class' => 'yii\grid\ActionColumn',
-                'contentOptions'=>['align'=>'center'],
+                'contentOptions' => ['align' => 'center'],
                 'template' => '{view} {update} {resetpwd} {privilege}',
                 'buttons' => [
 

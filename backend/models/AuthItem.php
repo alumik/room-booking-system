@@ -110,4 +110,76 @@ class AuthItem extends \yii\db\ActiveRecord
     {
         return $this->hasMany(AuthItem::className(), ['name' => 'parent'])->viaTable('auth_item_child', ['child' => 'name']);
     }
+
+    /**
+     * 获取角色对应的权限
+     *
+     * @return array
+     */
+    public function getPrivileges() {
+        $privileges = AuthItemChild::find()->select(['child'])
+            ->where(['auth_item_child.parent' => $this->name])
+            ->all();
+
+        $privilegesArray = array();
+        foreach ($privileges as $privilege) {
+            array_push($privilegesArray, $privilege->child);
+        }
+
+        return $privilegesArray;
+    }
+
+    /**
+     * 获取priManageRoom
+     *
+     * @return string
+     */
+    public function getPriManageRoom() {
+        return in_array('manageRoom', $this->getPrivileges()) ? '●' : '-';
+    }
+
+    /**
+     * 获取priManageAdmin
+     *
+     * @return string
+     */
+    public function getPriManageAdmin() {
+        return in_array('manageAdmin', $this->getPrivileges()) ? '●' : '-';
+    }
+
+    /**
+     * 获取priManageStudent
+     *
+     * @return string
+     */
+    public function getPriManageStudent() {
+        return in_array('manageStudent', $this->getPrivileges()) ? '●' : '-';
+    }
+
+    /**
+     * 获取priViewAdminList
+     *
+     * @return string
+     */
+    public function getPriViewAdminList() {
+        return in_array('viewAdminList', $this->getPrivileges()) ? '●' : '-';
+    }
+
+    /**
+     * 获取priViewStudentList
+     *
+     * @return string
+     */
+    public function getPriViewStudentList() {
+        return in_array('viewStudentList', $this->getPrivileges()) ? '●' : '-';
+    }
+
+    /**
+     * 获取priManagePermission
+     *
+     * @return string
+     */
+    public function getPriManagePermission() {
+        return in_array('managePermission', $this->getPrivileges()) ? '●' : '-';
+    }
 }

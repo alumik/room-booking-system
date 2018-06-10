@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             [
                 'attribute' => 'student_id',
-                'contentOptions'=>['width'=>'80px'],
+                'contentOptions' => ['width' => '80px'],
             ],
             'username',
             'email:email',
@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'class' => 'yii\grid\ActionColumn',
-                'contentOptions'=>['align'=>'center'],
+                'contentOptions' => ['align' => 'center'],
                 'template' => '{changestatus}',
                 'buttons' => [
                     'changestatus' => function($url, $model, $key)

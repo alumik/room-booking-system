@@ -2,6 +2,8 @@
 
 namespace backend\controllers;
 
+use app\models\AuthItem;
+use backend\models\AuthItemSearch;
 use Yii;
 use app\models\AuthAssignment;
 use backend\models\ResetPasswordForm;
@@ -231,6 +233,26 @@ class AdminController extends Controller
             'model' => $model,
             'roles' => $roles,
             'allRoles' => $allRoles,
+        ]);
+    }
+
+    /**
+     * 权限对照表
+     *
+     * @return string
+     * @throws ForbiddenHttpException
+     */
+    public function actionViewprivilege() {
+        if (!Yii::$app->user->can('manageAdmin')) {
+            throw new ForbiddenHttpException('对不起，你没有进行该操作的权限。');
+        }
+
+        $searchModel = new AuthItemSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('view_privilege', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
