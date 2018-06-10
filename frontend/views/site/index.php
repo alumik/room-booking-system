@@ -10,7 +10,10 @@ $this->title = Yii::$app->name;
         <h3>欢迎使用</h3>
         <h1><?= Yii::$app->name ?></h1>
         <br />
-        <p><a class="btn btn-lg btn-success">开始使用</a></p>
+        <div class="btn-group-lg">
+            <a class="btn btn-lg btn-success">预约房间</a>
+            <a class="btn btn-lg btn-success">我的预约</a>
+        </div>
     </div>
 
     <div class="body-content">
