@@ -1,11 +1,18 @@
 <?php
+
 namespace backend\models;
 
 use yii\base\Model;
 use common\models\Admin;
 
 /**
- * Signup form
+ * 注册表单类
+ *
+ * @param string $admin_id
+ * @param string $admin_name
+ * @param string $email
+ * @param string $password
+ * @param string $password2
  */
 class SignupForm extends Model
 {
@@ -58,9 +65,9 @@ class SignupForm extends Model
     }
 
     /**
-     * Signs admin up.
+     * 注册管理员
      *
-     * @return Admin|null the saved model or null if saving fails
+     * @return Admin|null
      */
     public function signup()
     {

@@ -5,7 +5,7 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "auth_assignment".
+ * "auth_assignment" 表的模型类
  *
  * @property string $item_name
  * @property string $user_id

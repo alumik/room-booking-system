@@ -2,20 +2,21 @@
 
 namespace backend\controllers;
 
+use Yii;
 use app\models\AuthAssignment;
 use app\models\AuthItem;
 use backend\models\ResetPasswordForm;
 use backend\models\SignupForm;
-use Yii;
 use common\models\Admin;
 use common\models\AdminSearch;
+use yii\db\StaleObjectException;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\ForbiddenHttpException;
 
 /**
- * AdminController implements the CRUD actions for Admin model.
+ * AdminController Admin模型类的控制器
  */
 class AdminController extends Controller
 {
@@ -35,10 +36,10 @@ class AdminController extends Controller
     }
 
     /**
-     * Lists all Admin models.
+     * 列出所有管理员
      *
-     * @throws ForbiddenHttpException
      * @return mixed
+     * @throws ForbiddenHttpException 如果没有权限
      */
     public function actionIndex()
     {
@@ -56,12 +57,12 @@ class AdminController extends Controller
     }
 
     /**
-     * Displays a single Admin model.
+     * 查看一个管理员的详细信息
      *
      * @param integer $id
-     * @throws ForbiddenHttpException
      * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * @throws ForbiddenHttpException 如果没有权限
+     * @throws NotFoundHttpException 如果模型找不到
      */
     public function actionView($id)
     {
@@ -75,11 +76,11 @@ class AdminController extends Controller
     }
 
     /**
-     * Creates a new Admin model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
+     * 创建一个新管理员
+     * 如果操作成功则跳转至详情页
      *
-     * @throws ForbiddenHttpException
      * @return mixed
+     * @throws ForbiddenHttpException 如果没有权限
      */
     public function actionCreate()
     {
@@ -100,6 +101,14 @@ class AdminController extends Controller
         ]);
     }
 
+    /**
+     * 重置管理员密码
+     * 如果操作成功则跳转至管理员列表
+     *
+     * @param integer $id
+     * @return mixed
+     * @throws ForbiddenHttpException 如果没有权限
+     */
     public function actionResetpwd($id)
     {
         if (!Yii::$app->user->can('manageAdmin')) {
@@ -120,13 +129,13 @@ class AdminController extends Controller
     }
 
     /**
-     * Updates an existing Admin model.
-     * If update is successful, the browser will be redirected to the 'view' page.
+     * 修改管理员信息
+     * 如果操作成功则跳转至详情页
      *
-     * @throws ForbiddenHttpException
      * @param integer $id
      * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * @throws ForbiddenHttpException 如果没有权限
+     * @throws NotFoundHttpException 如果模型找不到
      */
     public function actionUpdate($id)
     {
@@ -146,13 +155,15 @@ class AdminController extends Controller
     }
 
     /**
-     * Deletes an existing Admin model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * 删除管理员
+     * 如果操作成功则跳转至管理员列表
      *
-     * @throws ForbiddenHttpException
      * @param integer $id
      * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * @throws ForbiddenHttpException 如果没有权限
+     * @throws NotFoundHttpException 如果模型找不到
+     * @throws StaleObjectException 如果[[optimisticLock|optimistic locking]]已启用且待删除数据已过期
+     * @throws \Exception|\Throwable 如果删除失败
      */
     public function actionDelete($id)
     {
@@ -166,21 +177,14 @@ class AdminController extends Controller
     }
 
     /**
-     * Finds the Admin model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
+     * 修改管理员权限
+     * 如果操作成功则跳转至管理员列表
+     *
      * @param integer $id
-     * @return Admin the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
+     * @return mixed
+     * @throws ForbiddenHttpException 如果没有权限
+     * @throws NotFoundHttpException 如果模型找不到
      */
-    protected function findModel($id)
-    {
-        if (($model = Admin::findOne($id)) !== null) {
-            return $model;
-        }
-
-        throw new NotFoundHttpException('The requested page does not exist.');
-    }
-
     public function actionPrivilege($id)
     {
         if (!Yii::$app->user->can('managePermission')) {
@@ -194,7 +198,6 @@ class AdminController extends Controller
             ->orderBy('description')
             ->all();
         $allPrivilegesArray = array();
-
         foreach ($allPrivileges as $privilege) {
             $allPrivilegesArray[$privilege->name] = $privilege->description;
         }
@@ -203,7 +206,6 @@ class AdminController extends Controller
             ->where(['user_id' => $id])
             ->all();
         $authAssignmentsArray = array();
-
         foreach ($authAssignments as $authAssignment) {
             array_push($authAssignmentsArray, $authAssignment->item_name);
         }
@@ -223,7 +225,27 @@ class AdminController extends Controller
             return $this->redirect(['index']);
         }
 
-        return $this->render('privilege', ['model' => $model, 'authAssignmentsArray' => $authAssignmentsArray,
-            'allPrivilegesArray' => $allPrivilegesArray]);
+        return $this->render('privilege', [
+            'model' => $model,
+            'authAssignmentsArray' => $authAssignmentsArray,
+            'allPrivilegesArray' => $allPrivilegesArray
+        ]);
+    }
+
+    /**
+     * 根据主键寻找管理员模型
+     * 如果未找到模型，抛出404异常
+     *
+     * @param integer $id
+     * @return Admin
+     * @throws NotFoundHttpException 如果模型找不到
+     */
+    protected function findModel($id)
+    {
+        if (($model = Admin::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="site-login">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>输入学号和密码登录系统：</p>
+    <p>请输入学号和密码登录系统：</p>
 
     <div class="row">
         <div class="col-lg-5">

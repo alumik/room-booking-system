@@ -11,7 +11,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * UserController implements the CRUD actions for User model.
+ * UserController User模型类的控制器
  */
 class UserController extends Controller
 {
@@ -31,10 +31,10 @@ class UserController extends Controller
     }
 
     /**
-     * Lists all User models.
+     * 列出所有学生
      *
-     * @throws ForbiddenHttpException
      * @return mixed
+     * @throws ForbiddenHttpException 如果没有权限
      */
     public function actionIndex()
     {
@@ -52,25 +52,14 @@ class UserController extends Controller
     }
 
     /**
-     * Updates an existing User model.
-     * If update is successful, the browser will be redirected to the 'view' page.
+     * 修改学生状态（正常/已删除）
+     * 如果操作成功则跳转至学生列表
+     *
      * @param integer $id
      * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * @throws ForbiddenHttpException 如果没有权限
+     * @throws NotFoundHttpException 如果模型找不到
      */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
-
     public function actionChangestatus($id)
     {
         if (!Yii::$app->user->can('manageStudent')) {
@@ -78,7 +67,6 @@ class UserController extends Controller
         }
 
         $model = $this->findModel($id);
-
         $model->changeStatus();
         $model->save();
 
@@ -86,11 +74,12 @@ class UserController extends Controller
     }
 
     /**
-     * Finds the User model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
+     * 根据主键寻找学生模型
+     * 如果未找到模型，抛出404异常
+     *
      * @param integer $id
-     * @return User the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
+     * @return User
+     * @throws NotFoundHttpException 如果模型找不到
      */
     protected function findModel($id)
     {

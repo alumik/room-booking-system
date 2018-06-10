@@ -1,4 +1,5 @@
 <?php
+
 namespace backend\controllers;
 
 use Yii;
@@ -8,7 +9,7 @@ use yii\filters\AccessControl;
 use common\models\AdminLoginForm;
 
 /**
- * Site controller
+ * 网站控制器
  */
 class SiteController extends Controller
 {
@@ -54,7 +55,7 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays homepage.
+     * 主页
      *
      * @return string
      */
@@ -64,7 +65,7 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays about page.
+     * 关于页面
      *
      * @return mixed
      */
@@ -74,7 +75,7 @@ class SiteController extends Controller
     }
 
     /**
-     * Login action.
+     * 登录页面
      *
      * @return string
      */
@@ -97,7 +98,7 @@ class SiteController extends Controller
     }
 
     /**
-     * Logout action.
+     * 注销操作
      *
      * @return string
      */

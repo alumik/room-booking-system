@@ -1,22 +1,19 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Zhong
- * Date: 2018/6/10
- * Time: 15:48
- */
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+
 /* @var $this yii\web\View */
 /* @var $model common\models\Admin */
+/* @var $authAssignmentsArray array*/
+/* @var $allPrivilegesArray array*/
 
 $this->title = '权限设置：' . $model->admin_name;
 $this->params['breadcrumbs'][] = ['label' => '管理员', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->admin_id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = '权限设置';
 ?>
-<div class="admin-update">
+<div class="admin-privilege">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

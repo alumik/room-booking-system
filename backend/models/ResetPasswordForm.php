@@ -1,11 +1,15 @@
 <?php
+
 namespace backend\models;
 
 use yii\base\Model;
 use common\models\Admin;
 
 /**
- * Reset password form
+ * 修改密码表单类
+ *
+ * @param string $password
+ * @param string $password2
  */
 class ResetPasswordForm extends Model
 {
@@ -37,7 +41,7 @@ class ResetPasswordForm extends Model
     }
 
     /**
-     * Reset password.
+     * 修改密码
      *
      * @param integer $id
      * @return boolean

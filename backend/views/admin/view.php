@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpUnhandledExceptionInspection */
+
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 

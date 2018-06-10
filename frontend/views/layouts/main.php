@@ -46,7 +46,7 @@ AppAsset::register($this);
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
-                '注销 (' . Yii::$app->user->identity->username . '[' . Yii::$app->user->identity->student_id . '])',
+                '注销 (' . Yii::$app->user->identity->username . ')',
                 ['class' => 'btn btn-link logout']
             )
             . Html::endForm()
@@ -70,7 +70,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; <?= Html::a(Yii::$app->name, ['about']) ?> <?= date('Y') ?></p>
+        <p class="pull-left">&copy; <?= Html::a(Yii::$app->name, ['/site/about']) ?> <?= date('Y') ?></p>
 
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>
