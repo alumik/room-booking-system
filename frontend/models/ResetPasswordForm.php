@@ -1,12 +1,13 @@
 <?php
+
 namespace frontend\models;
 
 use yii\base\Model;
-use yii\base\InvalidParamException;
+use yii\base\InvalidArgumentException;
 use common\models\User;
 
 /**
- * Password reset form
+ * 学生登录前修改密码表单模型
  */
 class ResetPasswordForm extends Model
 {
@@ -18,22 +19,21 @@ class ResetPasswordForm extends Model
      */
     private $_user;
 
-
     /**
-     * Creates a form model given a token.
+     * 根据给定的密码重置密钥创建表单
      *
      * @param string $token
-     * @param array $config name-value pairs that will be used to initialize the object properties
-     * @throws \yii\base\InvalidParamException if token is empty or not valid
+     * @param array $config
+     * @throws \yii\base\InvalidArgumentException 如果密码重置密钥无效
      */
     public function __construct($token, $config = [])
     {
         if (empty($token) || !is_string($token)) {
-            throw new InvalidParamException('密码重置口令不能为空！');
+            throw new InvalidArgumentException('密码重置密钥不能为空！');
         }
         $this->_user = User::findByPasswordResetToken($token);
         if (!$this->_user) {
-            throw new InvalidParamException('密码重置口令无效！');
+            throw new InvalidArgumentException('密码重置密钥无效！');
         }
         parent::__construct($config);
     }
@@ -50,6 +50,9 @@ class ResetPasswordForm extends Model
         ];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function attributeLabels()
     {
         return [
@@ -59,9 +62,10 @@ class ResetPasswordForm extends Model
     }
 
     /**
-     * Resets password.
+     * 修改密码
      *
-     * @return bool if password was reset.
+     * @return bool
+     * @throws \Exception
      */
     public function resetPassword()
     {

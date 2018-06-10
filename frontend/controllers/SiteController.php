@@ -1,8 +1,9 @@
 <?php
+
 namespace frontend\controllers;
 
 use Yii;
-use yii\base\InvalidParamException;
+use yii\base\InvalidArgumentException;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -13,7 +14,7 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 
 /**
- * Site controller
+ * 网站控制器
  */
 class SiteController extends Controller
 {
@@ -65,7 +66,7 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays homepage.
+     * 主页
      *
      * @return mixed
      */
@@ -75,7 +76,7 @@ class SiteController extends Controller
     }
 
     /**
-     * Logs in a user.
+     * 登陆页面
      *
      * @return mixed
      */
@@ -98,7 +99,7 @@ class SiteController extends Controller
     }
 
     /**
-     * Logs out the current user.
+     * 注销操作
      *
      * @return mixed
      */
@@ -110,7 +111,7 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays about page.
+     * 关于页面
      *
      * @return mixed
      */
@@ -120,9 +121,10 @@ class SiteController extends Controller
     }
 
     /**
-     * Signs user up.
+     * 注册页面
      *
      * @return mixed
+     * @throws \Exception
      */
     public function actionSignup()
     {
@@ -141,9 +143,10 @@ class SiteController extends Controller
     }
 
     /**
-     * Requests password reset.
+     * 密码重置请求
      *
      * @return mixed
+     * @throws \Exception
      */
     public function actionRequestPasswordReset()
     {
@@ -164,17 +167,18 @@ class SiteController extends Controller
     }
 
     /**
-     * Resets password.
+     * 登录前修改密码
      *
      * @param string $token
      * @return mixed
      * @throws BadRequestHttpException
+     * @throws \Exception
      */
     public function actionResetPassword($token)
     {
         try {
             $model = new ResetPasswordForm($token);
-        } catch (InvalidParamException $e) {
+        } catch (InvalidArgumentException $e) {
             throw new BadRequestHttpException($e->getMessage());
         }
 
