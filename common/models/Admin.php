@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Zhong
- * Date: 2018/6/9
- * Time: 23:04
- */
+
 namespace common\models;
 
 use Yii;
@@ -14,7 +9,7 @@ use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
 /**
- * User model
+ * 管理员模型
  *
  * @property integer $id
  * @property string $admin_id
@@ -28,7 +23,6 @@ use yii\web\IdentityInterface;
  */
 class Admin extends ActiveRecord implements IdentityInterface
 {
-
     /**
      * {@inheritdoc}
      */
@@ -92,6 +86,7 @@ class Admin extends ActiveRecord implements IdentityInterface
 
     /**
      * {@inheritdoc}
+     * @throws NotSupportedException
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
@@ -99,7 +94,7 @@ class Admin extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Finds user by admin_id
+     * 根据admin_id寻找管理员
      *
      * @param string $admin_id
      * @return static|null
@@ -134,10 +129,10 @@ class Admin extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Validates password
+     * 检查密码是否有效
      *
-     * @param string $password password to validate
-     * @return bool if password provided is valid for current user
+     * @param string $password
+     * @return bool
      */
     public function validatePassword($password)
     {
@@ -145,9 +140,10 @@ class Admin extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Generates password hash from password and sets it to the model
+     * 为密码生成散列值（password_hash）并保存
      *
      * @param string $password
+     * @throws \Exception
      */
     public function setPassword($password)
     {
@@ -155,13 +151,21 @@ class Admin extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Generates "remember me" authentication key
+     * 生成“保持登录状态”用的鉴权码（auth_key）
+     *
+     * @throws \Exception
      */
     public function generateAuthKey()
     {
         $this->auth_key = Yii::$app->security->generateRandomString();
     }
 
+    /**
+     * 保存前自动生成修改时间
+     *
+     * @param bool $insert
+     * @return bool
+     */
     public function beforeSave($insert)
     {
         if (parent::beforeSave($insert)) {

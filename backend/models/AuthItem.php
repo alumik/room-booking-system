@@ -5,7 +5,7 @@ namespace app\models;
 use Yii;
 
 /**
- * "auth_item" 表的模型类
+ * "auth_item" 表的模型
  *
  * @property string $name
  * @property int $type

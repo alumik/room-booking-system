@@ -1,4 +1,5 @@
 <?php
+
 namespace common\models;
 
 use Yii;
@@ -8,7 +9,7 @@ use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
 /**
- * User model
+ * 学生模型
  *
  * @property integer $id
  * @property string $student_id
@@ -26,7 +27,6 @@ class User extends ActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
-
 
     /**
      * {@inheritdoc}
@@ -95,6 +95,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     /**
      * {@inheritdoc}
+     * @throws NotSupportedException
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
@@ -102,7 +103,7 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Finds user by student_id
+     * 根据student_id寻找学生
      *
      * @param string $student_id
      * @return static|null
@@ -113,9 +114,9 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Finds user by password reset token
+     * 根据password_reset_token寻找学生
      *
-     * @param string $token password reset token
+     * @param string $token
      * @return static|null
      */
     public static function findByPasswordResetToken($token)
@@ -131,9 +132,9 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Finds out if password reset token is valid
+     * 检查密码重置密钥是否有效
      *
-     * @param string $token password reset token
+     * @param string $token
      * @return bool
      */
     public static function isPasswordResetTokenValid($token)
@@ -172,10 +173,10 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Validates password
+     * 检查密码是否有效
      *
-     * @param string $password password to validate
-     * @return bool if password provided is valid for current user
+     * @param string $password
+     * @return bool
      */
     public function validatePassword($password)
     {
@@ -183,9 +184,10 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Generates password hash from password and sets it to the model
+     * 为密码生成散列值（password_hash）并保存
      *
      * @param string $password
+     * @throws \Exception
      */
     public function setPassword($password)
     {
@@ -193,7 +195,9 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Generates "remember me" authentication key
+     * 生成“保持登录状态”用的鉴权码（auth_key）
+     *
+     * @throws \Exception
      */
     public function generateAuthKey()
     {
@@ -201,7 +205,9 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Generates new password reset token
+     * 生成新的密码重置密钥
+     *
+     * @throws \Exception
      */
     public function generatePasswordResetToken()
     {
@@ -209,22 +215,38 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Removes password reset token
+     * 清除密码重置密钥
      */
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
     }
 
+    /**
+     * 获取所有状态列表
+     *
+     * @return array
+     */
     public static function allStatus()
     {
         return [self::STATUS_ACTIVE => '正常', self::STATUS_DELETED => '已禁用'];
     }
 
+    /**
+     * 获取当前学生状态字符串
+     *
+     * @return string
+     */
     public function getStatusStr() {
         return $this->status == self::STATUS_ACTIVE ? '正常' : '已禁用';
     }
 
+    /**
+     * 保存前自动生成修改时间
+     *
+     * @param bool $insert
+     * @return bool
+     */
     public function beforeSave($insert)
     {
         if (parent::beforeSave($insert)) {
@@ -234,6 +256,11 @@ class User extends ActiveRecord implements IdentityInterface
         return false;
     }
 
+    /**
+     * 切换学生状态
+     *
+     * @return bool
+     */
     public function changeStatus()
     {
         if ($this->status == self::STATUS_ACTIVE) {

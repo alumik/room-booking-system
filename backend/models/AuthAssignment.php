@@ -5,7 +5,7 @@ namespace app\models;
 use Yii;
 
 /**
- * "auth_assignment" 表的模型类
+ * "auth_assignment" 表的模型
  *
  * @property string $item_name
  * @property string $user_id

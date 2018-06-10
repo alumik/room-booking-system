@@ -6,13 +6,7 @@ use yii\base\Model;
 use common\models\Admin;
 
 /**
- * 注册表单类
- *
- * @param string $admin_id
- * @param string $admin_name
- * @param string $email
- * @param string $password
- * @param string $password2
+ * 管理员注册表单模型
  */
 class SignupForm extends Model
 {
@@ -68,6 +62,7 @@ class SignupForm extends Model
      * 注册管理员
      *
      * @return Admin|null
+     * @throws \Exception
      */
     public function signup()
     {

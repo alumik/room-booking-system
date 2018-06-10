@@ -1,11 +1,12 @@
 <?php
+
 namespace common\models;
 
 use Yii;
 use yii\base\Model;
 
 /**
- * Login form
+ * 管理员登录表单模型
  */
 class AdminLoginForm extends Model
 {
@@ -15,19 +16,17 @@ class AdminLoginForm extends Model
 
     private $_admin;
 
-
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            // admin_id and password are both required
             [['admin_id', 'password'], 'required'],
             ['admin_id', 'string', 'length' => 7],
-            // rememberMe must be a boolean value
+
             ['rememberMe', 'boolean'],
-            // password is validated by validatePassword()
+
             ['password', 'validatePassword'],
         ];
     }
@@ -45,11 +44,10 @@ class AdminLoginForm extends Model
     }
 
     /**
-     * Validates the password.
-     * This method serves as the inline validation for password.
+     * 验证密码是否正确
      *
-     * @param string $attribute the attribute currently being validated
-     * @param array $params the additional name-value pairs given in the rule
+     * @param string $attribute 被验证的属性
+     * @param array $params 额外键值对信息
      */
     public function validatePassword($attribute, $params)
     {
@@ -62,9 +60,9 @@ class AdminLoginForm extends Model
     }
 
     /**
-     * Logs in a admin using the provided admin_id and password.
+     * 根据给定的账号和密码登录管理员
      *
-     * @return bool whether the admin is logged in successfully
+     * @return bool 管理员是否登录成功
      */
     public function login()
     {
@@ -76,7 +74,7 @@ class AdminLoginForm extends Model
     }
 
     /**
-     * Finds admin by [[admin_id]]
+     * 根据 [[admin_id]] 寻找管理员模型
      *
      * @return Admin|null
      */

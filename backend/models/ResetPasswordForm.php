@@ -6,10 +6,7 @@ use yii\base\Model;
 use common\models\Admin;
 
 /**
- * 修改密码表单类
- *
- * @param string $password
- * @param string $password2
+ * 管理员修改密码表单模型
  */
 class ResetPasswordForm extends Model
 {
@@ -45,6 +42,7 @@ class ResetPasswordForm extends Model
      *
      * @param integer $id
      * @return boolean
+     * @throws \Exception
      */
     public function resetPassword($id)
     {

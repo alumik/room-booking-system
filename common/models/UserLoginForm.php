@@ -1,20 +1,20 @@
 <?php
+
 namespace common\models;
 
 use Yii;
 use yii\base\Model;
 
 /**
- * Login form
+ * 学生登陆表单模型
  */
-class LoginForm extends Model
+class UserLoginForm extends Model
 {
     public $student_id;
     public $password;
     public $rememberMe = true;
 
     private $_user;
-
 
     /**
      * {@inheritdoc}
@@ -45,11 +45,10 @@ class LoginForm extends Model
     }
 
     /**
-     * Validates the password.
-     * This method serves as the inline validation for password.
+     * 验证密码是否正确
      *
-     * @param string $attribute the attribute currently being validated
-     * @param array $params the additional name-value pairs given in the rule
+     * @param string $attribute 被验证的属性
+     * @param array $params 额外键值对信息
      */
     public function validatePassword($attribute, $params)
     {
@@ -62,9 +61,9 @@ class LoginForm extends Model
     }
 
     /**
-     * Logs in a user using the provided student_id and password.
+     * 根据给定的账号和密码登录学生
      *
-     * @return bool whether the user is logged in successfully
+     * @return bool 学生是否登录成功
      */
     public function login()
     {
@@ -76,7 +75,7 @@ class LoginForm extends Model
     }
 
     /**
-     * Finds user by [[student_id]]
+     * 根据 [[student_id]] 寻找学生模型
      *
      * @return User|null
      */
