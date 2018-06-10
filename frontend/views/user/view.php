@@ -21,6 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <?= DetailView::widget([
+        'template' => "<tr><th width='20%'>{label}</th><td width='80%'>{value}</td></tr>",
         'model' => $model,
         'attributes' => [
             'student_id',

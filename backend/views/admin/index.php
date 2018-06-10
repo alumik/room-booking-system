@@ -59,8 +59,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     'privilege' => function($url, $model, $key)
                     {
                         $options = [
-                            'title' => '权限设置',
-                            'aria-label' => '权限设置',
+                            'title' => '修改权限',
+                            'aria-label' => '修改权限',
                             'data-pjax' => '0',
                         ];
                         return Html::a('<span class="glyphicon glyphicon-user"></span>', $url, $options);

@@ -30,6 +30,7 @@ $this->params['breadcrumbs'][] = $model->admin_id;
     </p>
 
     <?= DetailView::widget([
+        'template' => "<tr><th width='20%'>{label}</th><td width='80%'>{value}</td></tr>",
         'model' => $model,
         'attributes' => [
             'admin_id',
