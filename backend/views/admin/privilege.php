@@ -5,8 +5,8 @@ use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Admin */
-/* @var $authAssignmentsArray array*/
-/* @var $allPrivilegesArray array*/
+/* @var $roles array*/
+/* @var $allRoles array*/
 
 $this->title = '权限设置：' . $model->admin_name;
 $this->params['breadcrumbs'][] = ['label' => '管理员管理', 'url' => ['index']];
@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = '权限设置';
 
         <?php $form = ActiveForm::begin(); ?>
         <br/>
-        <?= Html::checkboxList('newPri', $authAssignmentsArray, $allPrivilegesArray); ?>
+        <?= Html::checkboxList('newRoles', $roles, $allRoles); ?>
         <br/>
         <div class="form-group">
             <?= Html::submitButton('保存', ['class' => 'btn btn-success']) ?>

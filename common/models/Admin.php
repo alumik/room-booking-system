@@ -2,6 +2,8 @@
 
 namespace common\models;
 
+use app\models\AuthAssignment;
+use app\models\AuthItem;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
@@ -19,6 +21,10 @@ use yii\web\IdentityInterface;
  * @property string $auth_key
  * @property integer $created_at
  * @property integer $updated_at
+ * @property boolean $super_admin
+ * @property boolean $web_admin
+ * @property boolean $student_admin
+ * @property boolean $room_admin
  * @property string $password write-only password
  */
 class Admin extends ActiveRecord implements IdentityInterface
@@ -173,5 +179,93 @@ class Admin extends ActiveRecord implements IdentityInterface
             return true;
         }
         return false;
+    }
+
+    /**
+     * 获取所有角色列表
+     *
+     * @return array
+     */
+    public static function getAllRoles() {
+        $allRoles = AuthItem::find()->select(['name', 'description'])
+            ->where(['type' => 1])
+            ->orderBy('description')
+            ->all();
+
+        $allRolesArray = array();
+        foreach ($allRoles as $role) {
+            $allRolesArray[$role->name] = $role->description;
+        }
+
+        return $allRolesArray;
+    }
+
+    /**
+     * 获取已选中角色列表
+     *
+     * @return array
+     */
+    public function getRoles() {
+        $roles = AuthAssignment::find()->select(['item_name'])
+            ->where(['user_id' => $this->id])
+            ->all();
+
+        $rolesArray = array();
+        foreach ($roles as $role) {
+            array_push($rolesArray, $role->item_name);
+        }
+
+        return $rolesArray;
+    }
+
+    /**
+     * 清空管理员角色
+     */
+    public function resetRole() {
+        $this->super_admin = false;
+        $this->web_admin = false;
+        $this->student_admin = false;
+        $this->room_admin = false;
+        $this->save();
+    }
+
+    /**
+     * 获取SuperAdminStr
+     *
+     * @return string
+     */
+    public function getSuperAdminStr()
+    {
+        return $this->super_admin ? '●' : '-';
+    }
+
+    /**
+     * 获取WebAdminStr
+     *
+     * @return string
+     */
+    public function getWebAdminStr()
+    {
+        return $this->web_admin ? '●' : '-';
+    }
+
+    /**
+     * 获取StudentAdminStr
+     *
+     * @return string
+     */
+    public function getStudentAdminStr()
+    {
+        return $this->student_admin ? '●' : '-';
+    }
+
+    /**
+     * 获取RoomAdminStr
+     *
+     * @return string
+     */
+    public function getRoomAdminStr()
+    {
+        return $this->room_admin ? '●' : '-';
     }
 }

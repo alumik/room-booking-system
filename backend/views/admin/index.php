@@ -31,14 +31,32 @@ $this->params['breadcrumbs'][] = $this->title;
             'admin_name',
             'email:email',
             [
-                'attribute' => 'created_at',
-                'format' => ['date', 'php: Y-m-d H:i:s'],
-                'filter' => '',
+                'attribute' => 'super_admin',
+                'label' => '超级管理员',
+                'value' => 'superAdminStr',
+                'filter' => ['0' => '不是', '1' => '是'],
+                'contentOptions'=>['align'=>'center'],
             ],
             [
-                'attribute' => 'updated_at',
-                'format' => ['date', 'php: Y-m-d H:i:s'],
-                'filter' => '',
+                'attribute' => 'web_admin',
+                'label' => '网站管理员',
+                'value' => 'webAdminStr',
+                'filter' => ['0' => '不是', '1' => '是'],
+                'contentOptions'=>['align'=>'center'],
+            ],
+            [
+                'attribute' => 'student_admin',
+                'label' => '学生管理员',
+                'value' => 'studentAdminStr',
+                'filter' => ['0' => '不是', '1' => '是'],
+                'contentOptions'=>['align'=>'center'],
+            ],
+            [
+                'attribute' => 'room_admin',
+                'label' => '预约管理员',
+                'value' => 'roomAdminStr',
+                'filter' => ['0' => '不是', '1' => '是'],
+                'contentOptions'=>['align'=>'center'],
             ],
 
             [

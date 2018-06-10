@@ -4,7 +4,6 @@ namespace backend\controllers;
 
 use Yii;
 use app\models\AuthAssignment;
-use app\models\AuthItem;
 use backend\models\ResetPasswordForm;
 use backend\models\SignupForm;
 use common\models\Admin;
@@ -81,6 +80,7 @@ class AdminController extends Controller
      *
      * @return mixed
      * @throws ForbiddenHttpException 如果没有权限
+     * @throws \Exception
      */
     public function actionCreate()
     {
@@ -108,6 +108,7 @@ class AdminController extends Controller
      * @param integer $id
      * @return mixed
      * @throws ForbiddenHttpException 如果没有权限
+     * @throws \Exception
      */
     public function actionResetpwd($id)
     {
@@ -192,43 +193,44 @@ class AdminController extends Controller
         }
 
         $model = $this->findModel($id);
+        $allRoles = Admin::getAllRoles();
+        $roles = $model->roles;
 
-        $allPrivileges = AuthItem::find()->select(['name', 'description'])
-            ->where(['type' => 1])
-            ->orderBy('description')
-            ->all();
-        $allPrivilegesArray = array();
-        foreach ($allPrivileges as $privilege) {
-            $allPrivilegesArray[$privilege->name] = $privilege->description;
-        }
-
-        $authAssignments = AuthAssignment::find()->select(['item_name'])
-            ->where(['user_id' => $id])
-            ->all();
-        $authAssignmentsArray = array();
-        foreach ($authAssignments as $authAssignment) {
-            array_push($authAssignmentsArray, $authAssignment->item_name);
-        }
-
-        if (isset($_POST['newPri'])) {
+        if (isset($_POST['newRoles'])) {
             AuthAssignment::deleteAll('user_id=:id', [':id' => $id]);
+            $model->resetRole();
 
-            $newPri = $_POST['newPri'];
-            foreach ($newPri as $pri) {
-                $aPri = new AuthAssignment();
-                $aPri->item_name = $pri;
-                $aPri->user_id = $id;
-                $aPri->created_at = time();
-                $aPri->save();
+            $newRoles = $_POST['newRoles'];
+            foreach ($newRoles as $role) {
+                $aRole = new AuthAssignment();
+                $aRole->item_name = $role;
+                $aRole->user_id = $id;
+                $aRole->created_at = time();
+                $aRole->save();
+
+                switch ($role) {
+                    case 'superAdmin':
+                        $model->super_admin = true;
+                        break;
+                    case 'webAdmin':
+                        $model->web_admin = true;
+                        break;
+                    case 'studentAdmin':
+                        $model->student_admin = true;
+                        break;
+                    case 'roomAdmin':
+                        $model->room_admin = true;
+                }
             }
 
+            $model->save();
             return $this->redirect(['index']);
         }
 
         return $this->render('privilege', [
             'model' => $model,
-            'authAssignmentsArray' => $authAssignmentsArray,
-            'allPrivilegesArray' => $allPrivilegesArray
+            'roles' => $roles,
+            'allRoles' => $allRoles,
         ]);
     }
 

@@ -18,7 +18,9 @@ class AdminSearch extends Admin
     {
         return [
             [['id', 'created_at', 'updated_at'], 'integer'],
-            [['admin_id', 'admin_name', 'auth_key', 'password_hash', 'password_reset_token', 'email'], 'safe'],
+            [['super_admin', 'web_admin', 'student_admin', 'room_admin',
+                'admin_id', 'admin_name', 'auth_key', 'password_hash',
+                'password_reset_token', 'email'], 'safe'],
         ];
     }
 
@@ -51,6 +53,13 @@ class AdminSearch extends Admin
         if (!$this->validate()) {
             return $dataProvider;
         }
+
+        $query->andFilterWhere([
+            'super_admin' => $this->super_admin,
+            'web_admin' => $this->web_admin,
+            'student_admin' => $this->student_admin,
+            'room_admin' => $this->room_admin,
+        ]);
 
         $query->andFilterWhere(['like', 'admin_id', $this->admin_id])
             ->andFilterWhere(['like', 'admin_name', $this->admin_name])
