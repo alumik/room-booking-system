@@ -8,6 +8,7 @@ use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\db\Query;
 use yii\web\IdentityInterface;
 
 /**
@@ -213,6 +214,26 @@ class Admin extends ActiveRecord implements IdentityInterface
         $rolesArray = array();
         foreach ($roles as $role) {
             array_push($rolesArray, $role->item_name);
+        }
+
+        return $rolesArray;
+    }
+
+    /**
+     * 获取管理员角色名
+     *
+     * @return array
+     */
+    public function getRolesDescription() {
+        $roles = (new Query())->select(['description'])
+            ->from('auth_assignment')
+            ->join('INNER JOIN', 'auth_item', 'auth_item.name = auth_assignment.item_name')
+            ->where(['user_id' => $this->id])
+            ->all();
+
+        $rolesArray = array();
+        foreach ($roles as $role) {
+            array_push($rolesArray, $role['description']);
         }
 
         return $rolesArray;

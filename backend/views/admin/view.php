@@ -37,6 +37,10 @@ $this->params['breadcrumbs'][] = $model->admin_id;
             'admin_name',
             'email:email',
             [
+                'label' => '管理员角色',
+                'value' => implode('，', $model->getRolesDescription()),
+            ],
+            [
                 'attribute' => 'created_at',
                 'format' => ['date', 'php: Y-m-d H:i:s'],
             ],

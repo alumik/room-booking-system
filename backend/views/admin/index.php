@@ -35,29 +35,33 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'super_admin',
                 'label' => '超级管理员',
                 'value' => 'superAdminStr',
-                'filter' => ['0' => '不是', '1' => '是'],
+                'filter' => ['1' => '是', '0' => '否'],
                 'contentOptions' => ['align' => 'center'],
+                'headerOptions' => ['class' => 'text-center'],
             ],
             [
                 'attribute' => 'web_admin',
                 'label' => '网站管理员',
                 'value' => 'webAdminStr',
-                'filter' => ['0' => '不是', '1' => '是'],
+                'filter' => ['1' => '是', '0' => '否'],
                 'contentOptions' => ['align' => 'center'],
+                'headerOptions' => ['class' => 'text-center'],
             ],
             [
                 'attribute' => 'student_admin',
                 'label' => '学生管理员',
                 'value' => 'studentAdminStr',
-                'filter' => ['0' => '不是', '1' => '是'],
+                'filter' => ['1' => '是', '0' => '否'],
                 'contentOptions' => ['align' => 'center'],
+                'headerOptions' => ['class' => 'text-center'],
             ],
             [
                 'attribute' => 'room_admin',
                 'label' => '预约管理员',
                 'value' => 'roomAdminStr',
-                'filter' => ['0' => '不是', '1' => '是'],
+                'filter' => ['1' => '是', '0' => '否'],
                 'contentOptions' => ['align' => 'center'],
+                'headerOptions' => ['class' => 'text-center'],
             ],
 
             [
@@ -65,7 +69,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions' => ['align' => 'center'],
                 'template' => '{view} {update} {resetpwd} {privilege}',
                 'buttons' => [
-
+                    'update' => function($url, $model, $key)
+                    {
+                        $options = [
+                            'title' => '修改信息',
+                            'aria-label' => '修改信息',
+                            'data-pjax' => '0',
+                        ];
+                        return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, $options);
+                    },
                     'resetpwd' => function($url, $model, $key)
                     {
                         $options = [
