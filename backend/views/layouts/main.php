@@ -41,7 +41,7 @@ AppAsset::register($this);
     } else {
         if (Yii::$app->user->can('manageRoom')) {
             $menuItems[] = ['label' => '房间管理', 'url' => ['/room/index']];
-            $menuItems[] = ['label' => '预约管理', 'url' => ['/apply/index']];
+            $menuItems[] = ['label' => '预约管理', 'url' => ['/application/index']];
         }
         if (Yii::$app->user->can('viewStudentList')) {
             $menuItems[] = ['label' => '学生管理', 'url' => ['/user/index']];
