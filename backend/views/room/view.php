@@ -29,16 +29,21 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= DetailView::widget([
         'model' => $model,
-        'template' => "<tr><th width='20%'>{label}</th><td width='80%'>{value}</td></tr>",
         'attributes' => [
             'room_number',
             [
                 'attribute' => 'type',
                 'value' => $model->type0->type_name,
+                'captionOptions' => ['width' => '20%'],
             ],
             [
                 'attribute' => 'campus',
                 'value' => $model->campus0->campus_name,
+            ],
+            [
+                'attribute' => 'available',
+                'value' => $model->getStatusStr(),
+                'contentOptions' => $model->getStatusBg(),
             ],
         ],
     ]) //TODO: 预定列表?>

@@ -42,6 +42,7 @@ AppAsset::register($this);
         if (Yii::$app->user->can('manageRoom')) {
             $menuItems[] = ['label' => '房间管理', 'url' => ['/room/index']];
             $menuItems[] = ['label' => '预约管理', 'url' => ['/application/index']];
+            $menuItems[] = '<li><span class="badge badge-inverse">' . \common\models\Application::getPendingApplicationCount() . '</span></li>';
         }
         if (Yii::$app->user->can('viewStudentList')) {
             $menuItems[] = ['label' => '学生管理', 'url' => ['/user/index']];

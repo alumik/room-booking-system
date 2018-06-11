@@ -15,7 +15,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="room-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a('新增房间', ['create'], ['class' => 'btn btn-success']) ?>
@@ -40,9 +39,19 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter' => \common\models\Room::getAllCampus(),
             ],
             [
+                'attribute' => 'available',
+                'value' => 'statusStr',
+                'filter' => \common\models\Room::getAllStatus(),
+                'contentOptions' => function($model) {
+                    $options = $model->getStatusBg();
+                    $options['width'] = '80px';
+                    return $options;
+                },
+            ],
+            [
                 'class' => 'yii\grid\ActionColumn',
-                'contentOptions' => ['width' => '60px', 'align' => 'center'],
-                'template' => '{view} {update}',
+                'contentOptions' => ['width' => '80px', 'align' => 'center'],
+                'template' => '{view} {update} {changestatus}',
                 'buttons' => [
                     'update' => function($url, $model, $key)
                     {
@@ -52,6 +61,15 @@ $this->params['breadcrumbs'][] = $this->title;
                             'data-pjax' => '0',
                         ];
                         return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, $options);
+                    },
+                    'changestatus' => function($url, $model, $key)
+                    {
+                        $options = [
+                            'title' => '切换状态',
+                            'aria-label' => '切换状态',
+                            'data-pjax' => '0',
+                        ];
+                        return Html::a('<span class="glyphicon glyphicon-refresh"></span>', $url, $options);
                     },
                 ],
             ],

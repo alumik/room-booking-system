@@ -3,17 +3,17 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\User;
-use common\models\UserSearch;
+use common\models\Application;
+use common\models\ApplicationSearch;
 use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * UserController User模型类的控制器
+ * ApplicationController implements the CRUD actions for Application model.
  */
-class UserController extends Controller
+class ApplicationController extends Controller
 {
     /**
      * @inheritdoc
@@ -31,18 +31,16 @@ class UserController extends Controller
     }
 
     /**
-     * 列出所有学生
-     *
+     * Lists all Application models.
      * @return mixed
-     * @throws ForbiddenHttpException 如果没有权限
      */
     public function actionIndex()
     {
-        if (!Yii::$app->user->can('viewStudentList')) {
+        if (!Yii::$app->user->can('manageRoom')) {
             throw new ForbiddenHttpException('对不起，你没有进行该操作的权限。');
         }
 
-        $searchModel = new UserSearch();
+        $searchModel = new ApplicationSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -52,41 +50,35 @@ class UserController extends Controller
     }
 
     /**
-     * 修改学生状态（正常/已删除）
-     * 如果操作成功则跳转至学生列表
-     *
+     * Displays a single Application model.
      * @param integer $id
      * @return mixed
-     * @throws ForbiddenHttpException 如果没有权限
-     * @throws NotFoundHttpException 如果模型找不到
+     * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionChangestatus($id)
+    public function actionView($id)
     {
-        if (!Yii::$app->user->can('manageStudent')) {
+        if (!Yii::$app->user->can('manageRoom')) {
             throw new ForbiddenHttpException('对不起，你没有进行该操作的权限。');
         }
 
-        $model = $this->findModel($id);
-        $model->changeStatus();
-        $model->save();
-
-        return $this->redirect(Yii::$app->request->referrer);
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
     }
 
     /**
-     * 根据主键寻找学生模型
-     * 如果未找到模型，抛出404异常
-     *
+     * Finds the Application model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return User
-     * @throws NotFoundHttpException 如果模型找不到
+     * @return Application the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = User::findOne($id)) !== null) {
+        if (($model = Application::findOne($id)) !== null) {
             return $model;
         }
 
-        throw new NotFoundHttpException('对不起，未找到你查询的数据');
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

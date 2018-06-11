@@ -132,6 +132,19 @@ class RoomController extends Controller
         return $this->redirect(['index']);
     }
 
+    public function actionChangestatus($id)
+    {
+        if (!Yii::$app->user->can('manageRoom')) {
+            throw new ForbiddenHttpException('对不起，你没有进行该操作的权限。');
+        }
+
+        $model = $this->findModel($id);
+        $model->changeStatus();
+        $model->save();
+
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
     /**
      * Finds the Room model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

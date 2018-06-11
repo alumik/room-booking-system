@@ -11,6 +11,7 @@ use Yii;
  * @property string $room_number
  * @property int $type
  * @property int $campus
+ * @property int $available
  *
  * @property Application[] $applications
  * @property RoomType $type0
@@ -18,6 +19,9 @@ use Yii;
  */
 class Room extends \yii\db\ActiveRecord
 {
+    const STATUS_AVAILABLE = 1;
+    const STATUS_UNAVAILABLE = 0;
+
     /**
      * @inheritdoc
      */
@@ -34,6 +38,8 @@ class Room extends \yii\db\ActiveRecord
         return [
             [['room_number', 'type', 'campus'], 'required'],
             [['type', 'campus'], 'integer'],
+            ['available', 'default', 'value' => self::STATUS_AVAILABLE],
+            ['available', 'in', 'range' => [self::STATUS_AVAILABLE, self::STATUS_UNAVAILABLE]],
             [['room_number'], 'string', 'max' => 10],
             [['type'], 'exist', 'skipOnError' => true, 'targetClass' => RoomType::className(), 'targetAttribute' => ['type' => 'id']],
             [['campus'], 'exist', 'skipOnError' => true, 'targetClass' => Campus::className(), 'targetAttribute' => ['campus' => 'id']],
@@ -50,6 +56,7 @@ class Room extends \yii\db\ActiveRecord
             'room_number' => '房间号',
             'type' => '房间类型',
             'campus' => '校区',
+            'available' => '状态',
         ];
     }
 
@@ -93,5 +100,58 @@ class Room extends \yii\db\ActiveRecord
             ->orderBy('id')
             ->indexBy('id')
             ->column();
+    }
+
+    public function getStatusBg()
+    {
+        $options = [];
+        switch ($this->available) {
+            case self::STATUS_AVAILABLE:
+                $options['class'] = 'bg-success';
+                break;
+            case self::STATUS_UNAVAILABLE:
+                $options['class'] = 'bg-danger';
+                break;
+        }
+        return $options;
+    }
+
+    /**
+     * 获取当前房间状态字符串
+     *
+     * @return string|null
+     */
+    public function getStatusStr() {
+        switch ($this->available) {
+            case self::STATUS_AVAILABLE:
+                return '可用';
+            case self::STATUS_UNAVAILABLE:
+                return '不可用';
+        }
+        return null;
+    }
+
+    public static function getAllStatus()
+    {
+        return [
+            self::STATUS_AVAILABLE => '可用',
+            self::STATUS_UNAVAILABLE => '不可用',
+        ];
+    }
+
+    /**
+     * 切换房间状态
+     *
+     * @return bool
+     */
+    public function changeStatus()
+    {
+        if ($this->available == self::STATUS_AVAILABLE) {
+            $this->available = self::STATUS_UNAVAILABLE;
+        } else {
+            $this->available = self::STATUS_AVAILABLE;
+        }
+
+        return true;
     }
 }
