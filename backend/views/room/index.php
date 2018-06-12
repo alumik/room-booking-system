@@ -68,6 +68,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             'title' => '切换状态',
                             'aria-label' => '切换状态',
                             'data-pjax' => '0',
+                            'data-confirm' => '确定要切换该房间状态吗？',
+                            'data-method' => 'post',
                         ];
                         return Html::a('<span class="glyphicon glyphicon-refresh"></span>', $url, $options);
                     },

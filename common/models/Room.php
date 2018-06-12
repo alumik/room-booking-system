@@ -131,6 +131,21 @@ class Room extends \yii\db\ActiveRecord
         return null;
     }
 
+    /**
+     * 获取当前房间状态字符串（上色）
+     *
+     * @return string|null
+     */
+    public function getStatusStrColoered() {
+        switch ($this->available) {
+            case self::STATUS_AVAILABLE:
+                return '<span class="text-success">（可用）</span>';
+            case self::STATUS_UNAVAILABLE:
+                return '<span class="text-danger">（不可用）</span>';
+        }
+        return null;
+    }
+
     public static function getAllStatus()
     {
         return [

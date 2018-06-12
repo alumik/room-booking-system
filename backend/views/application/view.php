@@ -23,8 +23,9 @@ $this->params['breadcrumbs'][] = $model->id;
             [
                 'attribute' => 'room_number',
                 'label' => '房间号',
-                'value' => $model->room->room_number . '（' . $model->room->statusStr . '）',
+                'value' => $model->room->room_number . $model->room->statusStrColoered,
                 'captionOptions' => ['width' => '20%'],
+                'format' => 'raw',
             ],
             [
                 'attribute' => 'campus',
