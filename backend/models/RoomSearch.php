@@ -1,7 +1,8 @@
 <?php
 
-namespace common\models;
+namespace backend\models;
 
+use common\models\Room;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;

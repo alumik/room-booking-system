@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\db\Query;
 
 /**
  * This is the model class for table "room".
@@ -168,5 +169,40 @@ class Room extends \yii\db\ActiveRecord
         }
 
         return true;
+    }
+
+    public function getQueueCount($s_time_str, $e_time_str)
+    {
+        $s_time = strtotime($s_time_str);
+        $e_time = strtotime($e_time_str);
+
+        $overlap = (new Query())
+            ->select('id')
+            ->from('application')
+            ->where("not (start_time >= $e_time or end_time <= $s_time)")
+            ->andWhere(['status' => Application::STATUS_PENDDING])
+            ->andWhere(['room_id' => $this->id])
+            ->count();
+
+        return $overlap;
+    }
+
+    public function getApprovalStatus($s_time_str, $e_time_str)
+    {
+        $s_time = strtotime($s_time_str);
+        $e_time = strtotime($e_time_str);
+
+        $overlap = (new Query())
+            ->select('id')
+            ->from('application')
+            ->where("not (start_time >= $e_time or end_time <= $s_time)")
+            ->andWhere(['status' => Application::STATUS_APPROVED])
+            ->andWhere(['room_id' => $this->id])
+            ->count();
+
+        if ($overlap > 0) {
+            return ['text' => '已分配', 'class' => ['class' => 'bg-danger']];
+        }
+        return ['text' => '未分配', 'class' => ['class' => 'bg-success']];
     }
 }

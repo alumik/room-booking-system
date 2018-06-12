@@ -61,7 +61,7 @@ $this->params['breadcrumbs'][] = $model->id;
     ]) ?>
 
     <?PHP
-        if ($model->status != \common\models\Application::STATUS_REJECTED) {
+        if ($model->canUpdate()) {
             ?>
             <p>
                 <?PHP

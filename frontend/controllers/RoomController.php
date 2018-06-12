@@ -1,22 +1,22 @@
 <?php
 
-namespace backend\controllers;
+namespace frontend\controllers;
 
+use common\models\Application;
 use Yii;
 use common\models\Room;
-use backend\models\RoomSearch;
+use frontend\models\RoomSearch;
 use yii\web\Controller;
-use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * RoomController Room模型类的控制器
+ * RoomController implements the CRUD actions for Room model.
  */
 class RoomController extends Controller
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function behaviors()
     {
@@ -31,17 +31,11 @@ class RoomController extends Controller
     }
 
     /**
-     * 列出所有房间
-     *
+     * Lists all Room models.
      * @return mixed
-     * @throws ForbiddenHttpException
      */
     public function actionIndex()
     {
-        if (!Yii::$app->user->can('manageRoom')) {
-            throw new ForbiddenHttpException('对不起，你没有进行该操作的权限。');
-        }
-
         $searchModel = new RoomSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -59,10 +53,6 @@ class RoomController extends Controller
      */
     public function actionView($id)
     {
-        if (!Yii::$app->user->can('manageRoom')) {
-            throw new ForbiddenHttpException('对不起，你没有进行该操作的权限。');
-        }
-
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -75,10 +65,6 @@ class RoomController extends Controller
      */
     public function actionCreate()
     {
-        if (!Yii::$app->user->can('manageRoom')) {
-            throw new ForbiddenHttpException('对不起，你没有进行该操作的权限。');
-        }
-
         $model = new Room();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -99,10 +85,6 @@ class RoomController extends Controller
      */
     public function actionUpdate($id)
     {
-        if (!Yii::$app->user->can('manageRoom')) {
-            throw new ForbiddenHttpException('对不起，你没有进行该操作的权限。');
-        }
-
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -123,26 +105,9 @@ class RoomController extends Controller
      */
     public function actionDelete($id)
     {
-        if (!Yii::$app->user->can('manageRoom')) {
-            throw new ForbiddenHttpException('对不起，你没有进行该操作的权限。');
-        }
-
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
-    }
-
-    public function actionChangestatus($id)
-    {
-        if (!Yii::$app->user->can('manageRoom')) {
-            throw new ForbiddenHttpException('对不起，你没有进行该操作的权限。');
-        }
-
-        $model = $this->findModel($id);
-        $model->changeStatus();
-        $model->save();
-
-        return $this->redirect(Yii::$app->request->referrer);
     }
 
     /**
@@ -159,5 +124,23 @@ class RoomController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionOrder($id, $s_time, $e_time)
+    {
+        $model = new Application();
+        $model->room_id = $id;
+        $model->start_time = $s_time;
+        $model->end_time = $e_time;
+        $model->status = Application::STATUS_PENDDING;
+        $model->applicant_id = Yii::$app->user->identity->getId();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['application/view', 'id' => $model->id]);
+        }
+
+        return $this->render('order', [
+            'model' => $model,
+        ]);
     }
 }

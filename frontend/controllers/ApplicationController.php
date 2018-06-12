@@ -79,10 +79,8 @@ class ApplicationController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionOrder($model)
     {
-        $model = new Application();
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -108,6 +106,7 @@ class ApplicationController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $model->start_time = strtotime($model->start_time);
             $model->end_time = strtotime($model->end_time);
+            $model->status = Application::STATUS_PENDDING;
             if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }

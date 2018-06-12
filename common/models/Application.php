@@ -48,9 +48,12 @@ class Application extends \yii\db\ActiveRecord
             [['start_time', 'end_time'], 'required'],
 
             [['event'], 'string'],
+
             [['organization_name'], 'string', 'max' => 64],
+
             ['status', 'default', 'value' => self::STATUS_PENDDING],
             ['status', 'in', 'range' => [self::STATUS_PENDDING, self::STATUS_APPROVED, self::STATUS_REJECTED]],
+
             [['applicant_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['applicant_id' => 'id']],
             [['room_id'], 'exist', 'skipOnError' => true, 'targetClass' => Room::className(), 'targetAttribute' => ['room_id' => 'id']],
         ];
@@ -75,8 +78,8 @@ class Application extends \yii\db\ActiveRecord
             $e_time = $this->end_time;
             if ($s_time > $e_time) {
                 $this->addError($attribute, '结束时间必须大于开始时间。');
-            } else if ($e_time - $s_time > 3600 * 5) {
-                $this->addError($attribute, '持续时间不能超过五小时。');
+            } else if ($e_time - $s_time > 3600 * 12) {
+                $this->addError($attribute, '持续时间不能超过十二小时。');
             }
         }
     }
@@ -146,7 +149,11 @@ class Application extends \yii\db\ActiveRecord
     }
 
     public static function getPendingApplicationCount() {
-        return Application::find()->where(['status' => 0])->count();
+        $time = time();
+        return Application::find()
+            ->where(['status' => 0])
+            ->andWhere("start_time > $time")
+            ->count();
     }
 
     public function getStatusBg()
@@ -182,14 +189,6 @@ class Application extends \yii\db\ActiveRecord
         }
 
         return [];
-    }
-
-    public function afterSave($insert, $changedAttributes) {
-        parent::afterSave($insert, $changedAttributes);
-        if (!empty($changedAttributes)) {
-            $this->status = self::STATUS_PENDDING;
-            $this->save();
-        }
     }
 
     public function canUpdate()

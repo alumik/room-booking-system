@@ -83,4 +83,30 @@ class ApplicationController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    public function actionApprove($id)
+    {
+        $model = $this->findModel($id);
+
+        $model->status = Application::STATUS_APPROVED;
+
+        try {
+            $model->save();
+        } catch (yii\db\Exception $e) {
+            return $this->render('sqlerror');
+        }
+
+        return $this->redirect(['index']);
+    }
+
+    public function actionReject($id)
+    {
+        $model = $this->findModel($id);
+
+        $model->status = Application::STATUS_REJECTED;
+
+        $model->save();
+
+        return $this->redirect(['index']);
+    }
 }
