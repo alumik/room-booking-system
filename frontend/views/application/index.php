@@ -4,6 +4,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use \kartik\datetime\DateTimePicker;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\ApplicationSearch */
@@ -37,12 +38,30 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'start_time',
                     'format' => ['date', 'php: Y-m-d H:i'],
-                    'filter' => '',
+                    'filter' => DateTimePicker::widget([
+                        'model' => $searchModel,
+                        'attribute' => 'start_time_picker',
+                        'type' => DateTimePicker::TYPE_INPUT,
+                        'readonly' => true,
+                        'pluginOptions' => [
+                            'autoclose' => true,
+                        ]
+                    ]),
+                    'contentOptions' => ['class' => "time-column"],
                 ],
                 [
                     'attribute' => 'end_time',
                     'format' => ['date', 'php: Y-m-d H:i'],
-                    'filter' => '',
+                    'filter' => \kartik\datetime\DateTimePicker::widget([
+                        'model' => $searchModel,
+                        'attribute' => 'end_time_picker',
+                        'type' => DateTimePicker::TYPE_INPUT,
+                        'readonly' => true,
+                        'pluginOptions' => [
+                            'autoclose' => true,
+                        ]
+                    ]),
+                    'contentOptions' => ['class' => "time-column"],
                 ],
                 [
                     'attribute' => 'status',

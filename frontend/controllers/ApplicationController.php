@@ -50,6 +50,8 @@ class ApplicationController extends Controller
     public function actionIndex()
     {
         $searchModel = new ApplicationSearch();
+        $searchModel->start_time_picker = date('Y-m-d H:i', time());
+        $searchModel->end_time_picker = date('Y-m-d H:i', time() + 3600 * 24 *30);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->query->andFilterWhere(['applicant_id' => Yii::$app->user->identity->getId()]);
 

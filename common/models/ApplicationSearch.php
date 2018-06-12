@@ -16,6 +16,8 @@ class ApplicationSearch extends Application
     public $campus;
     public $applicant_student_id;
     public $applicant_name;
+    public $start_time_picker;
+    public $end_time_picker;
 
     /**
      * @inheritdoc
@@ -26,6 +28,7 @@ class ApplicationSearch extends Application
             [['id', 'applicant_id', 'room_id'], 'integer'],
             [['organization_name', 'start_time', 'end_time', 'event', 'status'], 'safe'],
             [['room_number', 'campus', 'applicant_student_id', 'applicant_name'], 'safe'],
+            [['start_time_picker', 'end_time_picker'], 'safe'],
         ];
     }
 
@@ -95,6 +98,13 @@ class ApplicationSearch extends Application
             ->andFilterWhere(['like', 'room.campus', $this->campus])
             ->andFilterWhere(['like', 'user.student_id', $this->applicant_student_id])
             ->andFilterWhere(['like', 'user.username', $this->applicant_name]);
+
+        if (!empty($this->start_time_picker)) {
+            $query->andWhere(['>', 'start_time', strtotime($this->start_time_picker)]);
+        }
+        if (!empty($this->end_time_picker)) {
+            $query->andWhere(['<', 'end_time', strtotime($this->end_time_picker)]);
+        }
 
         $query->andFilterWhere(['like', 'organization_name', $this->organization_name])
             ->andFilterWhere(['like', 'event', $this->event]);
