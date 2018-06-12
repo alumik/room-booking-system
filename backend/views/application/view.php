@@ -46,11 +46,11 @@ $this->params['breadcrumbs'][] = $model->id;
             'event:ntext',
             [
                 'attribute' => 'start_time',
-                'format' => ['date', 'php: Y-m-d H:i:s'],
+                'format' => ['date', 'php: Y-m-d H:i'],
             ],
             [
                 'attribute' => 'end_time',
-                'format' => ['date', 'php: Y-m-d H:i:s'],
+                'format' => ['date', 'php: Y-m-d H:i'],
             ],
             [
                 'attribute' => 'status',
@@ -70,7 +70,7 @@ $this->params['breadcrumbs'][] = $model->id;
                         <?= Html::a('批准', ['approve', 'id' => $model->id], [
                             'class' => 'btn btn-primary',
                             'data' => [
-                                'confirm' => 'Are you sure you want to delete this item?',
+                                'confirm' => '你确定要批准该申请吗？',
                                 'method' => 'post',
                             ],
                         ]) ?>
@@ -80,7 +80,7 @@ $this->params['breadcrumbs'][] = $model->id;
                 <?= Html::a('拒绝', ['reject', 'id' => $model->id], [
                     'class' => 'btn btn-danger',
                     'data' => [
-                        'confirm' => 'Are you sure you want to delete this item?',
+                        'confirm' => '你确定要拒绝该申请吗？该操作不能撤销。',
                         'method' => 'post',
                     ],
                 ]) ?>

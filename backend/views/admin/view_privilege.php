@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="auth-item-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
+    <div class="scrollable">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
@@ -64,4 +64,5 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]); ?>
+    </div>
 </div>

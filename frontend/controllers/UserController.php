@@ -22,7 +22,7 @@ class UserController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['view', 'update'],
+                'only' => ['view', 'update', 'resetpwd'],
                 'rules' => [
                     [
                         'actions' => ['view', 'update', 'resetpwd'],

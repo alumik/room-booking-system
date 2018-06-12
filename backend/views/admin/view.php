@@ -42,11 +42,11 @@ $this->params['breadcrumbs'][] = $model->admin_id;
             ],
             [
                 'attribute' => 'created_at',
-                'format' => ['date', 'php: Y-m-d H:i:s'],
+                'format' => ['date', 'php: Y-m-d H:i'],
             ],
             [
                 'attribute' => 'updated_at',
-                'format' => ['date', 'php: Y-m-d H:i:s'],
+                'format' => ['date', 'php: Y-m-d H:i'],
             ],
         ],
     ]) ?>

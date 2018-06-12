@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="user-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
+    <div class="scrollable">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -35,12 +35,12 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'created_at',
-                'format' => ['date', 'php: Y-m-d H:i:s'],
+                'format' => ['date', 'php: Y-m-d H:i'],
                 'filter' => '',
             ],
             [
                 'attribute' => 'updated_at',
-                'format' => ['date', 'php: Y-m-d H:i:s'],
+                'format' => ['date', 'php: Y-m-d H:i'],
                 'filter' => '',
             ],
 
@@ -73,4 +73,5 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]); ?>
+    </div>
 </div>

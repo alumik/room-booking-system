@@ -21,6 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('新增管理员', ['create'], ['class' => 'btn btn-success']) ?>
         <?= Html::a('权限对照表', ['viewprivilege'], ['class' => 'btn btn-primary']) ?>
     </p>
+    <div class="scrollable">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -100,4 +101,5 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]); ?>
+    </div>
 </div>

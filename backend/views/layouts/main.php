@@ -41,8 +41,8 @@ AppAsset::register($this);
     } else {
         if (Yii::$app->user->can('manageRoom')) {
             $menuItems[] = ['label' => '房间管理', 'url' => ['/room/index']];
-            $menuItems[] = ['label' => '预约管理', 'url' => ['/application/index']];
-            $menuItems[] = '<li><span class="badge badge-inverse">' . \common\models\Application::getPendingApplicationCount() . '</span></li>';
+            $menuItems[] = ['label' => '预约管理 <span class="badge badge-inverse">' . \common\models\Application::getPendingApplicationCount() . '</span>', 'url' => ['/application/index']];
+            $menuItems[] = '<li></li>';
         }
         if (Yii::$app->user->can('viewStudentList')) {
             $menuItems[] = ['label' => '学生管理', 'url' => ['/user/index']];
@@ -62,6 +62,7 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => $menuItems,
+        'encodeLabels' => false,
     ]);
     NavBar::end();
     ?>

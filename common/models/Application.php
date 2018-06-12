@@ -42,7 +42,11 @@ class Application extends \yii\db\ActiveRecord
         return [
             [['applicant_id', 'room_id', 'event', 'status'], 'required'],
             [['applicant_id', 'room_id'], 'integer'],
-            [['start_time', 'end_time'], 'safe'],
+
+            [['start_time'], 'validateStartTime'],
+            [['end_time'], 'validateEndTime'],
+            [['start_time', 'end_time'], 'required'],
+
             [['event'], 'string'],
             [['organization_name'], 'string', 'max' => 64],
             ['status', 'default', 'value' => self::STATUS_PENDDING],
@@ -50,6 +54,31 @@ class Application extends \yii\db\ActiveRecord
             [['applicant_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['applicant_id' => 'id']],
             [['room_id'], 'exist', 'skipOnError' => true, 'targetClass' => Room::className(), 'targetAttribute' => ['room_id' => 'id']],
         ];
+    }
+
+    public function validateStartTime($attribute, $params)
+    {
+        if (!$this->hasErrors()) {
+            $s_time = $this->start_time;
+            if ($s_time < time()) {
+                $this->addError($attribute, '开始时间必须大于现在时间。');
+            } else if ($s_time > time() + 3600 * 24 * 30) {
+                $this->addError($attribute, '开始时间必须在一个月内。');
+            }
+        }
+    }
+
+    public function validateEndTime($attribute, $params)
+    {
+        if (!$this->hasErrors()) {
+            $s_time = $this->start_time;
+            $e_time = $this->end_time;
+            if ($s_time > $e_time) {
+                $this->addError($attribute, '结束时间必须大于开始时间。');
+            } else if ($e_time - $s_time > 3600 * 5) {
+                $this->addError($attribute, '持续时间不能超过五小时。');
+            }
+        }
     }
 
     /**
@@ -139,13 +168,12 @@ class Application extends \yii\db\ActiveRecord
 
     public function getActionBg()
     {
-        $tmp = self::STATUS_APPROVED;
-
         $overlap = (new Query())
             ->select('id')
             ->from('application')
             ->where("not (start_time >= $this->end_time or end_time <= $this->start_time)")
-            ->andWhere("status = $tmp")
+            ->andWhere(['status' => self::STATUS_APPROVED])
+            ->andWhere(['room_id' => $this->room_id])
             ->andWhere("id != $this->id")
             ->count();
 
@@ -154,5 +182,21 @@ class Application extends \yii\db\ActiveRecord
         }
 
         return [];
+    }
+
+    public function afterSave($insert, $changedAttributes) {
+        parent::afterSave($insert, $changedAttributes);
+        if (!empty($changedAttributes)) {
+            $this->status = self::STATUS_PENDDING;
+            $this->save();
+        }
+    }
+
+    public function canUpdate()
+    {
+        if ($this->start_time < time() || $this->status == self::STATUS_REJECTED) {
+            return false;
+        }
+        return true;
     }
 }

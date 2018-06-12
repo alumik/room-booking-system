@@ -41,7 +41,7 @@ AppAsset::register($this);
         $menuItems[] = ['label' => '登录', 'url' => ['/site/login']];
     } else {
         $menuItems[] = ['label' => '预约房间', 'url' => ['/apply/newapply']];
-        $menuItems[] = ['label' => '我的预约', 'url' => ['/user/myapply']];
+        $menuItems[] = ['label' => '我的预约', 'url' => ['/application/index']];
         $menuItems[] = ['label' => '我的账号', 'url' => ['/user/view']];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')

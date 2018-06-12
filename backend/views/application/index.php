@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <p>黄色标记表明该申请与已批准的申请冲突或房间已不可用</p>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
+    <div class="scrollable">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -47,12 +47,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'organization_name',
             [
                 'attribute' => 'start_time',
-                'format' => ['date', 'php: Y-m-d H:i:s'],
+                'format' => ['date', 'php: Y-m-d H:i'],
                 'filter' => '',
             ],
             [
                 'attribute' => 'end_time',
-                'format' => ['date', 'php: Y-m-d H:i:s'],
+                'format' => ['date', 'php: Y-m-d H:i'],
                 'filter' => '',
             ],
             [
@@ -88,4 +88,5 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]); ?>
+    </div>
 </div>
