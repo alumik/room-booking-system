@@ -76,7 +76,7 @@ class ApplicationSearch extends Application
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
+            'application.id' => $this->id,
             'applicant_id' => $this->applicant_id,
             'room_id' => $this->room_id,
             'application.status' => $this->status,
