@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $model->id;
             [
                 'attribute' => 'room_number',
                 'label' => '房间号',
-                'value' => $model->room->room_number . $model->room->statusStrColoered,
+                'value' => $model->room->room_number . $model->room->getColoredStatusStr(),
                 'captionOptions' => ['width' => '20%'],
                 'format' => 'raw',
             ],

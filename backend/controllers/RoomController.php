@@ -9,6 +9,8 @@ use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use common\models\Room;
+use common\models\Application;
+use common\models\ApplicationSearch;
 use backend\models\RoomSearch;
 
 /**
@@ -66,8 +68,16 @@ class RoomController extends Controller
             throw new ForbiddenHttpException('对不起，你没有进行该操作的权限。');
         }
 
+        $searchModel = new ApplicationSearch();
+        $searchModel->start_time_picker = date('Y-m-d H:i', time());
+        $searchModel->end_time_picker = date('Y-m-d H:i', time() + 3600 * 24 *30);
+        $searchModel->room_id = $id;
+        $searchModel->status = Application::STATUS_APPROVED;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'dataProvider' => $dataProvider,
         ]);
     }
 
