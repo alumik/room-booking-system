@@ -10,6 +10,7 @@ $this->title = '修改密码';
 $this->params['breadcrumbs'][] = ['label' => '我的账号', 'url' => ['view']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="user-resetpwd">
 
     <h1><?= Html::encode($this->title) ?></h1>

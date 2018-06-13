@@ -4,6 +4,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use common\models\Room;
 
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\models\RoomSearch */
@@ -12,6 +13,7 @@ use yii\grid\GridView;
 $this->title = '预约房间';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="room-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -32,17 +34,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'type',
                     'value' => 'type0.type_name',
-                    'filter' => \common\models\Room::getAllTypes(),
+                    'filter' => Room::getAllTypes(),
                 ],
                 [
                     'attribute' => 'campus',
                     'value' => 'campus0.campus_name',
-                    'filter' => \common\models\Room::getAllCampus(),
+                    'filter' => Room::getAllCampus(),
                 ],
                 [
                     'attribute' => 'queue_count',
                     'value' => function($model)use($searchModel) {
-                        return $model->getQueueCount($searchModel->start_time, $searchModel->end_time);
+                        /* @var $model Room */
+                        return $model->getQueueCount($searchModel->start_time_str, $searchModel->end_time_str);
                     },
                     'label' => '待审核申请',
                     'contentOptions' => ['width' => '100px'],
@@ -50,14 +53,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'approval_status',
                     'value' => function($model)use($searchModel) {
-                        $s_time = $searchModel->start_time;
-                        $e_time = $searchModel->end_time;
-                        $a_status = $model->getApprovalStatus($s_time, $e_time)['text'];
+                        /* @var $model Room */
+                        $s_time_str = $searchModel->start_time_str;
+                        $e_time_str = $searchModel->end_time_str;
+                        $a_status = $model->getApprovalStatus($s_time_str, $e_time_str)['text'];
 
                         if ($a_status == '已分配') {
                             return Html::a(
                                 $a_status,
-                                ['approvedapplication', 'id' => $model->id, 's_time' => $s_time, 'e_time' => $e_time]
+                                ['approvedapplication', 'id' => $model->id, 's_time_str' => $s_time_str, 'e_time_str' => $e_time_str]
                             );
                         }
 
@@ -65,7 +69,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     },
                     'label' => '分配状态',
                     'contentOptions' => function($model)use($searchModel) {
-                        $options = $model->getApprovalStatus($searchModel->start_time, $searchModel->end_time)['class'];
+                        /* @var $model Room */
+                        $options = $model->getApprovalStatus($searchModel->start_time_str, $searchModel->end_time_str)['class'];
                         $options['width'] = '80px';
                         return $options;
                     },
@@ -77,8 +82,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     'buttons' => [
                         'order' => function($url, $model, $key) use ($searchModel)
                         {
-                            $s_time = strtotime($searchModel->start_time);
-                            $e_time = strtotime($searchModel->end_time);
+                            $s_time = strtotime($searchModel->start_time_str);
+                            $e_time = strtotime($searchModel->end_time_str);
 
                             $options = [
                                 'title' => '预约该房间',

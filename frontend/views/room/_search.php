@@ -17,7 +17,7 @@ use kartik\datetime\DateTimePicker;
         'options' => ['style' => 'max-width: 42%'],
     ]); ?>
 
-    <?= $form->field($model, 'start_time')->widget(DateTimePicker::classname(), [
+    <?= $form->field($model, 'start_time_str')->widget(DateTimePicker::classname(), [
         'readonly' => true,
         'options' => [
             'placeholder' => '选择开始时间',
@@ -28,7 +28,7 @@ use kartik\datetime\DateTimePicker;
         ]
     ]); ?>
 
-    <?= $form->field($model, 'end_time')->widget(DateTimePicker::classname(), [
+    <?= $form->field($model, 'end_time_str')->widget(DateTimePicker::classname(), [
         'readonly' => true,
         'options' => [
             'placeholder' => '选择结束时间',

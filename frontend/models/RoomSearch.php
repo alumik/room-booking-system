@@ -11,8 +11,8 @@ use common\models\Room;
  */
 class RoomSearch extends Room
 {
-    public $start_time;
-    public $end_time;
+    public $start_time_str;
+    public $end_time_str;
     public $queue_count;
 
     /**
@@ -22,9 +22,9 @@ class RoomSearch extends Room
     {
         return [
             [['id', 'type', 'campus', 'available'], 'integer'],
-            [['room_number', 'start_time', 'end_time'], 'safe'],
-            [['start_time'], 'validateStartTime'],
-            [['end_time'], 'validateEndTime'],
+            [['room_number', 'start_time_str', 'end_time_str'], 'safe'],
+            ['start_time_str', 'validateStartTime'],
+            ['end_time_str', 'validateEndTime'],
         ];
     }
 
@@ -34,8 +34,8 @@ class RoomSearch extends Room
     public function attributeLabels()
     {
         return [
-            'start_time' => '开始时间',
-            'end_time' => '结束时间',
+            'start_time_str' => '开始时间',
+            'end_time_str' => '结束时间',
         ];
     }
 
@@ -48,7 +48,7 @@ class RoomSearch extends Room
     public function validateStartTime($attribute, $params)
     {
         if (!$this->hasErrors()) {
-            $s_time = strtotime($this->start_time);
+            $s_time = strtotime($this->start_time_str);
             if ($s_time < time()) {
                 $this->addError($attribute, '开始时间必须大于现在时间。');
             } else if ($s_time > time() + 3600 * 24 * 30) {
@@ -66,8 +66,8 @@ class RoomSearch extends Room
     public function validateEndTime($attribute, $params)
     {
         if (!$this->hasErrors()) {
-            $s_time = strtotime($this->start_time);
-            $e_time = strtotime($this->end_time);
+            $s_time = strtotime($this->start_time_str);
+            $e_time = strtotime($this->end_time_str);
             if ($s_time > $e_time) {
                 $this->addError($attribute, '结束时间必须大于开始时间。');
             } else if ($e_time - $s_time > 3600 * 12) {
@@ -119,7 +119,7 @@ class RoomSearch extends Room
             return $dataProvider;
         }
 
-        if (empty($this->start_time) || empty($this->end_time)) {
+        if (empty($this->start_time_str) || empty($this->end_time_str)) {
             $query->where('0 = 1');
         }
 

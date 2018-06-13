@@ -11,6 +11,7 @@ use yii\widgets\DetailView;
 $this->title = '我的账号';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="user-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -29,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'email:email',
             [
                 'attribute' => 'status',
-                'value' => $model->statusStr,
+                'value' => $model->getStatusStr(),
             ],
             [
                 'attribute' => 'created_at',

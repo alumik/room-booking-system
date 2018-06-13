@@ -4,6 +4,8 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use common\models\Application;
+use common\models\Room;
 use \kartik\datetime\DateTimePicker;
 
 /* @var $this yii\web\View */
@@ -13,10 +15,13 @@ use \kartik\datetime\DateTimePicker;
 $this->title = '我的预约';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="application-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
+
     <p>黄色标记表明该申请与已批准的申请冲突或房间已不可用</p>
+
     <div class="scrollable">
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
@@ -32,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute' => 'campus',
                     'label' => '校区',
                     'value' => 'room.campus0.campus_name',
-                    'filter' => \common\models\Room::getAllCampus(),
+                    'filter' => Room::getAllCampus(),
                 ],
                 'organization_name',
                 [
@@ -52,7 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'end_time',
                     'format' => ['date', 'php: Y-m-d H:i'],
-                    'filter' => \kartik\datetime\DateTimePicker::widget([
+                    'filter' => DateTimePicker::widget([
                         'model' => $searchModel,
                         'attribute' => 'end_time_picker',
                         'type' => DateTimePicker::TYPE_INPUT,
@@ -66,8 +71,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'status',
                     'value' => 'statusStr',
-                    'filter' => \common\models\Application::getAllStatus(),
+                    'filter' => Application::getAllStatus(),
                     'contentOptions' => function($model) {
+                        /* @var $model \common\models\Application */
                         $options = $model->getStatusBg();
                         $options['width'] = '80px';
                         return $options;
@@ -77,13 +83,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'class' => 'yii\grid\ActionColumn',
                     'contentOptions' => function($model) {
+                        /* @var $model \common\models\Application */
                         return $model->getActionBg();
                     },
                     'template' => '{view} {print}',
                     'visibleButtons' => [
                         'print' => function($model, $key, $index)
                         {
-                            return $model->status == \common\models\Application::STATUS_APPROVED;
+                            return $model->status == Application::STATUS_APPROVED;
                         }
                     ],
                     'buttons' => [
@@ -102,4 +109,5 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]); ?>
     </div>
+
 </div>

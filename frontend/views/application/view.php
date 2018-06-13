@@ -12,6 +12,7 @@ $this->title = '预约申请详情';
 $this->params['breadcrumbs'][] = ['label' => '我的预约', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $model->id;
 ?>
+
 <div class="application-view">
 
     <h1><?= Html::encode($this->title) ?></h1>

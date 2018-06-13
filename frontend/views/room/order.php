@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Application */
@@ -9,13 +9,14 @@ use yii\helpers\Html;
 $this->title = '预约房间';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="application-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <div class="application-form">
 
-        <?php $form = \yii\widgets\ActiveForm::begin(); ?>
+        <?php $form = ActiveForm::begin(); ?>
 
         <?= $form->field($model, 'room_number', [
             'inputOptions' => [
@@ -46,10 +47,10 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $form->field($model, 'event')->textarea(['rows' => 6]) ?>
 
         <div class="form-group">
-            <?= Html::submitButton('保存', ['class' => 'btn btn-success']) ?>
+            <?= Html::submitButton('提交申请', ['class' => 'btn btn-success']) ?>
         </div>
 
-        <?php \yii\widgets\ActiveForm::end(); ?>
+        <?php ActiveForm::end(); ?>
 
     </div>
 
