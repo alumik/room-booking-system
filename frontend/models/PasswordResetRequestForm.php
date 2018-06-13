@@ -7,7 +7,7 @@ use yii\base\Model;
 use common\models\User;
 
 /**
- * 学生密码重置申请表单模型
+ * 前台 学生登录前修改密码申请 表单模型
  */
 class PasswordResetRequestForm extends Model
 {
@@ -31,7 +31,7 @@ class PasswordResetRequestForm extends Model
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {

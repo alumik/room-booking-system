@@ -2,17 +2,18 @@
 
 namespace frontend\controllers;
 
-use common\models\Application;
 use Yii;
-use common\models\Room;
-use frontend\models\RoomSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 use common\models\ApplicationSearch;
+use common\models\Application;
+use common\models\Room;
+use frontend\models\RoomSearch;
 
 /**
- * RoomController implements the CRUD actions for Room model.
+ * 前台 房间 控制器
  */
 class RoomController extends Controller
 {
@@ -28,11 +29,23 @@ class RoomController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'approvedapplication', 'order'],
+                'rules' => [
+                    [
+                        'actions' => ['index', 'approvedapplication', 'order'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
         ];
     }
 
     /**
-     * Lists all Room models.
+     * 查看可预约房间列表
+     *
      * @return mixed
      */
     public function actionIndex()
@@ -47,41 +60,19 @@ class RoomController extends Controller
     }
 
     /**
-     * Displays a single Room model.
+     * 查看与我的申请冲突的申请列表
+     *
      * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * @param string $s_time_str
+     * @param string $e_time_str
+     * @return string
+     * @throws NotFoundHttpException
      */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
-    /**
-     * Creates a new Room model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new Room();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
-
-    public function actionApprovedapplication($id, $s_time, $e_time)
+    public function actionApprovedapplication($id, $s_time_str, $e_time_str)
     {
         $searchModel = new ApplicationSearch();
-        $searchModel->start_time_picker = $s_time;
-        $searchModel->end_time_picker = $e_time;
+        $searchModel->start_time_picker = $s_time_str;
+        $searchModel->end_time_picker = $e_time_str;
         $searchModel->room_id = $id;
         $searchModel->status = Application::STATUS_APPROVED;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -93,55 +84,14 @@ class RoomController extends Controller
     }
 
     /**
-     * Updates an existing Room model.
-     * If update is successful, the browser will be redirected to the 'view' page.
+     * 提交新申请
+     * 如果操作成功转到详情页
+     *
      * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * @param integer $s_time
+     * @param integer $e_time
+     * @return string|\yii\web\Response
      */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Deletes an existing Room model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
-    }
-
-    /**
-     * Finds the Room model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Room the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id)
-    {
-        if (($model = Room::findOne($id)) !== null) {
-            return $model;
-        }
-
-        throw new NotFoundHttpException('The requested page does not exist.');
-    }
-
     public function actionOrder($id, $s_time, $e_time)
     {
         $model = new Application();
@@ -158,5 +108,22 @@ class RoomController extends Controller
         return $this->render('order', [
             'model' => $model,
         ]);
+    }
+
+    /**
+     * 根据主键寻找房间模型
+     * 如果未找到模型，抛出404异常
+     *
+     * @param integer $id
+     * @return Room the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = Room::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('你所请求的页面不存在。');
     }
 }

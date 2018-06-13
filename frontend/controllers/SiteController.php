@@ -14,7 +14,7 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 
 /**
- * 网站控制器
+ * 前台 网站 控制器
  */
 class SiteController extends Controller
 {

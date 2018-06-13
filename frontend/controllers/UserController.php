@@ -3,14 +3,14 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\User;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\AccessControl;
+use common\models\User;
 use frontend\models\LoginResetPasswordForm;
 
 /**
- * UserController User模型类的控制器
+ * 前台 学生 控制器
  */
 class UserController extends Controller
 {
@@ -38,7 +38,7 @@ class UserController extends Controller
      * 显示账号信息
      *
      * @return mixed
-     * @throws NotFoundHttpException 如果模型找不到
+     * @throws NotFoundHttpException
      */
     public function actionView()
     {
@@ -53,7 +53,7 @@ class UserController extends Controller
      *
      * @param integer $id
      * @return mixed
-     * @throws NotFoundHttpException 如果模型找不到
+     * @throws NotFoundHttpException
      */
     public function actionUpdate($id)
     {
@@ -96,7 +96,7 @@ class UserController extends Controller
      *
      * @param integer $id
      * @return User
-     * @throws NotFoundHttpException 如果模型找不到
+     * @throws NotFoundHttpException
      */
     protected function findModel($id)
     {
@@ -104,6 +104,6 @@ class UserController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException('对不起，未找到你查询的数据');
+        throw new NotFoundHttpException('你所请求的页面不存在。');
     }
 }

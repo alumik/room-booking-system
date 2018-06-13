@@ -3,22 +3,20 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\Application;
-use common\models\ApplicationSearch;
-use yii\behaviors\AttributeBehavior;
-use yii\db\ActiveRecord;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use common\models\Application;
+use common\models\ApplicationSearch;
 
 /**
- * ApplicationController implements the CRUD actions for Application model.
+ * 前台 申请 控制器
  */
 class ApplicationController extends Controller
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function behaviors()
     {
@@ -27,24 +25,25 @@ class ApplicationController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
-                'access' => [
-                    'class' => AccessControl::className(),
-                    'only' => ['view', 'index', 'update', 'delete'],
-                    'rules' => [
-                        [
-                            'actions' => ['view', 'index', 'update', 'delete'],
-                            'allow' => true,
-                            'roles' => ['@'],
-                        ],
-                    ],
                 ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['view', 'index', 'update', 'delete', 'applicationdetail'],
+                'rules' => [
+                    [
+                        'actions' => ['view', 'index', 'update', 'delete', 'applicationdetail'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
         ];
     }
 
     /**
-     * Lists all Application models.
+     * 列出“我的预约”
+     *
      * @return mixed
      */
     public function actionIndex()
@@ -61,6 +60,13 @@ class ApplicationController extends Controller
         ]);
     }
 
+    /**
+     * 查看与自己申请相冲突的申请详情
+     *
+     * @param integer $id
+     * @return string
+     * @throws NotFoundHttpException
+     */
     public function actionApplicationdetail($id)
     {
         return $this->render('application_detail', [
@@ -69,7 +75,8 @@ class ApplicationController extends Controller
     }
 
     /**
-     * Displays a single Application model.
+     * 我的预约申请详情
+     *
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -82,24 +89,9 @@ class ApplicationController extends Controller
     }
 
     /**
-     * Creates a new Application model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionOrder($model)
-    {
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Updates an existing Application model.
-     * If update is successful, the browser will be redirected to the 'view' page.
+     * 修改我的申请
+     * 如果操作成功转到详情页
+     *
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -127,11 +119,14 @@ class ApplicationController extends Controller
     }
 
     /**
-     * Deletes an existing Application model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * 撤销我的申请
+     * 如果操作成功转到我的申请列表
+     *
      * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
      */
     public function actionDelete($id)
     {
@@ -141,11 +136,12 @@ class ApplicationController extends Controller
     }
 
     /**
-     * Finds the Application model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
+     * 根据主键寻找申请模型
+     * 如果未找到模型，抛出404异常
+     *
      * @param integer $id
-     * @return Application the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
+     * @return Application
+     * @throws NotFoundHttpException
      */
     protected function findModel($id)
     {
@@ -153,6 +149,6 @@ class ApplicationController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+        throw new NotFoundHttpException('你所请求的页面不存在。');
     }
 }

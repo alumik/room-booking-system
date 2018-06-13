@@ -2,14 +2,12 @@
 
 namespace frontend\models;
 
-use common\models\Application;
-use common\models\Room;
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use common\models\Room;
 
 /**
- * 房间筛选模型
+ * 前台 房间 筛选模型
  */
 class RoomSearch extends Room
 {
@@ -30,6 +28,9 @@ class RoomSearch extends Room
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function attributeLabels()
     {
         return [
@@ -38,6 +39,12 @@ class RoomSearch extends Room
         ];
     }
 
+    /**
+     * 判断输入的开始时间是否合法
+     *
+     * @param $attribute
+     * @param $params
+     */
     public function validateStartTime($attribute, $params)
     {
         if (!$this->hasErrors()) {
@@ -50,6 +57,12 @@ class RoomSearch extends Room
         }
     }
 
+    /**
+     * 判断输入的结束时间是否合法
+     *
+     * @param $attribute
+     * @param $params
+     */
     public function validateEndTime($attribute, $params)
     {
         if (!$this->hasErrors()) {
@@ -64,7 +77,7 @@ class RoomSearch extends Room
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function scenarios()
     {
@@ -75,7 +88,6 @@ class RoomSearch extends Room
      * 根据查询条件生成dataProvider
      *
      * @param array $params
-     *
      * @return ActiveDataProvider
      */
     public function search($params)

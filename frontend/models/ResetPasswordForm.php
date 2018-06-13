@@ -7,7 +7,7 @@ use yii\base\InvalidArgumentException;
 use common\models\User;
 
 /**
- * 学生登录前修改密码表单模型
+ * 前台 学生登录前修改密码 表单模型
  */
 class ResetPasswordForm extends Model
 {
