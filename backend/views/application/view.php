@@ -62,6 +62,14 @@ $this->params['breadcrumbs'][] = $model->id;
                 'value' => $model->getStatusStr(),
                 'contentOptions' => $model->getStatusBg(),
             ],
+            [
+                'attribute' => 'created_at',
+                'format' => ['date', 'php: Y-m-d H:i'],
+            ],
+            [
+                'attribute' => 'updated_at',
+                'format' => ['date', 'php: Y-m-d H:i'],
+            ],
         ],
     ]) ?>
 

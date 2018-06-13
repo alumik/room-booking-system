@@ -16,6 +16,8 @@ use yii\db\ActiveRecord;
  * @property string $end_time
  * @property string $event
  * @property int $status
+ * @property int $created_at
+ * @property int $updated_at
  *
  * @property User $applicant
  * @property Room $room
@@ -46,6 +48,9 @@ class Application extends ActiveRecord
             [['start_time'], 'validateStartTime'],
             [['end_time'], 'validateEndTime'],
             [['start_time', 'end_time'], 'required'],
+
+            [['created_at', 'updated_at'], 'integer'],
+            [['created_at', 'updated_at'], 'safe'],
 
             [['event'], 'string'],
 
@@ -110,6 +115,8 @@ class Application extends ActiveRecord
             'end_time' => '结束时间',
             'event' => '申请理由',
             'status' => '审批状态',
+            'created_at' => '创建时间',
+            'updated_at' => '修改时间',
         ];
     }
 
@@ -229,5 +236,25 @@ class Application extends ActiveRecord
             return false;
         }
         return true;
+    }
+
+    /**
+     * 保存前自动生成修改时间
+     *
+     * @param bool $insert
+     * @return bool
+     */
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if ($insert) {
+                $this->created_at = time();
+                $this->updated_at = time();
+            } else {
+                $this->updated_at = time();
+            }
+            return true;
+        }
+        return false;
     }
 }

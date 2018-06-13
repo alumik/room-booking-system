@@ -58,6 +58,14 @@ $this->params['breadcrumbs'][] = '预约申请详情';
                 'value' => $model->getStatusStr(),
                 'contentOptions' => $model->getStatusBg(),
             ],
+            [
+                'attribute' => 'created_at',
+                'format' => ['date', 'php: Y-m-d H:i'],
+            ],
+            [
+                'attribute' => 'updated_at',
+                'format' => ['date', 'php: Y-m-d H:i'],
+            ],
         ],
     ]) ?>
 
