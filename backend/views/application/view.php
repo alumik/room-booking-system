@@ -4,6 +4,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use common\models\Application;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Application */
@@ -12,6 +13,7 @@ $this->title = '预约申请详情';
 $this->params['breadcrumbs'][] = ['label' => '预约管理', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $model->id;
 ?>
+
 <div class="application-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -23,7 +25,7 @@ $this->params['breadcrumbs'][] = $model->id;
             [
                 'attribute' => 'room_number',
                 'label' => '房间号',
-                'value' => $model->room->room_number . $model->room->statusStrColoered,
+                'value' => $model->room->room_number . $model->room->getColoredStatusStr(),
                 'captionOptions' => ['width' => '20%'],
                 'format' => 'raw',
             ],
@@ -65,7 +67,7 @@ $this->params['breadcrumbs'][] = $model->id;
             ?>
             <p>
                 <?PHP
-                    if ($model->status != \common\models\Application::STATUS_APPROVED) {
+                    if ($model->status != Application::STATUS_APPROVED) {
                         ?>
                         <?= Html::a('批准', ['approve', 'id' => $model->id], [
                             'class' => 'btn btn-primary',

@@ -137,7 +137,7 @@ class Room extends \yii\db\ActiveRecord
      *
      * @return string|null
      */
-    public function getStatusStrColoered() {
+    public function getColoredStatusStr() {
         switch ($this->available) {
             case self::STATUS_AVAILABLE:
                 return '<span class="text-success">（可用）</span>';
