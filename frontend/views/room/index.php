@@ -50,7 +50,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'approval_status',
                     'value' => function($model)use($searchModel) {
-                        return $model->getApprovalStatus($searchModel->start_time, $searchModel->end_time)['text'];
+                        $s_time = $searchModel->start_time;
+                        $e_time = $searchModel->end_time;
+                        $a_status = $model->getApprovalStatus($s_time, $e_time)['text'];
+
+                        if ($a_status == '已分配') {
+                            return Html::a(
+                                $a_status,
+                                ['approvedapplication', 'id' => $model->id, 's_time' => $s_time, 'e_time' => $e_time]
+                            );
+                        }
+
+                        return $a_status;
                     },
                     'label' => '分配状态',
                     'contentOptions' => function($model)use($searchModel) {
@@ -58,6 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         $options['width'] = '80px';
                         return $options;
                     },
+                    'format' => 'raw',
                 ],
                 [
                     'class' => 'yii\grid\ActionColumn',

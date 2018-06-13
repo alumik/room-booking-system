@@ -99,12 +99,10 @@ class ApplicationSearch extends Application
             ->andFilterWhere(['like', 'user.student_id', $this->applicant_student_id])
             ->andFilterWhere(['like', 'user.username', $this->applicant_name]);
 
-        if (!empty($this->start_time_picker)) {
-            $query->andWhere(['>', 'start_time', strtotime($this->start_time_picker)]);
-        }
-        if (!empty($this->end_time_picker)) {
-            $query->andWhere(['<', 'end_time', strtotime($this->end_time_picker)]);
-        }
+        $s_time = strtotime($this->start_time_picker);
+        $e_time = strtotime($this->end_time_picker);
+
+        $query->andWhere("not(end_time < $s_time or start_time > $e_time)");
 
         $query->andFilterWhere(['like', 'organization_name', $this->organization_name])
             ->andFilterWhere(['like', 'event', $this->event]);

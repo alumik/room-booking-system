@@ -9,6 +9,7 @@ use frontend\models\RoomSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use common\models\ApplicationSearch;
 
 /**
  * RoomController implements the CRUD actions for Room model.
@@ -73,6 +74,21 @@ class RoomController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+        ]);
+    }
+
+    public function actionApprovedapplication($id, $s_time, $e_time)
+    {
+        $searchModel = new ApplicationSearch();
+        $searchModel->start_time_picker = $s_time;
+        $searchModel->end_time_picker = $e_time;
+        $searchModel->room_id = $id;
+        $searchModel->status = Application::STATUS_APPROVED;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('approved_application', [
+            'model' => $this->findModel($id),
+            'dataProvider' => $dataProvider,
         ]);
     }
 

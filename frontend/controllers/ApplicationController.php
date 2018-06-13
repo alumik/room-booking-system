@@ -61,6 +61,13 @@ class ApplicationController extends Controller
         ]);
     }
 
+    public function actionApplicationdetail($id)
+    {
+        return $this->render('application_detail', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+
     /**
      * Displays a single Application model.
      * @param integer $id
