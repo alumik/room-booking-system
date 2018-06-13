@@ -2,10 +2,8 @@
 
 namespace app\models;
 
-use Yii;
-
 /**
- * "auth_assignment" 表的模型
+ * 后台 角色分配 模型
  *
  * @property string $item_name
  * @property string $user_id
@@ -16,7 +14,7 @@ use Yii;
 class AuthAssignment extends \yii\db\ActiveRecord
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -24,7 +22,7 @@ class AuthAssignment extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -38,7 +36,7 @@ class AuthAssignment extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {

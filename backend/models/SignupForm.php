@@ -6,7 +6,7 @@ use yii\base\Model;
 use common\models\Admin;
 
 /**
- * 管理员注册表单模型
+ * 后台 管理员注册 表单模型
  */
 class SignupForm extends Model
 {
@@ -45,7 +45,7 @@ class SignupForm extends Model
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {

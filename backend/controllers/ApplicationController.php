@@ -3,20 +3,20 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Application;
-use common\models\ApplicationSearch;
 use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use common\models\Application;
+use common\models\ApplicationSearch;
 
 /**
- * ApplicationController implements the CRUD actions for Application model.
+ * 后台 申请 控制器
  */
 class ApplicationController extends Controller
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function behaviors()
     {
@@ -31,8 +31,11 @@ class ApplicationController extends Controller
     }
 
     /**
-     * Lists all Application models.
+     * 列出所有申请列表
+     * 默认显示时间范围为从现在起30天内
+     *
      * @return mixed
+     * @throws ForbiddenHttpException
      */
     public function actionIndex()
     {
@@ -42,7 +45,7 @@ class ApplicationController extends Controller
 
         $searchModel = new ApplicationSearch();
         $searchModel->start_time_picker = date('Y-m-d H:i', time());
-        $searchModel->end_time_picker = date('Y-m-d H:i', time() + 3600 * 24 *30);
+        $searchModel->end_time_picker = date('Y-m-d H:i', time() + 3600 * 24 * 30);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -52,10 +55,12 @@ class ApplicationController extends Controller
     }
 
     /**
-     * Displays a single Application model.
+     * 显示一个申请详情
+     *
      * @param integer $id
      * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * @throws NotFoundHttpException
+     * @throws ForbiddenHttpException
      */
     public function actionView($id)
     {
@@ -69,25 +74,20 @@ class ApplicationController extends Controller
     }
 
     /**
-     * Finds the Application model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
+     * 批准一条申请
+     *
      * @param integer $id
-     * @return Application the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
+     * @throws ForbiddenHttpException
      */
-    protected function findModel($id)
-    {
-        if (($model = Application::findOne($id)) !== null) {
-            return $model;
-        }
-
-        throw new NotFoundHttpException('The requested page does not exist.');
-    }
-
     public function actionApprove($id)
     {
-        $model = $this->findModel($id);
+        if (!Yii::$app->user->can('manageRoom')) {
+            throw new ForbiddenHttpException('对不起，你没有进行该操作的权限。');
+        }
 
+        $model = $this->findModel($id);
         $model->status = Application::STATUS_APPROVED;
 
         try {
@@ -99,14 +99,41 @@ class ApplicationController extends Controller
         return $this->redirect(['index']);
     }
 
+    /**
+     * 拒绝一条申请
+     *
+     * @param integer $id
+     * @return \yii\web\Response
+     * @throws ForbiddenHttpException
+     * @throws NotFoundHttpException
+     */
     public function actionReject($id)
     {
+        if (!Yii::$app->user->can('manageRoom')) {
+            throw new ForbiddenHttpException('对不起，你没有进行该操作的权限。');
+        }
+
         $model = $this->findModel($id);
-
         $model->status = Application::STATUS_REJECTED;
-
         $model->save();
 
         return $this->redirect(['index']);
+    }
+
+    /**
+     * 根据主键寻找申请模型
+     * 如果未找到模型，抛出404异常
+     *
+     * @param integer $id
+     * @return Application the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = Application::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('你所请求的页面不存在。');
     }
 }

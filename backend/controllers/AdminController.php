@@ -2,27 +2,26 @@
 
 namespace backend\controllers;
 
-use app\models\AuthItem;
-use backend\models\AuthItemSearch;
 use Yii;
-use app\models\AuthAssignment;
-use backend\models\ResetPasswordForm;
-use backend\models\SignupForm;
-use common\models\Admin;
-use common\models\AdminSearch;
 use yii\db\StaleObjectException;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\ForbiddenHttpException;
+use app\models\AuthAssignment;
+use common\models\Admin;
+use common\models\AdminSearch;
+use backend\models\ResetPasswordForm;
+use backend\models\SignupForm;
+use backend\models\AuthItemSearch;
 
 /**
- * AdminController Admin模型类的控制器
+ * 后台 管理员 控制器
  */
 class AdminController extends Controller
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function behaviors()
     {
@@ -40,7 +39,7 @@ class AdminController extends Controller
      * 列出所有管理员
      *
      * @return mixed
-     * @throws ForbiddenHttpException 如果没有权限
+     * @throws ForbiddenHttpException
      */
     public function actionIndex()
     {
@@ -62,8 +61,8 @@ class AdminController extends Controller
      *
      * @param integer $id
      * @return mixed
-     * @throws ForbiddenHttpException 如果没有权限
-     * @throws NotFoundHttpException 如果模型找不到
+     * @throws ForbiddenHttpException
+     * @throws NotFoundHttpException
      */
     public function actionView($id)
     {
@@ -81,7 +80,7 @@ class AdminController extends Controller
      * 如果操作成功则跳转至详情页
      *
      * @return mixed
-     * @throws ForbiddenHttpException 如果没有权限
+     * @throws ForbiddenHttpException
      * @throws \Exception
      */
     public function actionCreate()
@@ -109,7 +108,7 @@ class AdminController extends Controller
      *
      * @param integer $id
      * @return mixed
-     * @throws ForbiddenHttpException 如果没有权限
+     * @throws ForbiddenHttpException
      * @throws \Exception
      */
     public function actionResetpwd($id)
@@ -137,8 +136,8 @@ class AdminController extends Controller
      *
      * @param integer $id
      * @return mixed
-     * @throws ForbiddenHttpException 如果没有权限
-     * @throws NotFoundHttpException 如果模型找不到
+     * @throws ForbiddenHttpException
+     * @throws NotFoundHttpException
      */
     public function actionUpdate($id)
     {
@@ -163,10 +162,10 @@ class AdminController extends Controller
      *
      * @param integer $id
      * @return mixed
-     * @throws ForbiddenHttpException 如果没有权限
-     * @throws NotFoundHttpException 如果模型找不到
-     * @throws StaleObjectException 如果[[optimisticLock|optimistic locking]]已启用且待删除数据已过期
-     * @throws \Exception|\Throwable 如果删除失败
+     * @throws ForbiddenHttpException
+     * @throws NotFoundHttpException
+     * @throws StaleObjectException
+     * @throws \Exception|\Throwable
      */
     public function actionDelete($id)
     {
@@ -185,8 +184,8 @@ class AdminController extends Controller
      *
      * @param integer $id
      * @return mixed
-     * @throws ForbiddenHttpException 如果没有权限
-     * @throws NotFoundHttpException 如果模型找不到
+     * @throws ForbiddenHttpException
+     * @throws NotFoundHttpException
      */
     public function actionPrivilege($id)
     {
@@ -196,11 +195,11 @@ class AdminController extends Controller
 
         $model = $this->findModel($id);
         $allRoles = Admin::getAllRoles();
-        $roles = $model->roles;
+        $roles = $model->getRoles();
 
         if (isset($_POST['newRoles'])) {
-            AuthAssignment::deleteAll('user_id=:id', [':id' => $id]);
             $model->resetRole();
+            AuthAssignment::deleteAll('user_id=:id', [':id' => $id]);
 
             $newRoles = $_POST['newRoles'];
             foreach ($newRoles as $role) {
@@ -226,6 +225,7 @@ class AdminController extends Controller
             }
 
             $model->save();
+
             return $this->redirect(['index']);
         }
 
@@ -270,6 +270,6 @@ class AdminController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+        throw new NotFoundHttpException('你所请求的页面不存在。');
     }
 }

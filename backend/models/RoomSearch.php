@@ -2,18 +2,17 @@
 
 namespace backend\models;
 
-use common\models\Room;
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use common\models\Room;
 
 /**
- * 房间筛选模型
+ * 后台 房间 筛选模型
  */
 class RoomSearch extends Room
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -24,7 +23,7 @@ class RoomSearch extends Room
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function scenarios()
     {
@@ -35,7 +34,6 @@ class RoomSearch extends Room
      * 根据查询条件生成dataProvider
      *
      * @param array $params
-     *
      * @return ActiveDataProvider
      */
     public function search($params)

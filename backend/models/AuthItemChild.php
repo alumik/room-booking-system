@@ -2,10 +2,8 @@
 
 namespace app\models;
 
-use Yii;
-
 /**
- * This is the model class for table "auth_item_child".
+ * 后台 权限关系 模型
  *
  * @property string $parent
  * @property string $child
@@ -16,7 +14,7 @@ use Yii;
 class AuthItemChild extends \yii\db\ActiveRecord
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -24,7 +22,7 @@ class AuthItemChild extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -38,7 +36,7 @@ class AuthItemChild extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {

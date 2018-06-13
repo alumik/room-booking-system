@@ -6,7 +6,7 @@ use yii\base\Model;
 use common\models\Admin;
 
 /**
- * 管理员修改密码表单模型
+ * 后台 管理员修改密码 表单模型
  */
 class ResetPasswordForm extends Model
 {
@@ -27,7 +27,7 @@ class ResetPasswordForm extends Model
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {

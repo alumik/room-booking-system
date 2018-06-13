@@ -3,20 +3,21 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Room;
-use backend\models\RoomSearch;
+use yii\db\StaleObjectException;
 use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use common\models\Room;
+use backend\models\RoomSearch;
 
 /**
- * RoomController Room模型类的控制器
+ * 后台 房间 控制器
  */
 class RoomController extends Controller
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function behaviors()
     {
@@ -52,10 +53,12 @@ class RoomController extends Controller
     }
 
     /**
-     * Displays a single Room model.
+     * 显示一个房间详细信息
+     *
      * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * @return string
+     * @throws ForbiddenHttpException
+     * @throws NotFoundHttpException
      */
     public function actionView($id)
     {
@@ -69,9 +72,11 @@ class RoomController extends Controller
     }
 
     /**
-     * Creates a new Room model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
+     * 创建一个新房间
+     * 如果操作成功则跳转至详情页
+     *
      * @return mixed
+     * @throws ForbiddenHttpException
      */
     public function actionCreate()
     {
@@ -91,11 +96,13 @@ class RoomController extends Controller
     }
 
     /**
-     * Updates an existing Room model.
-     * If update is successful, the browser will be redirected to the 'view' page.
+     * 修改房间信息
+     * 如果操作成功则跳转至详情页
+     *
      * @param integer $id
      * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * @throws NotFoundHttpException
+     * @throws ForbiddenHttpException
      */
     public function actionUpdate($id)
     {
@@ -115,11 +122,15 @@ class RoomController extends Controller
     }
 
     /**
-     * Deletes an existing Room model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * 删除一个房间
+     * 如果操作成功则跳转至房间列表
+     *
      * @param integer $id
      * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * @throws NotFoundHttpException
+     * @throws ForbiddenHttpException
+     * @throws StaleObjectException
+     * @throws \Exception|\Throwable
      */
     public function actionDelete($id)
     {
@@ -132,6 +143,14 @@ class RoomController extends Controller
         return $this->redirect(['index']);
     }
 
+    /**
+     * 切换房间状态
+     *
+     * @param string $id
+     * @return \yii\web\Response
+     * @throws ForbiddenHttpException
+     * @throws NotFoundHttpException
+     */
     public function actionChangestatus($id)
     {
         if (!Yii::$app->user->can('manageRoom')) {
@@ -146,8 +165,9 @@ class RoomController extends Controller
     }
 
     /**
-     * Finds the Room model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
+     * 根据主键寻找房间模型
+     * 如果未找到模型，抛出404异常
+     *
      * @param integer $id
      * @return Room the loaded model
      * @throws NotFoundHttpException if the model cannot be found
@@ -158,6 +178,6 @@ class RoomController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+        throw new NotFoundHttpException('你所请求的页面不存在。');
     }
 }

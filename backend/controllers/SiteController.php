@@ -9,7 +9,7 @@ use yii\filters\AccessControl;
 use common\models\AdminLoginForm;
 
 /**
- * 网站控制器
+ * 后台 网站 控制器
  */
 class SiteController extends Controller
 {
@@ -86,6 +86,7 @@ class SiteController extends Controller
         }
 
         $model = new AdminLoginForm();
+
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         } else {

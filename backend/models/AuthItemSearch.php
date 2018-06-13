@@ -2,18 +2,17 @@
 
 namespace backend\models;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\AuthItem;
 
 /**
- * 管理员角色筛选模型
+ * 后台 权限项目 筛选模型
  */
 class AuthItemSearch extends AuthItem
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -23,7 +22,7 @@ class AuthItemSearch extends AuthItem
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function scenarios()
     {

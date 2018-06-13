@@ -5,7 +5,7 @@ namespace app\models;
 use Yii;
 
 /**
- * "auth_item" 表的模型
+ * 后台 权限项目 模型
  *
  * @property string $name
  * @property int $type
@@ -16,7 +16,6 @@ use Yii;
  * @property int $updated_at
  *
  * @property AuthAssignment[] $authAssignments
- * @property AuthRule $ruleName
  * @property AuthItemChild[] $authItemChildren
  * @property AuthItemChild[] $authItemChildren0
  * @property AuthItem[] $children
@@ -25,7 +24,7 @@ use Yii;
 class AuthItem extends \yii\db\ActiveRecord
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -33,7 +32,7 @@ class AuthItem extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -43,12 +42,12 @@ class AuthItem extends \yii\db\ActiveRecord
             [['description', 'data'], 'string'],
             [['name', 'rule_name'], 'string', 'max' => 64],
             [['name'], 'unique'],
-            [['rule_name'], 'exist', 'skipOnError' => true, 'targetClass' => AuthRule::className(), 'targetAttribute' => ['rule_name' => 'name']],
+            [['rule_name'], 'safe'],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
@@ -69,14 +68,6 @@ class AuthItem extends \yii\db\ActiveRecord
     public function getAuthAssignments()
     {
         return $this->hasMany(AuthAssignment::className(), ['item_name' => 'name']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getRuleName()
-    {
-        return $this->hasOne(AuthRule::className(), ['name' => 'rule_name']);
     }
 
     /**
@@ -123,6 +114,7 @@ class AuthItem extends \yii\db\ActiveRecord
 
         $privilegesArray = array();
         foreach ($privileges as $privilege) {
+            /* @var AuthItemChild $privilege */
             array_push($privilegesArray, $privilege->child);
         }
 

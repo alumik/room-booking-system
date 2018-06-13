@@ -3,20 +3,20 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\User;
-use common\models\UserSearch;
 use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use common\models\User;
+use common\models\UserSearch;
 
 /**
- * UserController User模型类的控制器
+ * 后台 学生 控制器
  */
 class UserController extends Controller
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function behaviors()
     {
@@ -34,7 +34,7 @@ class UserController extends Controller
      * 列出所有学生
      *
      * @return mixed
-     * @throws ForbiddenHttpException 如果没有权限
+     * @throws ForbiddenHttpException
      */
     public function actionIndex()
     {
@@ -52,13 +52,13 @@ class UserController extends Controller
     }
 
     /**
-     * 修改学生状态（正常/已删除）
+     * 修改学生状态（正常/已禁用）
      * 如果操作成功则跳转至学生列表
      *
      * @param integer $id
      * @return mixed
-     * @throws ForbiddenHttpException 如果没有权限
-     * @throws NotFoundHttpException 如果模型找不到
+     * @throws ForbiddenHttpException
+     * @throws NotFoundHttpException
      */
     public function actionChangestatus($id)
     {
@@ -87,6 +87,6 @@ class UserController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException('对不起，未找到你查询的数据');
+        throw new NotFoundHttpException('你所请求的页面不存在。');
     }
 }
