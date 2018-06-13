@@ -12,7 +12,7 @@ return [
         ],
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=potatofield.cn;dbname=lab',
+            'dsn' => 'mysql:host=localhost;dbname=lab',
             'username' => 'lab',
             'password' => 'shujukushiyanke',
             'charset' => 'utf8',
