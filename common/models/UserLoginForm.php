@@ -6,7 +6,7 @@ use Yii;
 use yii\base\Model;
 
 /**
- * 学生登陆表单模型
+ * 公共 学生登陆 表单模型
  */
 class UserLoginForm extends Model
 {
@@ -33,7 +33,7 @@ class UserLoginForm extends Model
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
@@ -47,8 +47,8 @@ class UserLoginForm extends Model
     /**
      * 验证密码是否正确
      *
-     * @param string $attribute 被验证的属性
-     * @param array $params 额外键值对信息
+     * @param string $attribute
+     * @param array $params
      */
     public function validatePassword($attribute, $params)
     {
@@ -63,7 +63,7 @@ class UserLoginForm extends Model
     /**
      * 根据给定的账号和密码登录学生
      *
-     * @return bool 学生是否登录成功
+     * @return bool
      */
     public function login()
     {

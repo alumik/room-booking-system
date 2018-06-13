@@ -2,13 +2,11 @@
 
 namespace common\models;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Application;
 
 /**
- * ApplicationSearch represents the model behind the search form of `common\models\Application`.
+ * 公共 申请 筛选模型
  */
 class ApplicationSearch extends Application
 {
@@ -20,7 +18,7 @@ class ApplicationSearch extends Application
     public $end_time_picker;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -33,26 +31,22 @@ class ApplicationSearch extends Application
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function scenarios()
     {
-        // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
 
     /**
-     * Creates data provider instance with search query applied
+     * 根据查询条件生成dataProvider
      *
      * @param array $params
-     *
      * @return ActiveDataProvider
      */
     public function search($params)
     {
         $query = Application::find();
-
-        // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -78,12 +72,9 @@ class ApplicationSearch extends Application
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
             return $dataProvider;
         }
 
-        // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
             'applicant_id' => $this->applicant_id,

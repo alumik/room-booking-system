@@ -2,17 +2,17 @@
 
 namespace common\models;
 
-use app\models\AuthAssignment;
-use app\models\AuthItem;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\db\Query;
 use yii\web\IdentityInterface;
+use app\models\AuthAssignment;
+use app\models\AuthItem;
 
 /**
- * 管理员模型
+ * 公共 管理员 模型
  *
  * @property integer $id
  * @property string $admin_id

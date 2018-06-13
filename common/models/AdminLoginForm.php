@@ -6,7 +6,7 @@ use Yii;
 use yii\base\Model;
 
 /**
- * 管理员登录表单模型
+ * 公共 管理员登录 表单模型
  */
 class AdminLoginForm extends Model
 {
@@ -32,7 +32,7 @@ class AdminLoginForm extends Model
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
@@ -46,8 +46,8 @@ class AdminLoginForm extends Model
     /**
      * 验证密码是否正确
      *
-     * @param string $attribute 被验证的属性
-     * @param array $params 额外键值对信息
+     * @param string $attribute
+     * @param array $params
      */
     public function validatePassword($attribute, $params)
     {
@@ -62,7 +62,7 @@ class AdminLoginForm extends Model
     /**
      * 根据给定的账号和密码登录管理员
      *
-     * @return bool 管理员是否登录成功
+     * @return bool
      */
     public function login()
     {

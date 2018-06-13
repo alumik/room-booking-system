@@ -2,8 +2,8 @@
 
 namespace common\models;
 
-use Yii;
 use yii\db\Query;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "application".
@@ -20,14 +20,14 @@ use yii\db\Query;
  * @property User $applicant
  * @property Room $room
  */
-class Application extends \yii\db\ActiveRecord
+class Application extends ActiveRecord
 {
     const STATUS_PENDDING = 0;
     const STATUS_APPROVED = 1;
     const STATUS_REJECTED = 2;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -35,7 +35,7 @@ class Application extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -59,6 +59,12 @@ class Application extends \yii\db\ActiveRecord
         ];
     }
 
+    /**
+     * 判断输入的开始时间是否合法
+     *
+     * @param $attribute
+     * @param $params
+     */
     public function validateStartTime($attribute, $params)
     {
         if (!$this->hasErrors()) {
@@ -71,6 +77,12 @@ class Application extends \yii\db\ActiveRecord
         }
     }
 
+    /**
+     * 判断输入的结束时间是否合法
+     *
+     * @param $attribute
+     * @param $params
+     */
     public function validateEndTime($attribute, $params)
     {
         if (!$this->hasErrors()) {
@@ -85,7 +97,7 @@ class Application extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
@@ -148,6 +160,11 @@ class Application extends \yii\db\ActiveRecord
         return null;
     }
 
+    /**
+     * 获取从当前时间开始待审批的申请数
+     *
+     * @return int|string
+     */
     public static function getPendingApplicationCount() {
         $time = time();
         return Application::find()
@@ -156,6 +173,11 @@ class Application extends \yii\db\ActiveRecord
             ->count();
     }
 
+    /**
+     * 获取审批状态背景色
+     *
+     * @return array
+     */
     public function getStatusBg()
     {
         $options = [];
@@ -173,6 +195,11 @@ class Application extends \yii\db\ActiveRecord
         return $options;
     }
 
+    /**
+     * 获取操作栏背景色
+     *
+     * @return array
+     */
     public function getActionBg()
     {
         $overlap = (new Query())
@@ -191,6 +218,11 @@ class Application extends \yii\db\ActiveRecord
         return [];
     }
 
+    /**
+     * 判断是否应该显示修改或审批按钮
+     *
+     * @return bool
+     */
     public function canUpdate()
     {
         if ($this->start_time < time() || $this->status == self::STATUS_REJECTED) {

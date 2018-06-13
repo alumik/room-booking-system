@@ -2,17 +2,16 @@
 
 namespace common\models;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 /**
- * 管理员筛选模型
+ * 公共 管理员 筛选模型
  */
 class AdminSearch extends Admin
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -25,7 +24,7 @@ class AdminSearch extends Admin
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function scenarios()
     {

@@ -2,20 +2,20 @@
 
 namespace common\models;
 
-use Yii;
+use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "room_type".
+ * 公共 房间类型 模型
  *
  * @property int $id
  * @property string $type_name
  *
  * @property Room[] $rooms
  */
-class RoomType extends \yii\db\ActiveRecord
+class RoomType extends ActiveRecord
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -23,7 +23,7 @@ class RoomType extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -35,7 +35,7 @@ class RoomType extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {

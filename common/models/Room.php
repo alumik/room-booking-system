@@ -2,11 +2,11 @@
 
 namespace common\models;
 
-use Yii;
 use yii\db\Query;
+use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "room".
+ * 公共 房间 模型
  *
  * @property int $id
  * @property string $room_number
@@ -18,13 +18,13 @@ use yii\db\Query;
  * @property RoomType $type0
  * @property Campus $campus0
  */
-class Room extends \yii\db\ActiveRecord
+class Room extends ActiveRecord
 {
     const STATUS_AVAILABLE = 1;
     const STATUS_UNAVAILABLE = 0;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -32,7 +32,7 @@ class Room extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -48,7 +48,7 @@ class Room extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
@@ -85,6 +85,11 @@ class Room extends \yii\db\ActiveRecord
         return $this->hasOne(Campus::className(), ['id' => 'campus']);
     }
 
+    /**
+     * 返回所有房间类型数组
+     *
+     * @return array
+     */
     public static function getAllTypes()
     {
         return RoomType::find()
@@ -94,6 +99,11 @@ class Room extends \yii\db\ActiveRecord
             ->column();
     }
 
+    /**
+     * 返回所有校区数组
+     *
+     * @return array
+     */
     public static function getAllCampus()
     {
         return Campus::find()
@@ -103,6 +113,11 @@ class Room extends \yii\db\ActiveRecord
             ->column();
     }
 
+    /**
+     * 获取房间状态背景色
+     *
+     * @return array
+     */
     public function getStatusBg()
     {
         $options = [];
@@ -147,6 +162,11 @@ class Room extends \yii\db\ActiveRecord
         return null;
     }
 
+    /**
+     * 获取所有房间状态数组
+     *
+     * @return array
+     */
     public static function getAllStatus()
     {
         return [
@@ -171,6 +191,13 @@ class Room extends \yii\db\ActiveRecord
         return true;
     }
 
+    /**
+     * 获取相应时间内某房间的排队人数
+     *
+     * @param string $s_time_str
+     * @param string $e_time_str
+     * @return int|string
+     */
     public function getQueueCount($s_time_str, $e_time_str)
     {
         $s_time = strtotime($s_time_str);
@@ -187,6 +214,13 @@ class Room extends \yii\db\ActiveRecord
         return $overlap;
     }
 
+    /**
+     * 获取相应时间内某房间是否已被分配及背景颜色
+     *
+     * @param string $s_time_str
+     * @param string $e_time_str
+     * @return array
+     */
     public function getApprovalStatus($s_time_str, $e_time_str)
     {
         $s_time = strtotime($s_time_str);
