@@ -12,6 +12,7 @@ $this->params['breadcrumbs'][] = ['label' => '学生管理', 'url' => ['index']]
 $this->params['breadcrumbs'][] = ['label' => $model->student_id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = '修改';
 ?>
+
 <div class="user-update">
 
     <h1><?= Html::encode($this->title) ?></h1>

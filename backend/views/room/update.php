@@ -10,6 +10,7 @@ $this->params['breadcrumbs'][] = ['label' => '房间管理', 'url' => ['index']]
 $this->params['breadcrumbs'][] = ['label' => $model->room_number, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = '修改';
 ?>
+
 <div class="room-update">
 
     <h1><?= Html::encode($this->title) ?></h1>

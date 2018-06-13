@@ -12,6 +12,7 @@ $this->title = $model->room_number;
 $this->params['breadcrumbs'][] = ['label' => '房间管理', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="room-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
