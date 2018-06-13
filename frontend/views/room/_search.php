@@ -25,6 +25,10 @@ use kartik\datetime\DateTimePicker;
         ],
         'pluginOptions' => [
             'autoclose' => true,
+            'weekStart' => 1,
+            'startDate' => date('Y-m-d H:i', time()),
+            'endDate' => date('Y-m-d H:i', time() + 3600 * 24 * 30),
+            'minuteStep' => 10,
         ]
     ]); ?>
 
@@ -36,6 +40,10 @@ use kartik\datetime\DateTimePicker;
         ],
         'pluginOptions' => [
             'autoclose' => true,
+            'weekStart' => 1,
+            'startDate' => date('Y-m-d H:i', time()),
+            'endDate' => date('Y-m-d H:i', time() + 3600 * 24 * 30),
+            'minuteStep' => 10,
         ]
     ]); ?>
 

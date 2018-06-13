@@ -50,6 +50,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         'readonly' => true,
                         'pluginOptions' => [
                             'autoclose' => true,
+                            'weekStart' => 1,
+                            'minuteStep' => 10,
                         ]
                     ]),
                     'contentOptions' => ['class' => "time-column"],
@@ -64,6 +66,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         'readonly' => true,
                         'pluginOptions' => [
                             'autoclose' => true,
+                            'weekStart' => 1,
+                            'minuteStep' => 10,
                         ]
                     ]),
                     'contentOptions' => ['class' => "time-column"],

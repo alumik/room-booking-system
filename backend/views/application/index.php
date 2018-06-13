@@ -6,6 +6,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use common\models\Room;
+use common\models\Application;
 use kartik\datetime\DateTimePicker;
 
 /* @var $this yii\web\View */
@@ -60,6 +61,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         'readonly' => true,
                         'pluginOptions' => [
                             'autoclose' => true,
+                            'weekStart' => 1,
+                            'minuteStep' => 10,
                         ]
                     ]),
                     'contentOptions' => ['class' => "time-column"],
@@ -67,13 +70,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'end_time',
                     'format' => ['date', 'php: Y-m-d H:i'],
-                    'filter' => \kartik\datetime\DateTimePicker::widget([
+                    'filter' => DateTimePicker::widget([
                         'model' => $searchModel,
                         'attribute' => 'end_time_picker',
                         'type' => DateTimePicker::TYPE_INPUT,
                         'readonly' => true,
                         'pluginOptions' => [
                             'autoclose' => true,
+                            'weekStart' => 1,
+                            'minuteStep' => 10,
                         ]
                     ]),
                     'contentOptions' => ['class' => "time-column"],
@@ -81,7 +86,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'status',
                     'value' => 'statusStr',
-                    'filter' => \common\models\Application::getAllStatus(),
+                    'filter' => Application::getAllStatus(),
                     'contentOptions' => function($model) {
                         /* @var $model \common\models\Application */
                         $options = $model->getStatusBg();

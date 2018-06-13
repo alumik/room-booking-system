@@ -18,6 +18,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+    <p>房间最长预约时间为十二小时</p>
+
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <div class="scrollable">
