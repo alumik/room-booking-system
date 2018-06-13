@@ -41,7 +41,12 @@ AppAsset::register($this);
     } else {
         if (Yii::$app->user->can('manageRoom')) {
             $menuItems[] = ['label' => '房间管理', 'url' => ['/room/index']];
-            $menuItems[] = ['label' => '预约管理 <span class="badge badge-inverse">' . \common\models\Application::getPendingApplicationCount() . '</span>', 'url' => ['/application/index']];
+            $_count = \common\models\Application::getPendingApplicationCount();
+            if ($_count > 0) {
+                $menuItems[] = ['label' => '预约管理 <span class="badge badge-inverse">' . \common\models\Application::getPendingApplicationCount() . '</span>', 'url' => ['/application/index']];
+            } else {
+                $menuItems[] = ['label' => '预约管理', 'url' => ['/application/index']];
+            }
             $menuItems[] = '<li></li>';
         }
         if (Yii::$app->user->can('viewStudentList')) {

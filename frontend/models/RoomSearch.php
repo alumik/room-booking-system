@@ -25,7 +25,6 @@ class RoomSearch extends Room
         return [
             [['id', 'type', 'campus', 'available'], 'integer'],
             [['room_number', 'start_time', 'end_time'], 'safe'],
-            //[['start_time', 'end_time'], 'required'],
             [['start_time'], 'validateStartTime'],
             [['end_time'], 'validateEndTime'],
         ];
@@ -104,6 +103,7 @@ class RoomSearch extends Room
         $this->load($params);
 
         if (!$this->validate()) {
+            $query->where('0 = 1');
             return $dataProvider;
         }
 

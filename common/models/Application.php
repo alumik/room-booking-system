@@ -184,7 +184,7 @@ class Application extends \yii\db\ActiveRecord
             ->andWhere("id != $this->id")
             ->count();
 
-        if ($overlap > 0 || !$this->room->available) {
+        if (($overlap > 0 && $this->status == self::STATUS_PENDDING) || (!$this->room->available && $this->status != self::STATUS_REJECTED)) {
             return ['class' => 'bg-warning'];
         }
 
