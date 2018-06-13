@@ -126,3 +126,8 @@ a.desc:after {
 .time-column {
     min-width: 154px;
 }
+
+.permission-column {
+    text-align: center;
+    width: 12%;
+}

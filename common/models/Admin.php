@@ -236,7 +236,7 @@ class Admin extends ActiveRecord implements IdentityInterface
             array_push($rolesArray, $role['description']);
         }
 
-        return $rolesArray;
+        return implode('，', $rolesArray);
     }
 
     /**

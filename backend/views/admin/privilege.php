@@ -8,11 +8,12 @@ use yii\widgets\ActiveForm;
 /* @var $roles array*/
 /* @var $allRoles array*/
 
-$this->title = '权限设置：' . $model->admin_name;
+$this->title = '修改权限：' . $model->admin_name;
 $this->params['breadcrumbs'][] = ['label' => '管理员管理', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->admin_id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = '权限设置';
+$this->params['breadcrumbs'][] = '修改权限';
 ?>
+
 <div class="admin-privilege">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -20,9 +21,11 @@ $this->params['breadcrumbs'][] = '权限设置';
     <div class="admin-privilege-form">
 
         <?php $form = ActiveForm::begin(); ?>
-        <br/>
-        <?= Html::checkboxList('newRoles', $roles, $allRoles); ?>
-        <br/>
+
+        <p>
+            <?= Html::checkboxList('newRoles', $roles, $allRoles); ?>
+        </p>
+
         <div class="form-group">
             <?= Html::submitButton('保存', ['class' => 'btn btn-success']) ?>
         </div>

@@ -8,10 +8,11 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\Admin */
 
-$this->title = $model->admin_name;
+$this->title = '管理员：' . $model->admin_name;
 $this->params['breadcrumbs'][] = ['label' => '管理员管理', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $model->admin_id;
 ?>
+
 <div class="admin-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -38,7 +39,7 @@ $this->params['breadcrumbs'][] = $model->admin_id;
             'email:email',
             [
                 'label' => '管理员角色',
-                'value' => implode('，', $model->getRolesDescription()),
+                'value' => $model->getRolesDescription(),
             ],
             [
                 'attribute' => 'created_at',

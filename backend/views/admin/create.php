@@ -10,6 +10,7 @@ $this->title = '新增管理员';
 $this->params['breadcrumbs'][] = ['label' => '管理员管理', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="admin-create">
 
     <h1><?= Html::encode($this->title) ?></h1>

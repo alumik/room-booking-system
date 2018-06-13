@@ -11,6 +11,7 @@ $this->params['breadcrumbs'][] = ['label' => '管理员管理', 'url' => ['index
 $this->params['breadcrumbs'][] = ['label' => $model->admin_id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = '修改';
 ?>
+
 <div class="admin-update">
 
     <h1><?= Html::encode($this->title) ?></h1>
