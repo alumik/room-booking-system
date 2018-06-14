@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('新增房间', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <div class="scrollable">
+    <div class="scrollable col-lg-9 row">
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
