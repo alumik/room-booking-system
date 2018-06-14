@@ -79,7 +79,10 @@ $this->params['breadcrumbs'][] = $model->id;
             ?>
             <p>
                 <?PHP
-                    if ($model->status != Application::STATUS_APPROVED && $model->room->available != Room::STATUS_UNAVAILABLE) {
+                /* @var $model common\models\Application */
+                    if ($model->status != Application::STATUS_APPROVED &&
+                        $model->room->available != Room::STATUS_UNAVAILABLE &&
+                        !$model->getConflictId()) {
                         ?>
                         <?= Html::a('批准', ['approve', 'id' => $model->id], [
                             'class' => 'btn btn-primary',
