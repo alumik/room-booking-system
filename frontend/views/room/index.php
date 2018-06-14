@@ -1,9 +1,11 @@
 <?php
 
+/** @noinspection PhpUnusedParameterInspection */
 /** @noinspection PhpUnhandledExceptionInspection */
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
 use common\models\Room;
 
 /* @var $this yii\web\View */
@@ -93,8 +95,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'data-pjax' => '0',
                             ];
 
-                            $url .= '&s_time=' . $s_time;
-                            $url .= '&e_time=' . $e_time;
+                            $url = Url::to(['order', 'id' => $model->id, 's_time' => $s_time, 'e_time' => $e_time]);
 
                             return Html::a('<span class="btn btn-primary">预约该房间</span>', $url, $options);
                         }
