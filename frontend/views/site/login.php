@@ -13,6 +13,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="site-login">
 
+    <!-- delevopment stage only -->
+    <div class="alert alert-info">
+        <?= nl2br(Html::encode('提示：由于本网站仍处于开发阶段，并未接入学校数据库。新用户请在注册界面手动注册后使用。')) ?>
+    </div>
+
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>请输入学号和密码登录系统：</p>

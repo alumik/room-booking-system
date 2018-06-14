@@ -88,7 +88,7 @@ class ApplicationController extends Controller
         $conflict_id = $model->getConflictId();
 
         if (!empty($conflict_id) && $model->status == Application::STATUS_PENDDING && $model->canUpdate()) {
-            Yii::$app->session->setFlash('error', "该申请与该房间某些已批准的申请冲突，请考虑重新提交申请或与老师进行协调。");
+            Yii::$app->session->setFlash('error', "该申请与该房间某些已批准的申请冲突，请考虑修改并重新提交申请或与老师进行协调。");
         }
 
         if ($model->room->available == Room::STATUS_UNAVAILABLE && $model->canUpdate()) {
