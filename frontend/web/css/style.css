@@ -1,0 +1,199 @@
+/*
+  Theme Name: Imperial
+  Theme URL: https://bootstrapmade.com/imperial-free-onepage-bootstrap-template/
+  Author: BootstrapMade
+  Author URL: https://bootstrapmade.com
+*/
+/*--------------------------------------------------------------
+# General
+--------------------------------------------------------------*/
+body {
+	background: #fff;
+	color: #666666;
+	font-family: "微软雅黑";
+}
+h1, h2, h3, h4, h5, h6 {
+	font-family: "微软雅黑";
+	font-weight: 400;
+	margin: 0 0 20px 0;
+	padding: 0;
+}
+/* Back to top button */
+.back-to-top {
+	position: fixed;
+	display: none;
+	background: rgba(0, 0, 0, 0.2);
+	color: #fff;
+	padding: 6px 12px 9px 12px;
+	font-size: 16px;
+	border-radius: 2px;
+	right: 15px;
+	bottom: 15px;
+	transition: background 0.5s;
+}
+
+@media (max-width: 768px) {
+.back-to-top {
+	bottom: 15px;
+}
+}
+.back-to-top:focus {
+	background: rgba(0, 0, 0, 0.2);
+	color: #fff;
+	outline: none;
+}
+.back-to-top:hover {
+	background: #7a0c6e;
+	color: #fff;
+}
+/*--------------------------------------------------------------
+# 首页头图
+--------------------------------------------------------------*/
+#hero {
+	display: table;
+	width: 100%;
+	height: 100vh;
+	background: url(../img/hero-bg.jpg) top center fixed;
+	background-size: cover;
+}
+
+#hero .hero-logo {
+	margin: 20px;
+}
+#hero .hero-logo img {
+	max-width: 100%;
+}
+#hero .hero-container {
+	background: rgba(0, 0, 0, 0.4);
+	display: table-cell;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	vertical-align: middle;
+}
+#hero h1 {
+	margin: 30px 0 10px 0;
+	font-weight: 700;
+	line-height: 48px;
+	text-transform: uppercase;
+	color: #fff;
+}
+
+@media (max-width: 768px) {
+#hero h1 {
+	font-size: 28px;
+	line-height: 36px;
+}
+}
+#hero h2 {
+	color: #d5d5d5;
+	margin-bottom: 50px;
+}
+
+@media (max-width: 768px) {
+#hero h2 {
+	font-size: 24px;
+	line-height: 26px;
+	margin-bottom: 30px;
+}
+#hero h2 .rotating {
+	display: block;
+}
+}
+#hero .rotating > .animated {
+	display: inline-block;
+}
+#hero .actions a {
+	font-family: "微软雅黑";
+	text-transform: uppercase;
+	font-weight: 500;
+	font-size: 16px;
+	letter-spacing: 1px;
+	display: inline-block;
+	padding: 8px 20px;
+	border-radius: 2px;
+	transition: 0.5s;
+	margin: 10px;
+}
+#hero .btn-info {
+	background: #7a0c6e;
+	border: 2px solid #7a0c6e;
+	color: #fff;
+}
+#hero .btn-info:hover {
+	background: none;
+	border: 2px solid #fff;
+	color: #fff;
+}
+#hero .btn-more {
+	border: 2px solid #fff;
+	color: #fff;
+}
+#hero .btn-more:hover {
+	background: #7a0c6e;
+	border: 2px solid #7a0c6e;
+}
+.section-title {
+	font-size: 32px;
+	text-transform: uppercase;
+	text-align: center;
+	font-weight: 700;
+	color: white;
+}
+.section-description {
+	text-align: center;
+	margin-bottom: 40px;
+}
+.section-title-divider {
+	width: 50px;
+	height: 3px;
+	background: #7a0c6e;
+	margin: 0 auto;
+	margin-bottom: 20px;
+}
+#guiding {
+	display: table;
+	width: 100%;
+	background-size: cover;
+	padding-top: 80px;
+}
+#guiding .list-item {
+	margin-bottom: 20px;
+}
+#guiding .list-icon {
+	float: left;
+	background: #7a0c6e;
+	width: 60px;
+	height: 60px;
+	text-align: center;
+	display: table;
+	border-radius: 50%;
+	transition: 0.5s;
+	border: 2px solid #7a0c6e;
+}
+#guiding .list-icon i {
+	color: #fff;
+	font-size: 30px;
+	display: table-cell;
+	vertical-align: middle;
+}
+#guiding .list-item:hover .list-icon {
+	background: #fff;
+}
+#guiding .list-item:hover .list-icon i {
+	color: #7a0c6e;
+}
+#guiding .list-title {
+	color: black;
+	margin-left: 80px;
+	font-weight: 700;
+	margin-bottom: 15px;
+	text-transform: uppercase;
+}
+#guiding .list-title a {
+	color: #111;
+}
+#guiding .list-description {
+	margin-left: 80px;
+	line-height: 24px;
+}

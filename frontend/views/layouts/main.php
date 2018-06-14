@@ -72,6 +72,9 @@ AppAsset::register($this);
         NavBar::end();
     ?>
 
+    <?php if ($this->context->id=='site' && ($this->context->action->id=='index' || $this->context->action->id=='guiding')) { ?>
+        <?= $content ?>
+    <?php } else { ?>
     <div class="container">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
@@ -79,6 +82,7 @@ AppAsset::register($this);
         <?= Alert::widget() ?>
         <?= $content ?>
     </div>
+    <?php } ?>
 </div>
 
 <footer class="footer">

@@ -91,13 +91,17 @@ AppAsset::register($this);
         NavBar::end();
     ?>
 
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
+    <?php if ($this->context->id=='site' && ($this->context->action->id=='index' || $this->context->action->id=='guiding')) { ?>
         <?= $content ?>
-    </div>
+    <?php } else { ?>
+        <div class="container">
+            <?= Breadcrumbs::widget([
+                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            ]) ?>
+            <?= Alert::widget() ?>
+            <?= $content ?>
+        </div>
+    <?php } ?>
 </div>
 
 <footer class="footer">

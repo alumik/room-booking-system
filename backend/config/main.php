@@ -13,7 +13,7 @@ return [
     'bootstrap' => ['log'],
     'modules' => [],
     'language' => 'zh-CN',
-    'name' => '学生活动中心房间管理系统',
+    'name' => '学生活动场地管理系统',
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',

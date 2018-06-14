@@ -101,6 +101,16 @@ class SiteController extends Controller
     }
 
     /**
+     * 引导页面
+     *
+     * @return string
+     */
+    public function actionGuiding()
+    {
+        return $this->render('guiding');
+    }
+
+    /**
      * 注销操作
      *
      * @return mixed

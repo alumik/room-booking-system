@@ -25,7 +25,7 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error', 'about'],
+                        'actions' => ['login', 'error', 'about', 'guiding'],
                         'allow' => true,
                     ],
                     [
@@ -74,6 +74,16 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    /**
+     * 引导页面
+     *
+     * @return string
+     */
+    public function actionGuiding()
+    {
+        return $this->render('guiding');
     }
 
     /**
