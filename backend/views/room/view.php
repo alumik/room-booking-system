@@ -1,5 +1,6 @@
 <?php
 
+/** @noinspection PhpUnusedParameterInspection */
 /** @noinspection PhpUnhandledExceptionInspection */
 
 use yii\helpers\Html;
@@ -53,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
-    <p><strong>未来一个月已批准的申请</strong></p>
+    <p><strong>该房间未来一个月已批准的申请</strong></p>
 
     <div class="scrollable">
         <?= GridView::widget([

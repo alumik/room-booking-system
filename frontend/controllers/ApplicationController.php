@@ -150,6 +150,20 @@ class ApplicationController extends Controller
     }
 
     /**
+     * 预留打印接口
+     *
+     * @param integer $id
+     * @return string
+     * @throws NotFoundHttpException
+     */
+    public function actionPrint($id)
+    {
+        return $this->render('print', [
+            'model' => $this->findModel($id)
+        ]);
+    }
+
+    /**
      * 根据主键寻找申请模型
      * 如果未找到模型，抛出404异常
      *

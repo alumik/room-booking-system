@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>右侧按钮下黄色标记表明该申请与已批准的申请冲突或房间已不可用</p>
+    <p>淡黄色的审核按钮表明该申请与已批准的申请冲突或房间已不可用</p>
 
     <div class="scrollable">
         <?= GridView::widget([

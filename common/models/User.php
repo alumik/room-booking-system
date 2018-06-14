@@ -81,7 +81,7 @@ class User extends ActiveRecord implements IdentityInterface
             'student_id' => '学号',
             'username' => '姓名',
             'email' => 'Email',
-            'status' => '状态',
+            'status' => '账号状态',
             'created_at' => '注册时间',
             'updated_at' => '修改时间',
         ];

@@ -4,6 +4,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use \common\models\Application;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Application */
@@ -21,10 +22,13 @@ $this->params['breadcrumbs'][] = $model->id;
 
     <p>
         <?php
-            if ($model->canUpdate()) {
-                echo Html::a('修改申请', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']);
-            }
-        ?>
+            if ($model->canUpdate()) { ?>
+                <?= Html::a('修改申请', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']); ?>
+            <?php } ?>
+        <?php
+            if ($model->status == Application::STATUS_APPROVED) { ?>
+                <?= Html::a('打印申请', ['print', 'id' => $model->id], ['class' => 'btn btn-primary']); ?>
+            <?php } ?>
         <?= Html::a('撤销申请', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [

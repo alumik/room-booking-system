@@ -1,5 +1,6 @@
 <?php
 
+/** @noinspection PhpUnusedParameterInspection */
 /** @noinspection PhpUnhandledExceptionInspection */
 
 use yii\helpers\Html;
@@ -42,7 +43,7 @@ $this->params['breadcrumbs'][] = $model->room_number;
         ],
     ]) ?>
 
-    <p><strong>与你设定时间相冲突的已批准申请</strong></p>
+    <p><strong>该房间与你设定时间相冲突且已批准的申请</strong></p>
 
     <div class="scrollable">
         <?= GridView::widget([

@@ -109,7 +109,7 @@ class Application extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => '编号',
+            'id' => '申请编号',
             'applicant_id' => '申请人ID',
             'organization_name' => '组织名',
             'room_id' => '房间ID',
