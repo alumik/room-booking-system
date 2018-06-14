@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = '修改';
 
         <?= $form->field($model, 'organization_name')
             ->textInput(['maxlength' => true])
-            ->label('组织名（个人申请可留空）')
+            ->label('组织名（个人申请可不填）')
         ?>
 
         <?= $form->field($model, 'start_time')->widget(DateTimePicker::classname(), [

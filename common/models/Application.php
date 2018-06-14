@@ -260,13 +260,21 @@ class Application extends ActiveRecord
 
     public function getConflictId()
     {
-        return (new Query())
+        $conflict_id = (new Query())
             ->select('id')
             ->from('application')
             ->where("not (start_time >= $this->end_time or end_time <= $this->start_time)")
             ->andWhere(['status' => self::STATUS_APPROVED])
             ->andWhere(['room_id' => $this->room_id])
             ->andWhere("id != $this->id")
-            ->one();
+            ->all();
+
+        $conflict_id_array = [];
+
+        foreach ($conflict_id as $c_id) {
+            $conflict_id_array[] = $c_id['id'];
+        }
+
+        return $conflict_id_array;
     }
 }
