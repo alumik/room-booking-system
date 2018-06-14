@@ -8,6 +8,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\Application */
 
+/* @author 钟震宇 <nczzy1997@gmail.com> */
+
 $this->title = '预约申请详情';
 $this->params['breadcrumbs'][] = ['label' => '我的预约', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $model->id;

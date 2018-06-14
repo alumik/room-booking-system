@@ -13,6 +13,8 @@ use common\models\Room;
 use frontend\models\RoomSearch;
 
 /**
+ * @author 钟震宇 <nczzy1997@gmail.com>
+ *
  * 前台 房间 控制器
  */
 class RoomController extends Controller

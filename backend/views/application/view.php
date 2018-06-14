@@ -10,6 +10,8 @@ use common\models\Room;
 /* @var $this yii\web\View */
 /* @var $model common\models\Application */
 
+/* @author 钟震宇 <nczzy1997@gmail.com> */
+
 $this->title = '预约申请详情';
 $this->params['breadcrumbs'][] = ['label' => '预约管理', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $model->id;

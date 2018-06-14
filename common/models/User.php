@@ -9,6 +9,8 @@ use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
 /**
+ * @author 钟震宇 <nczzy1997@gmail.com>
+ *
  * 公共 学生 模型
  *
  * @property integer $id

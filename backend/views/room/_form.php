@@ -6,6 +6,8 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model common\models\Room */
 /* @var $form yii\widgets\ActiveForm */
+
+/* @author 钟震宇 <nczzy1997@gmail.com> */
 ?>
 
 <div class="room-form col-lg-5 row">

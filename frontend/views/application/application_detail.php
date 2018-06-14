@@ -8,6 +8,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\Application */
 
+/* @author 钟震宇 <nczzy1997@gmail.com> */
+
 $this->title = '预约申请详情';
 $this->params['breadcrumbs'][] = ['label' => '预约房间', 'url' => ['room/index']];
 $this->params['breadcrumbs'][] = $model->room->room_number;

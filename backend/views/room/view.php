@@ -10,6 +10,8 @@ use yii\grid\GridView;
 /* @var $model common\models\Room */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
+/* @author 钟震宇 <nczzy1997@gmail.com> */
+
 $this->title = $model->room_number;
 $this->params['breadcrumbs'][] = ['label' => '房间管理', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;

@@ -11,6 +11,8 @@ use common\models\Room;
 /* @var $searchModel backend\models\RoomSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
+/* @author 钟震宇 <nczzy1997@gmail.com> */
+
 $this->title = '房间管理';
 $this->params['breadcrumbs'][] = $this->title;
 ?>

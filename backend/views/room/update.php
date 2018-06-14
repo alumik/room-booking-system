@@ -5,6 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Room */
 
+/* @author 钟震宇 <nczzy1997@gmail.com> */
+
 $this->title = '修改房间信息：' . $model->room_number;
 $this->params['breadcrumbs'][] = ['label' => '房间管理', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->room_number, 'url' => ['view', 'id' => $model->id]];

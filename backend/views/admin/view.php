@@ -8,6 +8,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\Admin */
 
+/* @author 钟震宇 <nczzy1997@gmail.com> */
+
 $this->title = '管理员：' . $model->admin_name;
 $this->params['breadcrumbs'][] = ['label' => '管理员管理', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $model->admin_id;

@@ -10,6 +10,8 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\AdminSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
+/* @author 钟震宇 <nczzy1997@gmail.com> */
+
 $this->title = '管理员管理';
 $this->params['breadcrumbs'][] = $this->title;
 ?>

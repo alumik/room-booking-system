@@ -9,6 +9,8 @@ use yii\grid\GridView;
 /* @var $searchModel backend\models\AuthItemSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
+/* @author 钟震宇 <nczzy1997@gmail.com> */
+
 $this->title = '权限对照表';
 $this->params['breadcrumbs'][] = ['label' => '管理员管理', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;

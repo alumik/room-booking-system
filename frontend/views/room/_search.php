@@ -7,6 +7,8 @@ use kartik\datetime\DateTimePicker;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\RoomSearch */
 /* @var $form yii\widgets\ActiveForm */
+
+/* @author 钟震宇 <nczzy1997@gmail.com> */
 ?>
 
 <div class="room-search">

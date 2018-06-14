@@ -1,8 +1,10 @@
 <?php
 
+use yii\helpers\Html;
+
 /* @var $this yii\web\View */
 
-use yii\helpers\Html;
+/* @author 钟震宇 <nczzy1997@gmail.com> */
 
 $this->title = '关于';
 $this->params['breadcrumbs'][] = $this->title;
@@ -16,6 +18,6 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= nl2br(Html::encode('本网站作者：钟震宇（网站） 张志毅（数据库/欢迎界面）。')) ?>
     </div>
 
-    <p>网站版本1.2.1</p>
+    <p>网站版本1.2.5</p>
 
 </div>

@@ -6,6 +6,8 @@ use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 /**
+ * @author 钟震宇 <nczzy1997@gmail.com>
+ *
  * 公共 申请 筛选模型
  */
 class ApplicationSearch extends Application

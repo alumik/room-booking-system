@@ -14,6 +14,8 @@ use common\models\ApplicationSearch;
 use backend\models\RoomSearch;
 
 /**
+ * @author 钟震宇 <nczzy1997@gmail.com>
+ *
  * 后台 房间 控制器
  */
 class RoomController extends Controller

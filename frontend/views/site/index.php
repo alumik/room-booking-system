@@ -1,8 +1,10 @@
 <?php
 
+use yii\helpers\Html;
+
 /* @var $this yii\web\View */
 
-use yii\helpers\Html;
+/* @author 钟震宇 <nczzy1997@gmail.com> */
 
 $this->title = Yii::$app->name;
 ?>

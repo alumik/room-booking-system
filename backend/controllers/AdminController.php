@@ -16,6 +16,8 @@ use backend\models\SignupForm;
 use backend\models\AuthItemSearch;
 
 /**
+ * @author 钟震宇 <nczzy1997@gmail.com>
+ *
  * 后台 管理员 控制器
  */
 class AdminController extends Controller

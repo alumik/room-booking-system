@@ -6,6 +6,8 @@ use Yii;
 use yii\base\Model;
 
 /**
+ * @author 钟震宇 <nczzy1997@gmail.com>
+ *
  * 公共 学生登陆 表单模型
  */
 class UserLoginForm extends Model

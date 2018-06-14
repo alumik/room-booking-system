@@ -12,6 +12,8 @@ use common\models\Application;
 use common\models\ApplicationSearch;
 
 /**
+ * @author 钟震宇 <nczzy1997@gmail.com>
+ *
  * 后台 申请 控制器
  */
 class ApplicationController extends Controller

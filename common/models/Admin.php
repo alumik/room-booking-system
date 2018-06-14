@@ -12,6 +12,8 @@ use app\models\AuthAssignment;
 use app\models\AuthItem;
 
 /**
+ * @author 钟震宇 <nczzy1997@gmail.com>
+ *
  * 公共 管理员 模型
  *
  * @property integer $id

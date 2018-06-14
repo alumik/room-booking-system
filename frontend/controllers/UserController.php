@@ -10,6 +10,8 @@ use common\models\User;
 use frontend\models\LoginResetPasswordForm;
 
 /**
+ * @author 钟震宇 <nczzy1997@gmail.com>
+ *
  * 前台 学生 控制器
  */
 class UserController extends Controller

@@ -8,6 +8,8 @@ use yii\widgets\ActiveForm;
 /* @var $roles array*/
 /* @var $allRoles array*/
 
+/* @author 钟震宇 <nczzy1997@gmail.com> */
+
 $this->title = '修改权限：' . $model->admin_name;
 $this->params['breadcrumbs'][] = ['label' => '管理员管理', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->admin_id, 'url' => ['view', 'id' => $model->id]];

@@ -6,6 +6,8 @@ use yii\base\Model;
 use common\models\Admin;
 
 /**
+ * @author 钟震宇 <nczzy1997@gmail.com>
+ *
  * 后台 管理员修改密码 表单模型
  */
 class ResetPasswordForm extends Model

@@ -5,6 +5,8 @@ namespace app\models;
 use Yii;
 
 /**
+ * @author 钟震宇 <nczzy1997@gmail.com>
+ *
  * 后台 权限项目 模型
  *
  * @property string $name

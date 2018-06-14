@@ -5,6 +5,8 @@ namespace common\models;
 use yii\db\ActiveRecord;
 
 /**
+ * @author 钟震宇 <nczzy1997@gmail.com>
+ *
  * 公共 校区 模型
  *
  * @property int $id

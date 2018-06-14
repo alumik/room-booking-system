@@ -6,7 +6,9 @@ use yii\db\Query;
 use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "application".
+ * @author 钟震宇 <nczzy1997@gmail.com>
+ *
+ * 公共 申请 模型
  *
  * @property int $id
  * @property int $applicant_id

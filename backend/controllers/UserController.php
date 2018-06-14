@@ -11,6 +11,8 @@ use common\models\User;
 use common\models\UserSearch;
 
 /**
+ * @author 钟震宇 <nczzy1997@gmail.com>
+ *
  * 后台 学生 控制器
  */
 class UserController extends Controller

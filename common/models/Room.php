@@ -6,6 +6,8 @@ use yii\db\Query;
 use yii\db\ActiveRecord;
 
 /**
+ * @author 钟震宇 <nczzy1997@gmail.com>
+ *
  * 公共 房间 模型
  *
  * @property int $id

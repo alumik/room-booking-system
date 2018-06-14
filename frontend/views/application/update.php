@@ -10,6 +10,8 @@ use kartik\datetime\DateTimePicker;
 /* @var $this yii\web\View */
 /* @var $model common\models\Application */
 
+/* @author 钟震宇 <nczzy1997@gmail.com> */
+
 $this->title = '修改预约申请：' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => '我的预约', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];

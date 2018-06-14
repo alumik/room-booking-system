@@ -7,6 +7,8 @@ use yii\base\Model;
 use common\models\User;
 
 /**
+ * @author 钟震宇 <nczzy1997@gmail.com>
+ *
  * 前台 学生登录前修改密码申请 表单模型
  */
 class PasswordResetRequestForm extends Model

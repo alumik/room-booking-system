@@ -5,6 +5,8 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+/* @author 钟震宇 <nczzy1997@gmail.com> */
+
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;

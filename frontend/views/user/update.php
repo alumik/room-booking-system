@@ -6,6 +6,8 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model common\models\User */
 
+/* @author 钟震宇 <nczzy1997@gmail.com> */
+
 $this->title = '修改信息';
 $this->params['breadcrumbs'][] = ['label' => '我的账号', 'url' => ['view']];
 $this->params['breadcrumbs'][] = $this->title;

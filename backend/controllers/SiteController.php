@@ -9,6 +9,8 @@ use yii\filters\AccessControl;
 use common\models\AdminLoginForm;
 
 /**
+ * @author 钟震宇 <nczzy1997@gmail.com>
+ *
  * 后台 网站 控制器
  */
 class SiteController extends Controller

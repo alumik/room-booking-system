@@ -7,6 +7,8 @@ use yii\data\ActiveDataProvider;
 use app\models\AuthItem;
 
 /**
+ * @author 钟震宇 <nczzy1997@gmail.com>
+ *
  * 后台 权限项目 筛选模型
  */
 class AuthItemSearch extends AuthItem

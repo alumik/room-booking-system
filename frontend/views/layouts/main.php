@@ -2,15 +2,17 @@
 
 /** @noinspection PhpUnhandledExceptionInspection */
 
-/* @var $this \yii\web\View */
-/* @var $content string */
-
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
 use frontend\assets\AppAsset;
+
+/* @var $this \yii\web\View */
+/* @var $content string */
+
+/* @author 钟震宇 <nczzy1997@gmail.com> */
 
 AppAsset::register($this);
 ?>

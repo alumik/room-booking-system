@@ -3,6 +3,8 @@
 namespace app\models;
 
 /**
+ * @author 钟震宇 <nczzy1997@gmail.com>
+ *
  * 后台 权限关系 模型
  *
  * @property string $parent

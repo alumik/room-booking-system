@@ -12,6 +12,8 @@ use common\models\Room;
 /* @var $searchModel frontend\models\RoomSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
+/* @author 钟震宇 <nczzy1997@gmail.com> */
+
 $this->title = '预约房间';
 $this->params['breadcrumbs'][] = $this->title;
 ?>

@@ -13,6 +13,8 @@ use kartik\datetime\DateTimePicker;
 /* @var $searchModel common\models\ApplicationSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
+/* @author 钟震宇 <nczzy1997@gmail.com> */
+
 $this->title = '预约管理';
 $this->params['breadcrumbs'][] = $this->title;
 ?>

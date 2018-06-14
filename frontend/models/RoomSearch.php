@@ -7,6 +7,8 @@ use yii\data\ActiveDataProvider;
 use common\models\Room;
 
 /**
+ * @author 钟震宇 <nczzy1997@gmail.com>
+ *
  * 前台 房间 筛选模型
  */
 class RoomSearch extends Room

@@ -12,6 +12,8 @@ use common\models\ApplicationSearch;
 use common\models\Room;
 
 /**
+ * @author 钟震宇 <nczzy1997@gmail.com>
+ *
  * 前台 申请 控制器
  */
 class ApplicationController extends Controller

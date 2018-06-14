@@ -6,6 +6,8 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model common\models\Application */
 
+/* @author 钟震宇 <nczzy1997@gmail.com> */
+
 $this->title = '预约房间';
 $this->params['breadcrumbs'][] = $this->title;
 ?>

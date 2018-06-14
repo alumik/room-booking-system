@@ -11,6 +11,8 @@ use common\models\User;
 /* @var $searchModel common\models\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
+/* @author 钟震宇 <nczzy1997@gmail.com> */
+
 $this->title = '学生管理';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
