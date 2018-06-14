@@ -9,6 +9,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\Application;
 use common\models\ApplicationSearch;
+use common\models\Room;
 
 /**
  * 前台 申请 控制器
@@ -83,8 +84,19 @@ class ApplicationController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        $conflict_id = $model->getConflictId();
+
+        if ($conflict_id != null && $model->status == Application::STATUS_PENDDING && $model->canUpdate()) {
+            Yii::$app->session->setFlash('error', "该申请与他人已批准的申请冲突，请考虑重新提交申请或与老师进行协调。");
+        }
+
+        if ($model->room->available == Room::STATUS_UNAVAILABLE && $model->canUpdate()) {
+            Yii::$app->session->addFlash('error', "该申请所预约的房间已不可用。");
+        }
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
         ]);
     }
 

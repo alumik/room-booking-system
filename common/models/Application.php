@@ -257,4 +257,16 @@ class Application extends ActiveRecord
         }
         return false;
     }
+
+    public function getConflictId()
+    {
+        return (new Query())
+            ->select('id')
+            ->from('application')
+            ->where("not (start_time >= $this->end_time or end_time <= $this->start_time)")
+            ->andWhere(['status' => self::STATUS_APPROVED])
+            ->andWhere(['room_id' => $this->room_id])
+            ->andWhere("id != $this->id")
+            ->one();
+    }
 }

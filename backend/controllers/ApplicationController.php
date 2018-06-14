@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\Room;
 use Yii;
 use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
@@ -68,8 +69,20 @@ class ApplicationController extends Controller
             throw new ForbiddenHttpException('对不起，你没有进行该操作的权限。');
         }
 
+        $model = $this->findModel($id);
+        $conflict_id = $model->getConflictId();
+
+        if ($conflict_id != null && $model->status == Application::STATUS_PENDDING && $model->canUpdate()) {
+            $conflict_id = $conflict_id['id'];
+            Yii::$app->session->setFlash('error', "该申请与编号为 $conflict_id 的申请冲突，请检查冲突情况。");
+        }
+
+        if ($model->room->available == Room::STATUS_UNAVAILABLE && $model->canUpdate()) {
+            Yii::$app->session->addFlash('error', "该申请所预约的房间已不可用。");
+        }
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
         ]);
     }
 
@@ -93,7 +106,8 @@ class ApplicationController extends Controller
         try {
             $model->save();
         } catch (yii\db\Exception $e) {
-            return $this->render('sqlerror');
+            $conflict_id = $model->getConflictId()['id'];
+            Yii::$app->session->setFlash('error', "操作失败。你将批准的申请与编号为 $conflict_id 的申请冲突，请检查冲突情况。");
         }
 
         return $this->redirect(['index']);

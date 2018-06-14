@@ -5,6 +5,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use common\models\Application;
+use common\models\Room;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Application */
@@ -78,7 +79,7 @@ $this->params['breadcrumbs'][] = $model->id;
             ?>
             <p>
                 <?PHP
-                    if ($model->status != Application::STATUS_APPROVED) {
+                    if ($model->status != Application::STATUS_APPROVED && $model->room->available != Room::STATUS_UNAVAILABLE) {
                         ?>
                         <?= Html::a('批准', ['approve', 'id' => $model->id], [
                             'class' => 'btn btn-primary',

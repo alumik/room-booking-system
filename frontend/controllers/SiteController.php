@@ -155,7 +155,7 @@ class SiteController extends Controller
             if ($model->sendEmail()) {
                 Yii::$app->session->setFlash('success', '密码重置邮件已发送至你的注册邮箱。');
 
-                return $this->goHome();
+                return $this->redirect(['login']);
             } else {
                 Yii::$app->session->setFlash('error', '对不起，重置密码出错。请检查你的邮箱地址。');
             }
@@ -185,7 +185,7 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
             Yii::$app->session->setFlash('success', '密码修改成功。');
 
-            return $this->goHome();
+            return $this->redirect(['login']);
         }
 
         return $this->render('resetPassword', [
