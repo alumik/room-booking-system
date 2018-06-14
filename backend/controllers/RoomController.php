@@ -70,7 +70,7 @@ class RoomController extends Controller
 
         $searchModel = new ApplicationSearch();
         $searchModel->start_time_picker = date('Y-m-d H:i', time());
-        $searchModel->end_time_picker = date('Y-m-d H:i', time() + 3600 * 24 *30);
+        $searchModel->end_time_picker = date('Y-m-d H:i', time() + 3600 * 24 * 30);
         $searchModel->room_id = $id;
         $searchModel->status = Application::STATUS_APPROVED;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
