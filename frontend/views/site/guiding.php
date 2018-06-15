@@ -4,7 +4,6 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 
-/* @author 钟震宇 <nczzy1997@gmail.com> */
 /* @author 张志毅 */
 
 $this->title = '说明';

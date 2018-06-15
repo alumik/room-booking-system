@@ -10,6 +10,15 @@ use yii\helpers\Html;
 $this->title = Yii::$app->name;
 ?>
 
+<script>
+    console.log('一张网页，要经历怎样的过程，才能抵达用户面前？\n' +
+        '一位新人，要经历怎样的成长，才能站在技术之巅？\n' +
+        '探寻这里的秘密；\n' +
+        '体验这里的挑战；\n' +
+        '成为这里的主人；\n' +
+        '加入我们，你，可以影响世界。');
+</script>
+
 <!-- 需要Cleanup -->
 <link href="/favicon.ico" rel="shortcut icon">
 <link href="/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
