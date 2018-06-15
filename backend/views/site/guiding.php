@@ -22,7 +22,6 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="container wow fadeInUp">
             <div class="row">
                 <div class="col-md-12">
-                    <h3 class="section-title">申请学生活动场地的流程</h3>
                     <div class="section-title-divider"></div>
                 </div>
             </div>
