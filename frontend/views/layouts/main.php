@@ -85,11 +85,13 @@ AppAsset::register($this);
     <?php } ?>
 </div>
 
+<?php if (!($this->context->id=='site' && $this->context->action->id=='index')) { ?>
 <footer class="footer">
     <div class="container">
         <p class="text-center">&copy; <?= Html::a(Yii::$app->name, ['/site/about']) ?> <?= date('Y') ?></p>
     </div>
 </footer>
+<?php } ?>
 
 <?php $this->endBody() ?>
 </body>
