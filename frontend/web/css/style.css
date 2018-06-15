@@ -135,6 +135,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .section-title {
 	font-size: 32px;
+	color: #111;
 	text-transform: uppercase;
 	text-align: center;
 	font-weight: 700;

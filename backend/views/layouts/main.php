@@ -91,7 +91,7 @@ AppAsset::register($this);
         NavBar::end();
     ?>
 
-    <?php if ($this->context->id=='site' && ($this->context->action->id=='index' || $this->context->action->id=='guiding')) { ?>
+    <?php if ($this->context->id=='site' && $this->context->action->id=='index') { ?>
         <?= $content ?>
     <?php } else { ?>
         <div class="container">

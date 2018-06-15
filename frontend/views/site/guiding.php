@@ -7,7 +7,8 @@ use yii\helpers\Html;
 /* @author 钟震宇 <nczzy1997@gmail.com> */
 /* @author 张志毅 */
 
-$this->title = Yii::$app->name;
+$this->title = '说明';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <!-- 需要Cleanup -->

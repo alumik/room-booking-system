@@ -7,7 +7,8 @@ use yii\helpers\Html;
 /* @author 钟震宇 <nczzy1997@gmail.com> */
 /* @author 张志毅 */
 
-$this->title = Yii::$app->name;
+$this->title = '说明';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <!-- 需要Cleanup -->
@@ -19,7 +20,7 @@ $this->title = Yii::$app->name;
 <div class="site-index">
 
     <section id="guiding">
-        <div class="container wow fadeInDown">
+        <div class="container wow fadeInUp">
             <div class="row">
                 <div class="col-md-12">
                     <h3 class="section-title">申请学生活动场地的流程</h3>
