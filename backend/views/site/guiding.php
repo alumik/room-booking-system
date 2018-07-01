@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="site-index">
 
     <section id="guiding">
-        <div class="container wow fadeInUp">
+        <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="section-title-divider"></div>
