@@ -16,11 +16,12 @@ use kartik\datetime\DateTimePicker;
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
-        'options' => ['style' => 'max-width: 42%'],
+        'options' => ['class' => 'row col-lg-4'],
     ]); ?>
 
     <?= $form->field($model, 'start_time_str')->widget(DateTimePicker::classname(), [
         'readonly' => true,
+        'removeButton' => false,
         'options' => [
             'placeholder' => '选择开始时间',
             'autocomplete' => 'off',
@@ -36,6 +37,7 @@ use kartik\datetime\DateTimePicker;
 
     <?= $form->field($model, 'end_time_str')->widget(DateTimePicker::classname(), [
         'readonly' => true,
+        'removeButton' => false,
         'options' => [
             'placeholder' => '选择结束时间',
             'autocomplete' => 'off',

@@ -111,7 +111,7 @@ class RoomSearch extends Room
                     'campus' => SORT_ASC,
                 ]
             ],
-            'pagination' => ['pageSize' => 30],
+            'pagination' => ['pageSize' => 15],
         ]);
 
         $this->load($params);
