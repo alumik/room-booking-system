@@ -39,7 +39,7 @@ $this->title = Yii::$app->name;
 
                 <h1><?= Yii::$app->name ?></h1>
 
-                <h2>更加 <span class="rotating">便利的操作, 简洁的流程</span></h2>
+                <h2>更加<span class="rotating">便利的操作, 简洁的流程</span></h2>
 
                 <div class="actions">
                     <?= Html::a('查看说明', ['guiding'],  ['class' => 'btn btn-info']) ?>
@@ -54,7 +54,6 @@ $this->title = Yii::$app->name;
 <!-- 需要Cleanup -->
 <script src="/lib/jquery/jquery.min.js"></script>
 <script src="/lib/jquery/jquery-migrate.min.js"></script>
-<script src="/lib/bootstrap/js/bootstrap.min.js"></script>
 <script src="/lib/superfish/hoverIntent.js"></script>
 <script src="/lib/superfish/superfish.min.js"></script>
 <script src="/lib/morphext/morphext.min.js"></script>
