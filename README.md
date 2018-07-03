@@ -12,9 +12,9 @@
 
 项目网站
 -------------------
-学生活动场地申请系统 <a href="http://rbs.ret.red/">http://rbs.ret.red/</a>
+学生活动场地申请系统 <a href="https://rbs.ret.red/">https://rbs.ret.red/</a>
 
-学生活动场地管理系统 <a href="http://admin.rbs.ret.red/">http://admin.rbs.ret.red/</a>
+学生活动场地管理系统 <a href="https://admin.rbs.ret.red/">https://admin.rbs.ret.red/</a>
 
 部署步骤
 -------------------
