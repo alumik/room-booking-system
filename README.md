@@ -2,11 +2,11 @@
     <a href="https://www.netsurfing.science" target="_blank">
         <img src="http://www.nankai.edu.cn/_upload/tpl/00/3f/63/template63/images/logo.png" height="100px">
     </a>
-    <h1 align="center">学生活动中心房间预约及管理系统</h1>
+    <h1 align="center">学生活动场地申请及管理系统</h1>
     <br>
 </p>
 
-本项目为南开大学学生活动中心房间预约系统（学生端）以及一个对应的管理系统（教师端）。
+本项目为南开大学学生活动场地申请系统（学生端）以及一个对应的管理系统（教师端）。
 
 项目基于<a href="https://www.yiiframework.com/">Yii2</a>框架制作。
 
