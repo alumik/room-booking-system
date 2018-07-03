@@ -10,6 +10,12 @@
 
 项目基于<a href="https://www.yiiframework.com/">Yii2</a>框架制作。
 
+项目网站
+-------------------
+学生活动场地申请系统 <a href="http://rbs.ret.red/">http://rbs.ret.red/</a>
+
+学生活动场地管理系统 <a href="http://admin.rbs.ret.red/">http://admin.rbs.ret.red/</a>
+
 部署步骤
 -------------------
 1. 使用`git clone`命令将网站文件获取至网站部署目录。
