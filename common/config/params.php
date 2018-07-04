@@ -1,5 +1,5 @@
 <?php
 return [
     'user.passwordResetTokenExpire' => 3600,
-    'version' => '1.5.0',
+    'version' => '1.5.1',
 ];

@@ -33,6 +33,7 @@ RewriteCond %{REQUEST_FILENAME} !-d
 # Otherwise forward it to index.php
 RewriteRule . index.php
 ```
+8. 数据库中导入database/database.sql。默认管理员账号0000000，密码000000。默认用户账号0000000，密码000000。
 
 目录结构
 -------------------
