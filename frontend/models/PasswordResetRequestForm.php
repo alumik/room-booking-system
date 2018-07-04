@@ -27,7 +27,7 @@ class PasswordResetRequestForm extends Model
             ['email', 'exist',
                 'targetClass' => '\common\models\User',
                 'filter' => ['status' => User::STATUS_ACTIVE],
-                'message' => '该Email未注册或无效！'
+                'message' => '该Email未注册或无效。'
             ],
         ];
     }

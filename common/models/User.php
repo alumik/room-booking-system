@@ -60,11 +60,11 @@ class User extends ActiveRecord implements IdentityInterface
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => '该邮箱已注册！'],
+            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => '该邮箱已注册。'],
 
             ['student_id', 'required'],
             ['student_id', 'string', 'length' => 7],
-            ['student_id', 'unique', 'targetClass' => '\common\models\User', 'message' => '该账号已注册！'],
+            ['student_id', 'unique', 'targetClass' => '\common\models\User', 'message' => '该账号已注册。'],
 
             ['username', 'trim'],
             ['username', 'required'],

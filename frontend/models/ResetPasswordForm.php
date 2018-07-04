@@ -31,11 +31,11 @@ class ResetPasswordForm extends Model
     public function __construct($token, $config = [])
     {
         if (empty($token) || !is_string($token)) {
-            throw new InvalidArgumentException('密码重置密钥不能为空！');
+            throw new InvalidArgumentException('密码重置密钥不能为空。');
         }
         $this->_user = User::findByPasswordResetToken($token);
         if (!$this->_user) {
-            throw new InvalidArgumentException('密码重置密钥无效！');
+            throw new InvalidArgumentException('密码重置密钥无效。');
         }
         parent::__construct($config);
     }
@@ -46,9 +46,9 @@ class ResetPasswordForm extends Model
     public function rules()
     {
         return [
-            ['password', 'required'],
+            [['password', 'password2'], 'required'],
             ['password', 'string', 'min' => 6],
-            ['password2', 'compare', 'compareAttribute' => 'password', 'message' => '两次输入密码不一致！'],
+            ['password2', 'compare', 'compareAttribute' => 'password', 'message' => '两次输入密码不一致。'],
         ];
     }
 

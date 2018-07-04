@@ -26,7 +26,7 @@ class SignupForm extends Model
         return [
             ['admin_id', 'trim'],
             ['admin_id', 'required'],
-            ['admin_id', 'unique', 'targetClass' => '\common\models\Admin', 'message' => '该账号已注册！'],
+            ['admin_id', 'unique', 'targetClass' => '\common\models\Admin', 'message' => '该账号已注册。'],
             ['admin_id', 'string', 'length' => 7],
 
             ['admin_name', 'trim'],
@@ -37,12 +37,12 @@ class SignupForm extends Model
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\common\models\Admin', 'message' => '该邮箱已注册！'],
+            ['email', 'unique', 'targetClass' => '\common\models\Admin', 'message' => '该邮箱已注册。'],
 
-            ['password', 'required'],
+            [['password', 'password2'], 'required'],
             ['password', 'string', 'min' => 6],
 
-            ['password2', 'compare', 'compareAttribute' => 'password', 'message' => '两次输入密码不一致！'],
+            ['password2', 'compare', 'compareAttribute' => 'password', 'message' => '两次输入密码不一致。'],
         ];
     }
 

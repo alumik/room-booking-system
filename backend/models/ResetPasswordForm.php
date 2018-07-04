@@ -21,10 +21,10 @@ class ResetPasswordForm extends Model
     public function rules()
     {
         return [
-            ['password', 'required'],
+            [['password', 'password2'], 'required'],
             ['password', 'string', 'min' => 6],
 
-            ['password2', 'compare', 'compareAttribute' => 'password', 'message' => '两次输入密码不一致！'],
+            ['password2', 'compare', 'compareAttribute' => 'password', 'message' => '两次输入密码不一致。'],
         ];
     }
 
