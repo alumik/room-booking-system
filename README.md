@@ -1,5 +1,5 @@
 <p align="center">
-    <a href="https://www.netsurfing.science" target="_blank">
+    <a href="http://www.nankai.edu.cn/" target="_blank">
         <img src="http://www.nankai.edu.cn/_upload/tpl/00/3f/63/template63/images/logo.png" height="100px">
     </a>
     <h1 align="center">学生活动场地申请及管理系统</h1>
@@ -12,9 +12,9 @@
 
 项目网站
 -------------------
-学生活动场地申请系统 <a href="https://rbs.ret.red/">https://rbs.ret.red/</a>
+学生活动场地申请系统 <a href="https://rbs.ret.red/" target="_blank">https://rbs.ret.red/</a>
 
-学生活动场地管理系统 <a href="https://admin.rbs.ret.red/">https://admin.rbs.ret.red/</a>
+学生活动场地管理系统 <a href="https://admin.rbs.ret.red/" target="_blank">https://admin.rbs.ret.red/</a>
 
 部署步骤
 -------------------
