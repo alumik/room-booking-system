@@ -18,14 +18,15 @@
 
 3. 在根目录下执行 `php init` （Linux）或 `init.bat` （Windows），选择运行配置。
 
-4. 将前台网站根目录设置为 `frontend/web` ，后台网站根目录设置为 `backend/web` ，入口文件为 `index.php` 。
+4. 将前台网站根目录设置为 *frontend/web* ，后台网站根目录设置为 *backend/web* ，入口文件为 *index.php* 。
 
 5. 确保php允许 `open_basedir` 。
 
 6. 确保网站根目录被赋予了足够的权限。
 
 7. 根据网络服务器的类型配置 URL 转写。 Apache2 的配置如下：
-```angular2html
+
+```
 RewriteEngine on
 # If a directory or a file exists, use it directly
 RewriteCond %{REQUEST_FILENAME} !-f
@@ -34,4 +35,26 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . index.php
 ```
 
-8. 数据库中导入 database/database.sql 。默认管理员账号 `0000000` ，密码 `000000` 。默认用户账号 `0000000` ，密码 `000000` 。
+8. 数据库中新建一个数据库并导入 *database/database.sql* 。默认管理员账号 `0000000` ，密码 `000000` 。默认用户账号 `0000000` ，密码 `000000` 。
+
+9. 修改 *common/config/main-local.php* ，写入数据库配置信息和邮箱配置信息，例如：
+
+```
+<?php
+return [
+    'components' => [
+        'db' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=localhost;dbname=yii2advanced',
+            'username' => 'root',
+            'password' => '',
+            'charset' => 'utf8',
+        ],
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'viewPath' => '@common/mail',
+            'useFileTransport' => true,
+        ],
+    ],
+];
+```
