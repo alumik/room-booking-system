@@ -6,25 +6,37 @@
 
 ## 项目网站
 
-学生活动场地申请系统 [https://rbs.ret.red/](https://rbs.ret.red/)
+学生活动场地申请系统 [https://rbs.alumik.cn/](https://rbs.alumik.cn/)
 
-学生活动场地管理系统 [https://admin.rbs.ret.red/](https://admin.rbs.ret.red/)
+学生活动场地管理系统 [https://rbs.alumik.cn/admin/](https://rbs.alumik.cn/admin/)
 
 ## 部署步骤
 
-1. 使用 `git clone` 将网站文件获取至网站部署目录。
+#### 01 下载文件 ####
 
-2. 进入网站根目录， 运行 `composer install` 安装运行环境。
+使用 `git clone` 将网站文件下载至部署目录。
 
-3. 在根目录下执行 `php init` （Linux）或 `init.bat` （Windows），选择运行配置。
+#### 02 安装依赖 ####
 
-4. 将前台网站根目录设置为 *frontend/web* ，后台网站根目录设置为 *backend/web* ，入口文件为 *index.php* 。
+在网站根目录执行 `composer install` 安装依赖文件。
 
-5. 确保php允许 `open_basedir` 。
+#### 03 初始化项目 ####
 
-6. 确保网站根目录被赋予了足够的权限。
+在网站根目录执行 `php init` （Linux）或 `init.bat` （Windows），选择 "Production" 。
 
-7. 根据网络服务器的类型配置 URL 转写。 Apache2 的配置如下：
+#### 04 配置服务器（以 Apache2 为例） ####
+
+1. 将前台网站根目录设置为 *frontend/web* ，后台网站根目录设置为 *backend/web* ，入口文件均为 *index.php* 。
+
+2. 启用 Apache2 插件。
+
+```
+a2enmod rewrite
+a2enmod ssl
+service apache2 restart
+```
+
+3. 配置 URL 转写。
 
 ```
 RewriteEngine on
@@ -35,9 +47,11 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . index.php
 ```
 
-8. 数据库中新建一个数据库并导入 *database/database.sql* 。默认管理员账号 `0000000` ，密码 `000000` 。默认用户账号 `0000000` ，密码 `000000` 。
+#### 05 配置数据库 ####
 
-9. 修改 *common/config/main-local.php* ，写入数据库配置信息和邮箱配置信息，例如：
+1. 数据库中新建一个数据库并导入 *database/database.sql* 。默认管理员账号 `0000000` ，密码 `000000` 。默认用户账号 `0000000` ，密码 `000000` 。
+
+2. 修改 *common/config/main-local.php* ，写入数据库配置信息和邮箱配置信息，例如：
 
 ```
 <?php
@@ -53,7 +67,6 @@ return [
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             'viewPath' => '@common/mail',
-            'useFileTransport' => true,
         ],
     ],
 ];
