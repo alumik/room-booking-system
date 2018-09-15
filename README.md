@@ -30,22 +30,22 @@
 
 2. 启用 Apache2 插件。
 
-```
-a2enmod rewrite
-a2enmod ssl
-service apache2 restart
-```
+    ```
+    a2enmod rewrite
+    a2enmod ssl
+    service apache2 restart
+    ```
 
 3. 配置 URL 转写。
 
-```
-RewriteEngine on
-# If a directory or a file exists, use it directly
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-# Otherwise forward it to index.php
-RewriteRule . index.php
-```
+    ```
+    RewriteEngine on
+    # If a directory or a file exists, use it directly
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    # Otherwise forward it to index.php
+    RewriteRule . index.php
+    ```
 
 #### 05 配置数据库 ####
 
@@ -53,21 +53,21 @@ RewriteRule . index.php
 
 2. 修改 *common/config/main-local.php* ，写入数据库配置信息和邮箱配置信息，例如：
 
-```
-<?php
-return [
-    'components' => [
-        'db' => [
-            'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=yii2advanced',
-            'username' => 'root',
-            'password' => '',
-            'charset' => 'utf8',
+    ```
+    <?php
+    return [
+        'components' => [
+            'db' => [
+                'class' => 'yii\db\Connection',
+                'dsn' => 'mysql:host=localhost;dbname=yii2advanced',
+                'username' => 'root',
+                'password' => '',
+                'charset' => 'utf8',
+            ],
+            'mailer' => [
+                'class' => 'yii\swiftmailer\Mailer',
+                'viewPath' => '@common/mail',
+            ],
         ],
-        'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
-            'viewPath' => '@common/mail',
-        ],
-    ],
-];
-```
+    ];
+    ```
