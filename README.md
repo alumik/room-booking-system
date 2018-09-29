@@ -6,9 +6,9 @@
 
 ## 演示网站
 
-学生活动场地申请系统 [https://rbs.alumik.cn/](https://rbs.alumik.cn/)
+学生活动场地申请系统 [https://rrs.alumik.cn/](https://rrs.alumik.cn/)
 
-学生活动场地管理系统 [https://rbs.alumik.cn/admin/](https://rbs.alumik.cn/admin/)
+学生活动场地管理系统 [https://rrs.alumik.cn/admin/](https://rrs.alumik.cn/admin/)
 
 ## 部署步骤
 
