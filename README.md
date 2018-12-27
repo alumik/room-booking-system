@@ -4,12 +4,6 @@
 
 项目基于 [Yii2](https://www.yiiframework.com/) 框架制作。
 
-## 演示网站
-
-学生活动场地申请系统 [https://rrs.alumik.cn/](https://rrs.alumik.cn/)
-
-学生活动场地管理系统 [https://rrs.alumik.cn/admin/](https://rrs.alumik.cn/admin/)
-
 ## 部署步骤
 
 1. 下载文件
