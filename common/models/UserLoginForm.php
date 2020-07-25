@@ -63,7 +63,7 @@ class UserLoginForm extends Model
     }
 
     /**
-     * 根据给定的账号和密码登录学生
+     * 根据给定的学号和密码登录学生
      *
      * @return bool
      */

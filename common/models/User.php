@@ -64,7 +64,7 @@ class User extends ActiveRecord implements IdentityInterface
 
             ['student_id', 'required'],
             ['student_id', 'string', 'length' => 7],
-            ['student_id', 'unique', 'targetClass' => '\common\models\User', 'message' => '该账号已注册。'],
+            ['student_id', 'unique', 'targetClass' => '\common\models\User', 'message' => '该学号已注册。'],
 
             ['username', 'trim'],
             ['username', 'required'],
@@ -81,7 +81,7 @@ class User extends ActiveRecord implements IdentityInterface
             'student_id' => '学号',
             'username' => '姓名',
             'email' => 'Email',
-            'status' => '账号状态',
+            'status' => '用户状态',
             'created_at' => '注册时间',
             'updated_at' => '修改时间',
         ];

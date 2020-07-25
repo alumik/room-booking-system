@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>请输入管理员账号和密码登录系统：</p>
+    <p>请输入管理员工号和密码登录系统：</p>
 
     <div class="row">
         <div class="col-lg-5">

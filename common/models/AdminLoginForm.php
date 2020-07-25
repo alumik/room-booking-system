@@ -39,7 +39,7 @@ class AdminLoginForm extends Model
     public function attributeLabels()
     {
         return [
-            'admin_id' => '账号',
+            'admin_id' => '工号',
             'password' => '密码',
             'rememberMe' => '保持登录状态',
         ];
@@ -56,13 +56,13 @@ class AdminLoginForm extends Model
         if (!$this->hasErrors()) {
             $admin = $this->getAdmin();
             if (!$admin || !$admin->validatePassword($this->password)) {
-                $this->addError($attribute, '账号或密码不正确。');
+                $this->addError($attribute, '工号或密码不正确。');
             }
         }
     }
 
     /**
-     * 根据给定的账号和密码登录管理员
+     * 根据给定的工号和密码登录管理员
      *
      * @return bool
      */

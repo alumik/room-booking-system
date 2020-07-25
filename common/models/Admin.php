@@ -63,7 +63,7 @@ class Admin extends ActiveRecord implements IdentityInterface
 
             ['admin_id', 'required'],
             ['admin_id', 'string', 'length' => 7],
-            ['admin_id', 'unique', 'targetClass' => '\common\models\Admin', 'message' => '该账号已注册。'],
+            ['admin_id', 'unique', 'targetClass' => '\common\models\Admin', 'message' => '该工号已注册。'],
 
             ['admin_name', 'trim'],
             ['admin_name', 'required'],
@@ -77,7 +77,7 @@ class Admin extends ActiveRecord implements IdentityInterface
     public function attributeLabels()
     {
         return [
-            'admin_id' => '管理员账号',
+            'admin_id' => '管理员工号',
             'admin_name' => '姓名',
             'email' => 'Email',
             'created_at' => '注册时间',

@@ -26,7 +26,7 @@ class SignupForm extends Model
         return [
             ['admin_id', 'trim'],
             ['admin_id', 'required'],
-            ['admin_id', 'unique', 'targetClass' => '\common\models\Admin', 'message' => '该账号已注册。'],
+            ['admin_id', 'unique', 'targetClass' => '\common\models\Admin', 'message' => '该工号已注册。'],
             ['admin_id', 'string', 'length' => 7],
 
             ['admin_name', 'trim'],
@@ -52,7 +52,7 @@ class SignupForm extends Model
     public function attributeLabels()
     {
         return [
-            'admin_id' => '账号',
+            'admin_id' => '工号',
             'admin_name' => '姓名',
             'email' => 'Email',
             'password' => '密码',
