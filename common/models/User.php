@@ -145,7 +145,7 @@ class User extends ActiveRecord implements IdentityInterface
             return false;
         }
 
-        $timestamp = (int) substr($token, strrpos($token, '_') + 1);
+        $timestamp = (int)substr($token, strrpos($token, '_') + 1);
         $expire = Yii::$app->params['user.passwordResetTokenExpire'];
         return $timestamp + $expire >= time();
     }
@@ -239,7 +239,8 @@ class User extends ActiveRecord implements IdentityInterface
      *
      * @return string
      */
-    public function getStatusStr() {
+    public function getStatusStr()
+    {
         return $this->status == self::STATUS_ACTIVE ? '正常' : '已禁用';
     }
 
@@ -267,6 +268,11 @@ class User extends ActiveRecord implements IdentityInterface
     {
         if ($this->status == self::STATUS_ACTIVE) {
             $this->status = self::STATUS_DELETED;
+            $applications = Application::findAll(['applicant_id' => $this->id, 'status' => Application::STATUS_PENDDING]);
+            foreach ($applications as $application) {
+                $application->status = Application::STATUS_REJECTED;
+                $application->save();
+            }
         } else {
             $this->status = self::STATUS_ACTIVE;
         }
