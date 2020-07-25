@@ -100,7 +100,7 @@ class RoomController extends Controller
         $model->room_id = $id;
         $model->start_time = $s_time;
         $model->end_time = $e_time;
-        $model->status = Application::STATUS_PENDDING;
+        $model->status = Application::STATUS_PENDING;
         $model->applicant_id = Yii::$app->user->identity->getId();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {

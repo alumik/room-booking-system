@@ -74,7 +74,7 @@ class ApplicationController extends Controller
         $model = $this->findModel($id);
         $conflict_id = $model->getConflictId();
 
-        if (!empty($conflict_id) && $model->status == Application::STATUS_PENDDING && $model->canUpdate()) {
+        if (!empty($conflict_id) && $model->status == Application::STATUS_PENDING && $model->canUpdate()) {
             $conflict_id_str = implode(', ', $conflict_id);
             Yii::$app->session->setFlash('error', '该申请与编号为 ' . $conflict_id_str . ' 的申请冲突，请检查冲突情况。');
         }

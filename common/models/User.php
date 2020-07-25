@@ -268,7 +268,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         if ($this->status == self::STATUS_ACTIVE) {
             $this->status = self::STATUS_DELETED;
-            $applications = Application::findAll(['applicant_id' => $this->id, 'status' => Application::STATUS_PENDDING]);
+            $applications = Application::findAll(['applicant_id' => $this->id, 'status' => Application::STATUS_PENDING]);
             foreach ($applications as $application) {
                 $application->status = Application::STATUS_REJECTED;
                 $application->save();

@@ -89,7 +89,7 @@ class ApplicationController extends Controller
         $model = $this->findModel($id);
         $conflict_id = $model->getConflictId();
 
-        if (!empty($conflict_id) && $model->status == Application::STATUS_PENDDING && $model->canUpdate()) {
+        if (!empty($conflict_id) && $model->status == Application::STATUS_PENDING && $model->canUpdate()) {
             Yii::$app->session->setFlash('error', "该申请与该房间某些已批准的申请冲突，请考虑修改并重新提交申请或与老师进行协调。");
         }
 
@@ -119,7 +119,7 @@ class ApplicationController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $model->start_time = strtotime($model->start_time);
             $model->end_time = strtotime($model->end_time);
-            $model->status = Application::STATUS_PENDDING;
+            $model->status = Application::STATUS_PENDING;
             if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }

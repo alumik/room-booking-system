@@ -209,7 +209,7 @@ class Room extends ActiveRecord
             ->select('id')
             ->from('application')
             ->where("not (start_time >= $e_time or end_time <= $s_time)")
-            ->andWhere(['status' => Application::STATUS_PENDDING])
+            ->andWhere(['status' => Application::STATUS_PENDING])
             ->andWhere(['room_id' => $this->id])
             ->count();
 

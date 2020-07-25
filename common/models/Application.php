@@ -26,7 +26,7 @@ use yii\db\ActiveRecord;
  */
 class Application extends ActiveRecord
 {
-    const STATUS_PENDDING = 0;
+    const STATUS_PENDING = 0;
     const STATUS_APPROVED = 1;
     const STATUS_REJECTED = 2;
 
@@ -58,8 +58,8 @@ class Application extends ActiveRecord
 
             [['organization_name'], 'string', 'max' => 64],
 
-            ['status', 'default', 'value' => self::STATUS_PENDDING],
-            ['status', 'in', 'range' => [self::STATUS_PENDDING, self::STATUS_APPROVED, self::STATUS_REJECTED]],
+            ['status', 'default', 'value' => self::STATUS_PENDING],
+            ['status', 'in', 'range' => [self::STATUS_PENDING, self::STATUS_APPROVED, self::STATUS_REJECTED]],
 
             [['applicant_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['applicant_id' => 'id']],
             [['room_id'], 'exist', 'skipOnError' => true, 'targetClass' => Room::className(), 'targetAttribute' => ['room_id' => 'id']],
@@ -146,7 +146,7 @@ class Application extends ActiveRecord
     public static function getAllStatus()
     {
         return [
-            self::STATUS_PENDDING => '待审核',
+            self::STATUS_PENDING => '待审核',
             self::STATUS_APPROVED => '已批准',
             self::STATUS_REJECTED => '已拒绝',
         ];
@@ -159,7 +159,7 @@ class Application extends ActiveRecord
      */
     public function getStatusStr() {
         switch ($this->status) {
-            case self::STATUS_PENDDING:
+            case self::STATUS_PENDING:
                 return '待审核';
             case self::STATUS_APPROVED:
                 return '已批准';
@@ -191,7 +191,7 @@ class Application extends ActiveRecord
     {
         $options = [];
         switch ($this->status) {
-            case self::STATUS_PENDDING:
+            case self::STATUS_PENDING:
                 $options['class'] = 'bg-info';
                 break;
             case self::STATUS_APPROVED:
@@ -220,7 +220,7 @@ class Application extends ActiveRecord
             ->andWhere("id != $this->id")
             ->count();
 
-        if (($overlap > 0 && $this->status == self::STATUS_PENDDING) || (!$this->room->available && $this->status != self::STATUS_REJECTED)) {
+        if (($overlap > 0 && $this->status == self::STATUS_PENDING) || (!$this->room->available && $this->status != self::STATUS_REJECTED)) {
             return ['class' => 'bg-warning'];
         }
 
