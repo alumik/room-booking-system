@@ -48,7 +48,7 @@ return [
             'rules' => [
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>' => '<controller>/index',
-                '<controller:\w+>/<id:\d+>/<action:\w+>' => '<controller>/<action>',
+                '<controller:\w+>/<id:\d+>/<action:[\w\-]+>' => '<controller>/<action>',
             ],
         ],
     ],
