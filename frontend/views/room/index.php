@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
             'showOnEmpty' => false,
-            'emptyText' => '',
+            'emptyText' => '没有符合搜索条件的房间',
             'columns' => [
                 [
                     'attribute' => 'room_number',
