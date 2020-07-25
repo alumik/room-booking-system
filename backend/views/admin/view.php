@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $model->admin_id;
         <?= Html::a('删除', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => '确定要删除该管理员吗？',
+                'confirm' => '你确定要删除该管理员吗？',
                 'method' => 'post',
             ],
         ]) ?>

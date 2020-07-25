@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $model->id;
         <?= Html::a('撤销申请', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => '你确定要撤销该申请吗？',
+                'confirm' => '你确定要撤销该申请吗？该操作不可撤销。',
                 'method' => 'post',
             ],
         ]) ?>

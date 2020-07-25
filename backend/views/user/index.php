@@ -61,7 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'aria-label' => '禁用学生',
                                     'data-pjax' => '0',
                                     'data-method' => 'post',
-                                    'data-confirm' => '你确定要禁用该学生吗？该学生的所有预约都将被取消。',
+                                    'data-confirm' => '你确定要禁用该学生吗？该学生的所有预约都将被拒绝。',
                                 ];
                                 return Html::a('<span class="glyphicon glyphicon-remove"></span>', $url, $options);
                             }

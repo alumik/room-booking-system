@@ -99,7 +99,7 @@ $this->params['breadcrumbs'][] = $model->id;
                 <?= Html::a('拒绝', ['reject', 'id' => $model->id], [
                     'class' => 'btn btn-danger',
                     'data' => [
-                        'confirm' => '你确定要拒绝该申请吗？该操作不能撤销。',
+                        'confirm' => '你确定要拒绝该申请吗？该操作不可撤销。',
                         'method' => 'post',
                     ],
                 ]) ?>
