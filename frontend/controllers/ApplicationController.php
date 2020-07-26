@@ -25,15 +25,15 @@ class ApplicationController extends Controller
             'verbs' => [
                 'class' => VerbFilter::class,
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => ['post'],
                 ],
             ],
             'access' => [
                 'class' => AccessControl::class,
-                'only' => ['view', 'index', 'update', 'delete', 'conflict-detail'],
+                'only' => ['index', 'view', 'conflict-detail', 'update', 'delete', 'print'],
                 'rules' => [
                     [
-                        'actions' => ['view', 'index', 'update', 'delete', 'conflict-detail'],
+                        'actions' => ['index', 'view', 'conflict-detail', 'update', 'delete', 'print'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -58,20 +58,6 @@ class ApplicationController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    /**
-     * 查看与自己申请相冲突的申请详情
-     *
-     * @param integer $id
-     * @return string
-     * @throws NotFoundHttpException
-     */
-    public function actionConflictDetail($id)
-    {
-        return $this->render('conflict_detail', [
-            'model' => $this->findModel($id),
         ]);
     }
 
@@ -101,6 +87,20 @@ class ApplicationController extends Controller
 
         return $this->render('view', [
             'model' => $model,
+        ]);
+    }
+
+    /**
+     * 查看与自己申请相冲突的申请详情
+     *
+     * @param integer $id
+     * @return string
+     * @throws NotFoundHttpException
+     */
+    public function actionConflictDetail($id)
+    {
+        return $this->render('conflict_detail', [
+            'model' => $this->findModel($id),
         ]);
     }
 

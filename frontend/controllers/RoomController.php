@@ -24,15 +24,15 @@ class RoomController extends Controller
             'verbs' => [
                 'class' => VerbFilter::class,
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => ['post'],
                 ],
             ],
             'access' => [
                 'class' => AccessControl::class,
-                'only' => ['index', 'approved-application', 'order'],
+                'only' => ['index', 'view', 'order'],
                 'rules' => [
                     [
-                        'actions' => ['index', 'approved-application', 'order'],
+                        'actions' => ['index', 'view', 'order'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
