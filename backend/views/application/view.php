@@ -51,7 +51,6 @@ $this->params['breadcrumbs'][] = $model->id;
                 'value' => $model->applicant->username,
             ],
             'organization_name',
-            'event:ntext',
             [
                 'attribute' => 'start_time',
                 'format' => ['date', 'php: Y-m-d H:i'],
@@ -65,6 +64,7 @@ $this->params['breadcrumbs'][] = $model->id;
                 'value' => $model->getStatusStr(),
                 'contentOptions' => $model->getStatusBg(),
             ],
+            'event:ntext',
             [
                 'attribute' => 'created_at',
                 'format' => ['date', 'php: Y-m-d H:i'],

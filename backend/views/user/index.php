@@ -61,9 +61,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'aria-label' => '禁用学生',
                                     'data-pjax' => '0',
                                     'data-method' => 'post',
-                                    'data-confirm' => '你确定要禁用该学生吗？该学生的所有未处理申请都将被拒绝。',
+                                    'data-confirm' => '你确定要禁用该学生吗？该学生的所有待审核申请都将被拒绝。',
                                 ];
-                                return Html::a('<span class="glyphicon glyphicon-remove"></span>', $url, $options);
+                                return Html::a('<span class="glyphicon glyphicon-remove text-danger"></span>', $url, $options);
                             }
                             $options = [
                                 'title' => '启用学生',
@@ -71,7 +71,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'data-pjax' => '0',
                                 'data-method' => 'post',
                             ];
-                            return Html::a('<span class="glyphicon glyphicon-ok"></span>', $url, $options);
+                            return Html::a('<span class="glyphicon glyphicon-ok text-success"></span>', $url, $options);
                         },
                     ]
                 ],

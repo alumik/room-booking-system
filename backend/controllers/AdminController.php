@@ -127,7 +127,7 @@ class AdminController extends Controller
             }
         }
 
-        return $this->render('resetPassword', [
+        return $this->render('reset_password', [
             'model' => $model,
         ]);
     }
@@ -253,7 +253,7 @@ class AdminController extends Controller
         $searchModel = new AuthItemSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('viewPrivilege', [
+        return $this->render('view_privilege', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);

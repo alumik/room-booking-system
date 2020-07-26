@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <div class="alert alert-info">
-        <?= nl2br(Html::encode('本网站作者：钟震宇（网站） 张志毅（数据库/欢迎界面）。')) ?>
+        <?= nl2br(Html::encode('本网站作者：钟震宇、张志毅。')) ?>
     </div>
 
     <p>网站版本 <?= Yii::$app->params['version'] ?></p>

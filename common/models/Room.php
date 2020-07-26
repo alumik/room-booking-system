@@ -58,7 +58,7 @@ class Room extends ActiveRecord
         return [
             'id' => 'ID',
             'room_number' => '房间号',
-            'type' => '房间类型',
+            'type' => '类型',
             'campus' => '校区',
             'available' => '状态',
         ];

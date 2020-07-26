@@ -32,7 +32,7 @@ use yii\widgets\ActiveForm;
             ->orderBy('id')
             ->indexBy('id')
             ->column(),
-        ['prompt' => '请选择校区']) ?>
+        ['prompt' => '请选择房间所在校区']) ?>
 
     <div class="form-group">
         <?= Html::submitButton('保存', ['class' => 'btn btn-success']) ?>

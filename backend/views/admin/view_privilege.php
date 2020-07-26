@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'attribute' => 'priManageStudent',
-                    'label' => '修改学生',
+                    'label' => '修改学生信息',
                     'contentOptions' => ['class' => 'permission-column'],
                     'headerOptions' => ['class' => 'text-center'],
                 ],

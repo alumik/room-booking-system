@@ -17,9 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="site-login">
 
     <!-- development stage only -->
-    <div class="alert alert-info">
-        <?= nl2br(Html::encode('提示：由于本网站仍处于开发阶段，并未接入学校数据库。新用户请在注册界面手动注册后使用。')) ?>
-    </div>
+    <?= Yii::$app->session->setFlash('info', '提示：本网站仍处于开发阶段，并未接入学校数据库。请新用户在注册页面手动注册后再尝试登录。'); ?>
 
     <h1><?= Html::encode($this->title) ?></h1>
 
