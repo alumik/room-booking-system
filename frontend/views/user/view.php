@@ -19,8 +19,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('修改信息', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('修改密码', ['reset-password', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('修改信息', ['update'], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('修改密码', ['reset-password'], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <?= DetailView::widget([

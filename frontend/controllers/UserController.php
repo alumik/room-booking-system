@@ -54,16 +54,15 @@ class UserController extends Controller
      * 修改账号信息
      * 如果操作成功则跳转至详情页
      *
-     * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException
      */
-    public function actionUpdate($id)
+    public function actionUpdate()
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel(Yii::$app->user->identity->getId());
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view']);
         }
 
         return $this->render('update', [
@@ -74,16 +73,15 @@ class UserController extends Controller
     /**
      * 登录后修改密码
      *
-     * @param integer $id
      * @return string|Response
      * @throws \Exception
      */
-    public function actionResetPassword($id)
+    public function actionResetPassword()
     {
         $model = new LoginResetPasswordForm();
 
         if ($model->load(Yii::$app->request->post())) {
-            if ($admin = $model->resetPassword($id)) {
+            if ($model->resetPassword(Yii::$app->user->identity->getId())) {
                 return $this->redirect(['view']);
             }
         }

@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use Yii;
 use yii\db\StaleObjectException;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -42,7 +43,7 @@ class ApplicationController extends Controller
     }
 
     /**
-     * 列出“我的预约”
+     * 列出我的预约
      *
      * @return string
      */
@@ -80,10 +81,15 @@ class ApplicationController extends Controller
      * @param integer $id
      * @return string
      * @throws NotFoundHttpException
+     * @throws ForbiddenHttpException
      */
     public function actionView($id)
     {
         $model = $this->findModel($id);
+
+        if ($model->applicant_id !== Yii::$app->user->identity->getId()) {
+            throw new ForbiddenHttpException('你无权进行此操作。');
+        }
 
         if (!empty($model->getConflictId()) && $model->status == Application::STATUS_PENDING && $model->canUpdate()) {
             Yii::$app->session->setFlash('error', "该申请与该房间某些已批准的申请冲突，请考虑修改申请并重新提交或与老师进行协调。");
@@ -105,10 +111,16 @@ class ApplicationController extends Controller
      * @param integer $id
      * @return Response|string
      * @throws NotFoundHttpException
+     * @throws ForbiddenHttpException
      */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+
+        if ($model->applicant_id !== Yii::$app->user->identity->getId()) {
+            throw new ForbiddenHttpException('你无权进行此操作。');
+        }
+
         $model->start_time = date('Y-m-d H:i', $model->start_time);
         $model->end_time = date('Y-m-d H:i', $model->end_time);
 
@@ -136,11 +148,18 @@ class ApplicationController extends Controller
      * @return Response
      * @throws NotFoundHttpException
      * @throws StaleObjectException
+     * @throws ForbiddenHttpException
      * @throws \Throwable
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+
+        if ($model->applicant_id !== Yii::$app->user->identity->getId()) {
+            throw new ForbiddenHttpException('你无权进行此操作。');
+        } else {
+            $model->delete();
+        }
 
         return $this->redirect(['index']);
     }
@@ -151,11 +170,18 @@ class ApplicationController extends Controller
      * @param integer $id
      * @return string
      * @throws NotFoundHttpException
+     * @throws ForbiddenHttpException
      */
     public function actionPrint($id)
     {
+        $model = $this->findModel($id);
+
+        if ($model->applicant_id !== Yii::$app->user->identity->getId()) {
+            throw new ForbiddenHttpException('你无权进行此操作。');
+        }
+
         return $this->render('print', [
-            'model' => $this->findModel($id)
+            'model' => $model
         ]);
     }
 
