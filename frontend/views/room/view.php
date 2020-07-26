@@ -13,9 +13,9 @@ use yii\grid\GridView;
 
 /* @author 钟震宇 <nczzy1997@gmail.com> */
 
-$this->title = $model->room_number;
+$this->title = $model->campus0->campus_name . ' ' . $model->room_number;
 $this->params['breadcrumbs'][] = ['label' => '预约房间', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $model->room_number;
+$this->params['breadcrumbs'][] = $model->id;
 ?>
 
 <div class="room-view">

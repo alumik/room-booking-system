@@ -19,11 +19,18 @@ $this->params['breadcrumbs'][] = '修改';
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>注意：如果需要修改房间，请撤销申请后重新提交申请</p>
+    <p>注意：如果需要修改所申请的房间，请撤销申请后重新提交申请</p>
 
     <div class="application-form">
 
         <?php $form = ActiveForm::begin(); ?>
+
+        <?= $form->field($model, 'room_number', [
+            'inputOptions' => [
+                'class' => 'form-control',
+                'value' => $model->room->campus0->campus_name . ' ' . $model->room->room_number,
+            ]
+        ])->textInput(['disabled' => true])->label('房间') ?>
 
         <?= $form->field($model, 'organization_name')
             ->textInput(['maxlength' => true])
