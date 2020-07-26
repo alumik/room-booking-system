@@ -109,7 +109,7 @@ class ApplicationController extends Controller
      * 如果操作成功转到详情页
      *
      * @param integer $id
-     * @return Response|string
+     * @return string|Response
      * @throws NotFoundHttpException
      * @throws ForbiddenHttpException
      */
@@ -181,7 +181,7 @@ class ApplicationController extends Controller
         }
 
         return $this->render('print', [
-            'model' => $model
+            'model' => $model,
         ]);
     }
 

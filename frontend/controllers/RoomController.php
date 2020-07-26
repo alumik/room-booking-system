@@ -52,7 +52,7 @@ class RoomController extends Controller
 
         return $this->render('index', [
             'searchModel' => $searchModel,
-            'dataProvider' => $searchModel->search(Yii::$app->request->queryParams)
+            'dataProvider' => $searchModel->search(Yii::$app->request->queryParams),
         ]);
     }
 
@@ -75,7 +75,7 @@ class RoomController extends Controller
 
         return $this->render('view', [
             'model' => $this->findModel($id),
-            'dataProvider' => $searchModel->search(Yii::$app->request->queryParams)
+            'dataProvider' => $searchModel->search(Yii::$app->request->queryParams),
         ]);
     }
 

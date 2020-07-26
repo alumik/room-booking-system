@@ -50,10 +50,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     'contentOptions' => ['style' => 'vertical-align:middle'],
                 ],
                 [
-                    'attribute' => 'queue_count',
                     'value' => function($model)use($searchModel) {
                         /* @var $model Room */
-                        $queue_count = $model->getQueueCount($searchModel->start_time_str, $searchModel->end_time_str);
+                        $queue_count = $model->getQueueCount($searchModel->start_time, $searchModel->end_time);
                         return $queue_count == 0 ? '无' : $queue_count . ' 个';
                     },
                     'label' => '待审核申请',
@@ -63,8 +62,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute' => 'approval_status',
                     'value' => function($model)use($searchModel) {
                         /* @var $model Room */
-                        $s_time_str = $searchModel->start_time_str;
-                        $e_time_str = $searchModel->end_time_str;
+                        $s_time_str = $searchModel->start_time;
+                        $e_time_str = $searchModel->end_time;
                         $a_status = $model->getApprovalStatus($s_time_str, $e_time_str)['text'];
 
                         if ($a_status == '已分配') {
@@ -79,7 +78,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'label' => '分配状态',
                     'contentOptions' => function($model)use($searchModel) {
                         /* @var $model Room */
-                        $options = $model->getApprovalStatus($searchModel->start_time_str, $searchModel->end_time_str)['class'];
+                        $options = $model->getApprovalStatus($searchModel->start_time, $searchModel->end_time)['class'];
                         $options['style'] = 'width:80px; vertical-align:middle';
                         return $options;
                     },
@@ -91,8 +90,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     'buttons' => [
                         'order' => function($url, $model, $key) use ($searchModel)
                         {
-                            $s_time = strtotime($searchModel->start_time_str);
-                            $e_time = strtotime($searchModel->end_time_str);
+                            $s_time = strtotime($searchModel->start_time);
+                            $e_time = strtotime($searchModel->end_time);
 
                             $options = [
                                 'title' => '预约',

@@ -6,11 +6,6 @@ use Yii;
 use yii\base\Model;
 use common\models\User;
 
-/**
- * @author 钟震宇 <nczzy1997@gmail.com>
- *
- * 前台 学生登录前修改密码申请 表单模型
- */
 class PasswordResetRequestForm extends Model
 {
     public $email;
@@ -27,7 +22,7 @@ class PasswordResetRequestForm extends Model
             ['email', 'exist',
                 'targetClass' => '\common\models\User',
                 'filter' => ['status' => User::STATUS_ACTIVE],
-                'message' => '该Email未注册或无效。'
+                'message' => '该 Email 未注册或无效。',
             ],
         ];
     }
@@ -45,7 +40,7 @@ class PasswordResetRequestForm extends Model
     /**
      * 发送一封含有密码重置链接的邮件
      *
-     * @return bool 邮件发送是否成功
+     * @return bool
      * @throws \Exception
      */
     public function sendEmail()
@@ -58,7 +53,7 @@ class PasswordResetRequestForm extends Model
         if (!$user) {
             return false;
         }
-        
+
         if (!User::isPasswordResetTokenValid($user->password_reset_token)) {
             $user->generatePasswordResetToken();
             if (!$user->save()) {

@@ -6,11 +6,6 @@ use yii\base\Model;
 use yii\base\InvalidArgumentException;
 use common\models\User;
 
-/**
- * @author 钟震宇 <nczzy1997@gmail.com>
- *
- * 前台 学生登录前修改密码 表单模型
- */
 class ResetPasswordForm extends Model
 {
     public $password;
@@ -26,7 +21,7 @@ class ResetPasswordForm extends Model
      *
      * @param string $token
      * @param array $config
-     * @throws InvalidArgumentException 如果密码重置密钥无效
+     * @throws InvalidArgumentException
      */
     public function __construct($token, $config = [])
     {
@@ -59,7 +54,7 @@ class ResetPasswordForm extends Model
     {
         return [
             'password' => '密码',
-            'password2' => '重新输入密码',
+            'password2' => '再次输入密码',
         ];
     }
 

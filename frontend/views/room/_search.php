@@ -19,7 +19,7 @@ use kartik\datetime\DateTimePicker;
         'options' => ['class' => 'row col-lg-4'],
     ]); ?>
 
-    <?= $form->field($model, 'start_time_str')->widget(DateTimePicker::class, [
+    <?= $form->field($model, 'start_time')->widget(DateTimePicker::class, [
         'readonly' => true,
         'removeButton' => false,
         'options' => [
@@ -35,7 +35,7 @@ use kartik\datetime\DateTimePicker;
         ]
     ]); ?>
 
-    <?= $form->field($model, 'end_time_str')->widget(DateTimePicker::class, [
+    <?= $form->field($model, 'end_time')->widget(DateTimePicker::class, [
         'readonly' => true,
         'removeButton' => false,
         'options' => [

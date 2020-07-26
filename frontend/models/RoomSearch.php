@@ -6,16 +6,10 @@ use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\Room;
 
-/**
- * @author 钟震宇 <nczzy1997@gmail.com>
- *
- * 前台 房间 筛选模型
- */
 class RoomSearch extends Room
 {
-    public $start_time_str;
-    public $end_time_str;
-    public $queue_count;
+    public $start_time;
+    public $end_time;
 
     /**
      * @inheritdoc
@@ -24,9 +18,9 @@ class RoomSearch extends Room
     {
         return [
             [['id', 'type', 'campus', 'available'], 'integer'],
-            [['room_number', 'start_time_str', 'end_time_str'], 'safe'],
-            ['start_time_str', 'validateStartTime'],
-            ['end_time_str', 'validateEndTime'],
+            [['room_number', 'start_time', 'end_time'], 'safe'],
+            ['start_time', 'validateStartTime'],
+            ['end_time', 'validateEndTime'],
         ];
     }
 
@@ -36,8 +30,8 @@ class RoomSearch extends Room
     public function attributeLabels()
     {
         return [
-            'start_time_str' => '开始时间',
-            'end_time_str' => '结束时间',
+            'start_time' => '开始时间',
+            'end_time' => '结束时间',
         ];
     }
 
@@ -45,16 +39,15 @@ class RoomSearch extends Room
      * 判断输入的开始时间是否合法
      *
      * @param $attribute
-     * @param $params
      */
-    public function validateStartTime($attribute, $params)
+    public function validateStartTime($attribute)
     {
         if (!$this->hasErrors()) {
-            $s_time = strtotime($this->start_time_str);
-            if ($s_time < time()) {
+            $startTime = strtotime($this->start_time);
+            if ($startTime < time()) {
                 $this->addError($attribute, '开始时间必须大于现在时间。');
-            } else if ($s_time > time() + 3600 * 24 * 30) {
-                $this->addError($attribute, '开始时间必须在一个月内。');
+            } else if ($startTime > time() + 3600 * 24 * 30) {
+                $this->addError($attribute, '开始时间必须在距今一个月内。');
             }
         }
     }
@@ -63,16 +56,15 @@ class RoomSearch extends Room
      * 判断输入的结束时间是否合法
      *
      * @param $attribute
-     * @param $params
      */
-    public function validateEndTime($attribute, $params)
+    public function validateEndTime($attribute)
     {
         if (!$this->hasErrors()) {
-            $s_time = strtotime($this->start_time_str);
-            $e_time = strtotime($this->end_time_str);
-            if ($s_time > $e_time) {
+            $startTime = strtotime($this->start_time);
+            $endTime = strtotime($this->end_time);
+            if ($startTime > $endTime) {
                 $this->addError($attribute, '结束时间必须大于开始时间。');
-            } else if ($e_time - $s_time > 3600 * 12) {
+            } else if ($endTime - $startTime > 3600 * 12) {
                 $this->addError($attribute, '持续时间不能超过十二小时。');
             }
         }
@@ -121,7 +113,7 @@ class RoomSearch extends Room
             return $dataProvider;
         }
 
-        if (empty($this->start_time_str) || empty($this->end_time_str)) {
+        if (empty($this->start_time) || empty($this->end_time)) {
             $query->where('0 = 1');
         }
 

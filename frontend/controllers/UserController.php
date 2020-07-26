@@ -10,11 +10,6 @@ use common\models\User;
 use frontend\models\LoginResetPasswordForm;
 use yii\web\Response;
 
-/**
- * @author 钟震宇 <nczzy1997@gmail.com>
- *
- * 前台 学生 控制器
- */
 class UserController extends Controller
 {
     /**
@@ -40,7 +35,7 @@ class UserController extends Controller
     /**
      * 显示账号信息
      *
-     * @return mixed
+     * @return string
      * @throws NotFoundHttpException
      */
     public function actionView()
@@ -54,7 +49,7 @@ class UserController extends Controller
      * 修改账号信息
      * 如果操作成功则跳转至详情页
      *
-     * @return mixed
+     * @return string|Response
      * @throws NotFoundHttpException
      */
     public function actionUpdate()

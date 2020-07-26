@@ -5,11 +5,6 @@ namespace frontend\models;
 use yii\base\Model;
 use common\models\User;
 
-/**
- * @author 钟震宇 <nczzy1997@gmail.com>
- *
- * 前台 学生注册 表单模型
- */
 class SignupForm extends Model
 {
     public $student_id;
@@ -41,7 +36,6 @@ class SignupForm extends Model
 
             [['password', 'password2'], 'required'],
             ['password', 'string', 'min' => 6],
-
             ['password2', 'compare', 'compareAttribute' => 'password', 'message' => '两次输入密码不一致。'],
         ];
     }
@@ -56,7 +50,7 @@ class SignupForm extends Model
             'username' => '姓名',
             'email' => 'Email',
             'password' => '密码',
-            'password2' => '重新输入密码',
+            'password2' => '再次输入密码',
         ];
     }
 
@@ -71,14 +65,14 @@ class SignupForm extends Model
         if (!$this->validate()) {
             return null;
         }
-        
+
         $user = new User();
         $user->student_id = $this->student_id;
         $user->username = $this->username;
         $user->email = $this->email;
         $user->setPassword($this->password);
         $user->generateAuthKey();
-        
+
         return $user->save() ? $user : null;
     }
 }

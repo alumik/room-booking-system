@@ -42,7 +42,7 @@ $this->title = Yii::$app->name;
                 <h2>更加<span class="rotating">便利的操作, 简洁的流程</span></h2>
 
                 <div class="actions">
-                    <?= Html::a('查看说明', ['guiding'],  ['class' => 'btn btn-info']) ?>
+                    <?= Html::a('查看说明', ['instruction'],  ['class' => 'btn btn-info']) ?>
                 </div>
 
             </div>

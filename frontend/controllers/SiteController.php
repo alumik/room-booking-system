@@ -12,12 +12,8 @@ use common\models\UserLoginForm;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
+use yii\web\Response;
 
-/**
- * @author 钟震宇 <nczzy1997@gmail.com>
- *
- * 前台 网站 控制器
- */
 class SiteController extends Controller
 {
     /**
@@ -70,7 +66,7 @@ class SiteController extends Controller
     /**
      * 主页
      *
-     * @return mixed
+     * @return string
      */
     public function actionIndex()
     {
@@ -78,9 +74,9 @@ class SiteController extends Controller
     }
 
     /**
-     * 登陆页面
+     * 登录页面
      *
-     * @return mixed
+     * @return string
      */
     public function actionLogin()
     {
@@ -93,7 +89,6 @@ class SiteController extends Controller
             return $this->goBack();
         } else {
             $model->password = '';
-
             return $this->render('login', [
                 'model' => $model,
             ]);
@@ -105,15 +100,15 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function actionGuiding()
+    public function actionInstruction()
     {
-        return $this->render('guiding');
+        return $this->render('instruction');
     }
 
     /**
      * 注销操作
      *
-     * @return mixed
+     * @return string
      */
     public function actionLogout()
     {
@@ -125,7 +120,7 @@ class SiteController extends Controller
     /**
      * 关于页面
      *
-     * @return mixed
+     * @return string
      */
     public function actionAbout()
     {
@@ -135,7 +130,7 @@ class SiteController extends Controller
     /**
      * 注册页面
      *
-     * @return mixed
+     * @return string|Response
      * @throws \Exception
      */
     public function actionSignup()
@@ -157,7 +152,7 @@ class SiteController extends Controller
     /**
      * 密码重置请求
      *
-     * @return mixed
+     * @return string|Response
      * @throws \Exception
      */
     public function actionRequestPasswordReset()
@@ -166,7 +161,6 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
                 Yii::$app->session->setFlash('success', '密码重置邮件已发送至你的注册邮箱。');
-
                 return $this->redirect(['login']);
             } else {
                 Yii::$app->session->setFlash('error', '对不起，重置密码出错。请检查你的邮箱地址。');
@@ -182,7 +176,7 @@ class SiteController extends Controller
      * 登录前修改密码
      *
      * @param string $token
-     * @return mixed
+     * @return string|Response
      * @throws BadRequestHttpException
      * @throws \Exception
      */
@@ -196,7 +190,6 @@ class SiteController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
             Yii::$app->session->setFlash('success', '密码修改成功。');
-
             return $this->redirect(['login']);
         }
 
