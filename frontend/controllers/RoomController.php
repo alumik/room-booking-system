@@ -13,11 +13,6 @@ use common\models\Room;
 use frontend\models\RoomSearch;
 use yii\web\Response;
 
-/**
- * @author 钟震宇 <nczzy1997@gmail.com>
- *
- * 前台 房间 控制器
- */
 class RoomController extends Controller
 {
     /**
@@ -49,40 +44,38 @@ class RoomController extends Controller
     /**
      * 查看可预约房间列表
      *
-     * @return mixed
+     * @return string
      */
     public function actionIndex()
     {
         $searchModel = new RoomSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'dataProvider' => $searchModel->search(Yii::$app->request->queryParams)
         ]);
     }
 
     /**
-     * 查看与我的申请冲突的申请列表
+     * 查看该房间详情及与我的申请冲突的申请列表
      *
      * @param integer $id
-     * @param string $s_time_str
-     * @param string $e_time_str
+     * @param string $startTime
+     * @param string $endTime
      * @return string
      * @throws NotFoundHttpException
      */
-    public function actionApprovedApplication($id, $s_time_str, $e_time_str)
+    public function actionView($id, $startTime, $endTime)
     {
         $searchModel = new ApplicationSearch();
-        $searchModel->start_time_picker = $s_time_str;
-        $searchModel->end_time_picker = $e_time_str;
+        $searchModel->start_time_picker = $startTime;
+        $searchModel->end_time_picker = $endTime;
         $searchModel->room_id = $id;
         $searchModel->status = Application::STATUS_APPROVED;
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('approved_application', [
+        return $this->render('view', [
             'model' => $this->findModel($id),
-            'dataProvider' => $dataProvider,
+            'dataProvider' => $searchModel->search(Yii::$app->request->queryParams)
         ]);
     }
 
@@ -91,16 +84,16 @@ class RoomController extends Controller
      * 如果操作成功转到详情页
      *
      * @param integer $id
-     * @param integer $s_time
-     * @param integer $e_time
+     * @param integer $startTime
+     * @param integer $endTime
      * @return string|Response
      */
-    public function actionOrder($id, $s_time, $e_time)
+    public function actionOrder($id, $startTime, $endTime)
     {
         $model = new Application();
         $model->room_id = $id;
-        $model->start_time = $s_time;
-        $model->end_time = $e_time;
+        $model->start_time = $startTime;
+        $model->end_time = $endTime;
         $model->status = Application::STATUS_PENDING;
         $model->applicant_id = Yii::$app->user->identity->getId();
 
@@ -118,8 +111,8 @@ class RoomController extends Controller
      * 如果未找到模型，抛出404异常
      *
      * @param integer $id
-     * @return Room the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
+     * @return Room
+     * @throws NotFoundHttpException
      */
     protected function findModel($id)
     {

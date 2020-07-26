@@ -13,7 +13,7 @@ use yii\grid\GridView;
 
 /* @author 钟震宇 <nczzy1997@gmail.com> */
 
-$this->title = '分配详情：' . $model->room_number;
+$this->title = $model->room_number;
 $this->params['breadcrumbs'][] = ['label' => '预约房间', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $model->room_number;
 ?>
@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $model->room_number;
         ],
     ]) ?>
 
-    <p><strong>该房间与你设定时间相冲突且已批准的申请</strong></p>
+    <p><strong>与你申请时间相冲突且已批准的申请</strong></p>
 
     <div class="scrollable">
         <?= GridView::widget([

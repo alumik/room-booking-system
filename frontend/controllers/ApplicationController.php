@@ -13,11 +13,6 @@ use common\models\ApplicationSearch;
 use common\models\Room;
 use yii\web\Response;
 
-/**
- * @author 钟震宇 <nczzy1997@gmail.com>
- *
- * 前台 申请 控制器
- */
 class ApplicationController extends Controller
 {
     /**
@@ -49,13 +44,13 @@ class ApplicationController extends Controller
     /**
      * 列出“我的预约”
      *
-     * @return mixed
+     * @return string
      */
     public function actionIndex()
     {
         $searchModel = new ApplicationSearch();
-        $searchModel->start_time_picker = date('Y-m-d H:i', time());
-        $searchModel->end_time_picker = date('Y-m-d H:i', time() + 3600 * 24 *30);
+        $searchModel->start_time_picker = date('Y-m-d H:i');
+        $searchModel->end_time_picker = date('Y-m-d H:i', time() + 3600 * 24 * 30);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->query->andFilterWhere(['applicant_id' => Yii::$app->user->identity->getId()]);
 
@@ -83,15 +78,14 @@ class ApplicationController extends Controller
      * 我的预约申请详情
      *
      * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * @return string
+     * @throws NotFoundHttpException
      */
     public function actionView($id)
     {
         $model = $this->findModel($id);
-        $conflict_id = $model->getConflictId();
 
-        if (!empty($conflict_id) && $model->status == Application::STATUS_PENDING && $model->canUpdate()) {
+        if (!empty($model->getConflictId()) && $model->status == Application::STATUS_PENDING && $model->canUpdate()) {
             Yii::$app->session->setFlash('error', "该申请与该房间某些已批准的申请冲突，请考虑修改并重新提交申请或与老师进行协调。");
         }
 
@@ -109,8 +103,8 @@ class ApplicationController extends Controller
      * 如果操作成功转到详情页
      *
      * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * @return Response|string
+     * @throws NotFoundHttpException
      */
     public function actionUpdate($id)
     {
@@ -141,8 +135,8 @@ class ApplicationController extends Controller
      * @param integer $id
      * @return Response
      * @throws NotFoundHttpException
-     * @throws \Throwable
      * @throws StaleObjectException
+     * @throws \Throwable
      */
     public function actionDelete($id)
     {

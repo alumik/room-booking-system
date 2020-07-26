@@ -70,7 +70,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         if ($a_status == '已分配') {
                             return Html::a(
                                 $a_status,
-                                ['approved-application', 'id' => $model->id, 's_time_str' => $s_time_str, 'e_time_str' => $e_time_str]
+                                ['view', 'id' => $model->id, 'startTime' => $s_time_str, 'endTime' => $e_time_str]
                             );
                         }
 
@@ -100,7 +100,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'data-pjax' => '0',
                             ];
 
-                            $url = Url::to(['order', 'id' => $model->id, 's_time' => $s_time, 'e_time' => $e_time]);
+                            $url = Url::to(['order', 'id' => $model->id, 'startTime' => $s_time, 'endTime' => $e_time]);
 
                             return Html::a('<span class="btn btn-primary">预约</span>', $url, $options);
                         }
