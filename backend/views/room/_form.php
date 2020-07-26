@@ -1,5 +1,7 @@
 <?php
 
+use common\models\Campus;
+use common\models\RoomType;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -17,7 +19,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'room_number')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'type')->dropDownList(
-        \common\models\RoomType::find()
+        RoomType::find()
             ->select(['type_name', 'id'])
             ->orderBy('id')
             ->indexBy('id')
@@ -25,7 +27,7 @@ use yii\widgets\ActiveForm;
         ['prompt' => '请选择房间类型']) ?>
 
     <?= $form->field($model, 'campus')->dropDownList(
-        \common\models\Campus::find()
+        Campus::find()
             ->select(['campus_name', 'id'])
             ->orderBy('id')
             ->indexBy('id')

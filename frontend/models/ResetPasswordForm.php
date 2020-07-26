@@ -17,7 +17,7 @@ class ResetPasswordForm extends Model
     public $password2;
 
     /**
-     * @var \common\models\User
+     * @var User
      */
     private $_user;
 
@@ -26,7 +26,7 @@ class ResetPasswordForm extends Model
      *
      * @param string $token
      * @param array $config
-     * @throws \yii\base\InvalidArgumentException 如果密码重置密钥无效
+     * @throws InvalidArgumentException 如果密码重置密钥无效
      */
     public function __construct($token, $config = [])
     {

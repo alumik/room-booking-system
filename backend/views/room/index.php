@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'value' => 'statusStr',
                     'filter' => Room::getAllStatus(),
                     'contentOptions' => function($model) {
-                        /* @var $model \common\models\Room */
+                        /* @var $model Room */
                         $options = $model->getStatusBg();
                         $options['width'] = '80px';
                         return $options;
@@ -58,7 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'class' => 'yii\grid\ActionColumn',
                     'contentOptions' => ['width' => '80px', 'align' => 'center'],
-                    'template' => '{view} {update} {changestatus}',
+                    'template' => '{view} {update} {change-status}',
                     'buttons' => [
                         'update' => function($url, $model, $key)
                         {
@@ -69,7 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             ];
                             return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, $options);
                         },
-                        'changestatus' => function($url, $model, $key)
+                        'change-status' => function($url, $model, $key)
                         {
                             $options = [
                                 'title' => '切换状态',

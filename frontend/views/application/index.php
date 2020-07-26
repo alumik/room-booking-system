@@ -80,7 +80,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'value' => 'statusStr',
                     'filter' => Application::getAllStatus(),
                     'contentOptions' => function($model) {
-                        /* @var $model \common\models\Application */
+                        /* @var $model Application */
                         $options = $model->getStatusBg();
                         $options['width'] = '80px';
                         return $options;
@@ -90,7 +90,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'class' => 'yii\grid\ActionColumn',
                     'contentOptions' => function($model) {
-                        /* @var $model \common\models\Application */
+                        /* @var $model Application */
                         return $model->getActionBg();
                     },
                     'template' => '{view} {print}',

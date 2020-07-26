@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = ['label' => '我的账号', 'url' => ['view']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="user-resetpwd">
+<div class="user-reset-password">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

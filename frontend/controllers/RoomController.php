@@ -11,6 +11,7 @@ use common\models\ApplicationSearch;
 use common\models\Application;
 use common\models\Room;
 use frontend\models\RoomSearch;
+use yii\web\Response;
 
 /**
  * @author 钟震宇 <nczzy1997@gmail.com>
@@ -26,17 +27,17 @@ class RoomController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
             ],
             'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['index', 'approvedapplication', 'order'],
+                'class' => AccessControl::class,
+                'only' => ['index', 'approved-application', 'order'],
                 'rules' => [
                     [
-                        'actions' => ['index', 'approvedapplication', 'order'],
+                        'actions' => ['index', 'approved-application', 'order'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -70,7 +71,7 @@ class RoomController extends Controller
      * @return string
      * @throws NotFoundHttpException
      */
-    public function actionApprovedapplication($id, $s_time_str, $e_time_str)
+    public function actionApprovedApplication($id, $s_time_str, $e_time_str)
     {
         $searchModel = new ApplicationSearch();
         $searchModel->start_time_picker = $s_time_str;
@@ -92,7 +93,7 @@ class RoomController extends Controller
      * @param integer $id
      * @param integer $s_time
      * @param integer $e_time
-     * @return string|\yii\web\Response
+     * @return string|Response
      */
     public function actionOrder($id, $s_time, $e_time)
     {

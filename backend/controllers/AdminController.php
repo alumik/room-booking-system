@@ -29,7 +29,7 @@ class AdminController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -113,7 +113,7 @@ class AdminController extends Controller
      * @throws ForbiddenHttpException
      * @throws \Exception
      */
-    public function actionResetpwd($id)
+    public function actionResetPassword($id)
     {
         if (!Yii::$app->user->can('manageAdmin')) {
             throw new ForbiddenHttpException('对不起，你没有进行该操作的权限。');
@@ -127,7 +127,7 @@ class AdminController extends Controller
             }
         }
 
-        return $this->render('resetpwd', [
+        return $this->render('reset_password', [
             'model' => $model,
         ]);
     }
@@ -244,7 +244,7 @@ class AdminController extends Controller
      * @return string
      * @throws ForbiddenHttpException
      */
-    public function actionViewprivilege() {
+    public function actionViewPrivilege() {
         if (!Yii::$app->user->can('manageAdmin')) {
             throw new ForbiddenHttpException('对不起，你没有进行该操作的权限。');
         }

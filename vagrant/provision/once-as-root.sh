@@ -56,7 +56,7 @@ info "Enabling site configuration"
 ln -s /app/vagrant/nginx/app.conf /etc/nginx/sites-enabled/app.conf
 echo "Done!"
 
-info "Initailize databases for MySQL"
+info "Initialize databases for MySQL"
 mysql -uroot <<< "CREATE DATABASE yii2advanced"
 mysql -uroot <<< "CREATE DATABASE yii2advanced_test"
 echo "Done!"

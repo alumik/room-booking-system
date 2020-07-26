@@ -12,6 +12,7 @@ use common\models\Room;
 use common\models\Application;
 use common\models\ApplicationSearch;
 use backend\models\RoomSearch;
+use yii\web\Response;
 
 /**
  * @author 钟震宇 <nczzy1997@gmail.com>
@@ -27,7 +28,7 @@ class RoomController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -159,11 +160,11 @@ class RoomController extends Controller
      * 切换房间状态
      *
      * @param string $id
-     * @return \yii\web\Response
+     * @return Response
      * @throws ForbiddenHttpException
      * @throws NotFoundHttpException
      */
-    public function actionChangestatus($id)
+    public function actionChangeStatus($id)
     {
         if (!Yii::$app->user->can('manageRoom')) {
             throw new ForbiddenHttpException('对不起，你没有进行该操作的权限。');

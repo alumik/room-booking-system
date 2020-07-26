@@ -70,7 +70,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         if ($a_status == '已分配') {
                             return Html::a(
                                 $a_status,
-                                ['approvedapplication', 'id' => $model->id, 's_time_str' => $s_time_str, 'e_time_str' => $e_time_str]
+                                ['approved-application', 'id' => $model->id, 's_time_str' => $s_time_str, 'e_time_str' => $e_time_str]
                             );
                         }
 

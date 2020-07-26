@@ -1,11 +1,12 @@
 <?php
 
+use common\models\UserLoginForm;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
-/* @var $model \common\models\UserLoginForm */
+/* @var $model UserLoginForm */
 
 /* @author 钟震宇 <nczzy1997@gmail.com> */
 
@@ -15,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="site-login">
 
-    <!-- delevopment stage only -->
+    <!-- development stage only -->
     <div class="alert alert-info">
         <?= nl2br(Html::encode('提示：由于本网站仍处于开发阶段，并未接入学校数据库。新用户请在注册界面手动注册后使用。')) ?>
     </div>

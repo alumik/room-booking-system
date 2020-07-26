@@ -8,6 +8,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\AccessControl;
 use common\models\User;
 use frontend\models\LoginResetPasswordForm;
+use yii\web\Response;
 
 /**
  * @author 钟震宇 <nczzy1997@gmail.com>
@@ -23,11 +24,11 @@ class UserController extends Controller
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['view', 'update', 'resetpwd'],
+                'class' => AccessControl::class,
+                'only' => ['view', 'update', 'reset-password'],
                 'rules' => [
                     [
-                        'actions' => ['view', 'update', 'resetpwd'],
+                        'actions' => ['view', 'update', 'reset-password'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -74,10 +75,10 @@ class UserController extends Controller
      * 登录后修改密码
      *
      * @param integer $id
-     * @return string|\yii\web\Response
+     * @return string|Response
      * @throws \Exception
      */
-    public function actionResetpwd($id)
+    public function actionResetPassword($id)
     {
         $model = new LoginResetPasswordForm();
 
@@ -87,7 +88,7 @@ class UserController extends Controller
             }
         }
 
-        return $this->render('resetpwd', [
+        return $this->render('reset_password', [
             'model' => $model,
         ]);
     }

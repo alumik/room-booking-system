@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('修改信息', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('切换可用状态', ['changestatus', 'id' => $model->id], [
+        <?= Html::a('切换可用状态', ['change-status', 'id' => $model->id], [
             'class' => 'btn btn-primary',
             'data' => [
                 'confirm' => '你确定要切换该房间的可用状态吗？',

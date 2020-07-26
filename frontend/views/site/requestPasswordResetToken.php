@@ -1,11 +1,12 @@
 <?php
 
+use frontend\models\PasswordResetRequestForm;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
-/* @var $model \frontend\models\PasswordResetRequestForm */
+/* @var $model PasswordResetRequestForm */
 
 /* @author 钟震宇 <nczzy1997@gmail.com> */
 

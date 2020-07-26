@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use yii\db\ActiveQuery;
 use yii\db\Query;
 use yii\db\ActiveRecord;
 
@@ -44,8 +45,8 @@ class Room extends ActiveRecord
             ['available', 'default', 'value' => self::STATUS_AVAILABLE],
             ['available', 'in', 'range' => [self::STATUS_AVAILABLE, self::STATUS_UNAVAILABLE]],
             [['room_number'], 'string', 'max' => 10],
-            [['type'], 'exist', 'skipOnError' => true, 'targetClass' => RoomType::className(), 'targetAttribute' => ['type' => 'id']],
-            [['campus'], 'exist', 'skipOnError' => true, 'targetClass' => Campus::className(), 'targetAttribute' => ['campus' => 'id']],
+            [['type'], 'exist', 'skipOnError' => true, 'targetClass' => RoomType::class, 'targetAttribute' => ['type' => 'id']],
+            [['campus'], 'exist', 'skipOnError' => true, 'targetClass' => Campus::class, 'targetAttribute' => ['campus' => 'id']],
         ];
     }
 
@@ -64,27 +65,27 @@ class Room extends ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getApplications()
     {
-        return $this->hasMany(Application::className(), ['room_id' => 'id']);
+        return $this->hasMany(Application::class, ['room_id' => 'id']);
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getType0()
     {
-        return $this->hasOne(RoomType::className(), ['id' => 'type']);
+        return $this->hasOne(RoomType::class, ['id' => 'type']);
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getCampus0()
     {
-        return $this->hasOne(Campus::className(), ['id' => 'campus']);
+        return $this->hasOne(Campus::class, ['id' => 'campus']);
     }
 
     /**
@@ -205,15 +206,13 @@ class Room extends ActiveRecord
         $s_time = strtotime($s_time_str);
         $e_time = strtotime($e_time_str);
 
-        $overlap = (new Query())
+        return (new Query())
             ->select('id')
             ->from('application')
             ->where("not (start_time >= $e_time or end_time <= $s_time)")
             ->andWhere(['status' => Application::STATUS_PENDING])
             ->andWhere(['room_id' => $this->id])
             ->count();
-
-        return $overlap;
     }
 
     /**

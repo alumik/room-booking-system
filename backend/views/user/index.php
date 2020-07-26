@@ -51,9 +51,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'class' => 'yii\grid\ActionColumn',
                     'contentOptions' => ['align' => 'center'],
-                    'template' => '{changestatus}',
+                    'template' => '{change-status}',
                     'buttons' => [
-                        'changestatus' => function($url, $model, $key)
+                        'change-status' => function($url, $model, $key)
                         {
                             if ($model->status == User::STATUS_ACTIVE) {
                                 $options = [

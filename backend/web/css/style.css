@@ -10,10 +10,10 @@
 body {
 	background: #fff;
 	color: #666666;
-	font-family: "微软雅黑";
+	font-family: "微软雅黑", sans-serif;
 }
 h1, h2, h3, h4, h5, h6 {
-	font-family: "微软雅黑";
+	font-family: "微软雅黑", sans-serif;
 	font-weight: 400;
 	margin: 0 0 20px 0;
 	padding: 0;
@@ -104,7 +104,7 @@ h1, h2, h3, h4, h5, h6 {
 	display: inline-block;
 }
 #hero .actions a {
-	font-family: "微软雅黑";
+	font-family: "微软雅黑", sans-serif;
 	text-transform: uppercase;
 	font-weight: 500;
 	font-size: 16px;
@@ -135,7 +135,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 .section-title {
 	font-size: 32px;
-	color: #111;
 	text-transform: uppercase;
 	text-align: center;
 	font-weight: 700;
@@ -149,8 +148,7 @@ h1, h2, h3, h4, h5, h6 {
 	width: 50px;
 	height: 3px;
 	background: #7a0c6e;
-	margin: 0 auto;
-	margin-bottom: 20px;
+	margin: 0 auto 20px;
 }
 #guiding {
 	display: table;

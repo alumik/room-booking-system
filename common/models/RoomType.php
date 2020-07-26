@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
 /**
@@ -48,10 +49,10 @@ class RoomType extends ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getRooms()
     {
-        return $this->hasMany(Room::className(), ['type' => 'id']);
+        return $this->hasMany(Room::class, ['type' => 'id']);
     }
 }

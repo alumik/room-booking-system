@@ -46,7 +46,7 @@ class Admin extends ActiveRecord implements IdentityInterface
     public function behaviors()
     {
         return [
-            TimestampBehavior::className(),
+            TimestampBehavior::class,
         ];
     }
 
@@ -224,7 +224,7 @@ class Admin extends ActiveRecord implements IdentityInterface
     /**
      * 获取管理员角色名
      *
-     * @return array
+     * @string array
      */
     public function getRolesDescription() {
         $roles = (new Query())->select(['description'])

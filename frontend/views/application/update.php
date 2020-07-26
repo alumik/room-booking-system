@@ -1,8 +1,5 @@
 <?php
 
-/** @noinspection PhpUndefinedNamespaceInspection */
-/** @noinspection PhpUndefinedClassInspection */
-
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\datetime\DateTimePicker;
@@ -33,7 +30,7 @@ $this->params['breadcrumbs'][] = '修改';
             ->label('组织名（个人申请可不填）')
         ?>
 
-        <?= $form->field($model, 'start_time')->widget(DateTimePicker::classname(), [
+        <?= $form->field($model, 'start_time')->widget(DateTimePicker::class, [
             'options' => ['placeholder' => '选择开始时间'],
             'readonly' => true,
             'pluginOptions' => [
@@ -45,7 +42,7 @@ $this->params['breadcrumbs'][] = '修改';
             ]
         ]); ?>
 
-        <?= $form->field($model, 'end_time')->widget(DateTimePicker::classname(), [
+        <?= $form->field($model, 'end_time')->widget(DateTimePicker::class, [
             'options' => ['placeholder' => '选择结束时间'],
             'readonly' => true,
             'pluginOptions' => [

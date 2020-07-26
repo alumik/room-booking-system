@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = ['label' => '管理员管理', 'url' => ['index
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="admin-resetpwd">
+<div class="admin-reset-password">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

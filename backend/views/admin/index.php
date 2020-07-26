@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('新增管理员', ['create'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a('权限对照表', ['viewprivilege'], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('权限对照表', ['view-privilege'], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <div class="scrollable">
@@ -72,7 +72,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'class' => 'yii\grid\ActionColumn',
                     'contentOptions' => ['align' => 'center'],
-                    'template' => '{view} {update} {resetpwd} {privilege}',
+                    'template' => '{view} {update} {reset-password} {privilege}',
                     'buttons' => [
                         'update' => function($url, $model, $key)
                         {
@@ -83,7 +83,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             ];
                             return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, $options);
                         },
-                        'resetpwd' => function($url, $model, $key)
+                        'reset-password' => function($url, $model, $key)
                         {
                             $options = [
                                 'title' => '修改密码',

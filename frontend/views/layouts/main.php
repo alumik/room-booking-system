@@ -5,11 +5,12 @@
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use yii\web\View;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
 use frontend\assets\AppAsset;
 
-/* @var $this \yii\web\View */
+/* @var $this View */
 /* @var $content string */
 
 /* @author 钟震宇 <nczzy1997@gmail.com> */

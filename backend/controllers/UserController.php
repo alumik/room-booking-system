@@ -24,7 +24,7 @@ class UserController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -62,7 +62,7 @@ class UserController extends Controller
      * @throws ForbiddenHttpException
      * @throws NotFoundHttpException
      */
-    public function actionChangestatus($id)
+    public function actionChangeStatus($id)
     {
         if (!Yii::$app->user->can('manageStudent')) {
             throw new ForbiddenHttpException('对不起，你没有进行该操作的权限。');

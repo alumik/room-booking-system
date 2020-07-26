@@ -2,6 +2,9 @@
 
 namespace app\models;
 
+use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
+
 /**
  * @author 钟震宇 <nczzy1997@gmail.com>
  *
@@ -13,7 +16,7 @@ namespace app\models;
  *
  * @property AuthItem $itemName
  */
-class AuthAssignment extends \yii\db\ActiveRecord
+class AuthAssignment extends ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -33,7 +36,7 @@ class AuthAssignment extends \yii\db\ActiveRecord
             [['created_at'], 'integer'],
             [['item_name', 'user_id'], 'string', 'max' => 64],
             [['item_name', 'user_id'], 'unique', 'targetAttribute' => ['item_name', 'user_id']],
-            [['item_name'], 'exist', 'skipOnError' => true, 'targetClass' => AuthItem::className(), 'targetAttribute' => ['item_name' => 'name']],
+            [['item_name'], 'exist', 'skipOnError' => true, 'targetClass' => AuthItem::class, 'targetAttribute' => ['item_name' => 'name']],
         ];
     }
 
@@ -50,10 +53,10 @@ class AuthAssignment extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getItemName()
     {
-        return $this->hasOne(AuthItem::className(), ['name' => 'item_name']);
+        return $this->hasOne(AuthItem::class, ['name' => 'item_name']);
     }
 }

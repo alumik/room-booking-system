@@ -1,11 +1,12 @@
 <?php
 
+use common\models\UserLoginForm;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
-/* @var $model \common\models\UserLoginForm */
+/* @var $model UserLoginForm */
 
 /* @author 钟震宇 <nczzy1997@gmail.com> */
 

@@ -55,6 +55,6 @@ class ResetPasswordForm extends Model
         $admin = Admin::findOne($id);
         $admin->setPassword($this->password);
         
-        return $admin->save() ? true : false;
+        return $admin->save();
     }
 }

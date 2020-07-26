@@ -46,7 +46,6 @@
     5.2. 修改 *common/config/main-local.php*，写入数据库配置信息和邮箱配置信息，例如：
 
     ```php
-    <?php
     return [
         'components' => [
             'db' => [

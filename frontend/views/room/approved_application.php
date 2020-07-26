@@ -76,9 +76,9 @@ $this->params['breadcrumbs'][] = $model->room_number;
                     'class' => 'yii\grid\ActionColumn',
                     'controller' => 'application',
                     'contentOptions' => ['align' => 'center'],
-                    'template' => '{applicationdetail}',
+                    'template' => '{conflict-detail}',
                     'buttons' => [
-                        'applicationdetail' => function($url, $model, $key)
+                        'conflict-detail' => function($url, $model, $key)
                         {
                             $options = [
                                 'title' => '查看详情',

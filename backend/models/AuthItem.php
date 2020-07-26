@@ -3,6 +3,9 @@
 namespace app\models;
 
 use Yii;
+use yii\base\InvalidConfigException;
+use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 
 /**
  * @author 钟震宇 <nczzy1997@gmail.com>
@@ -23,7 +26,7 @@ use Yii;
  * @property AuthItem[] $children
  * @property AuthItem[] $parents
  */
-class AuthItem extends \yii\db\ActiveRecord
+class AuthItem extends ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -65,43 +68,45 @@ class AuthItem extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getAuthAssignments()
     {
-        return $this->hasMany(AuthAssignment::className(), ['item_name' => 'name']);
+        return $this->hasMany(AuthAssignment::class, ['item_name' => 'name']);
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getAuthItemChildren()
     {
-        return $this->hasMany(AuthItemChild::className(), ['parent' => 'name']);
+        return $this->hasMany(AuthItemChild::class, ['parent' => 'name']);
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getAuthItemChildren0()
     {
-        return $this->hasMany(AuthItemChild::className(), ['child' => 'name']);
+        return $this->hasMany(AuthItemChild::class, ['child' => 'name']);
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
+     * @throws InvalidConfigException
      */
     public function getChildren()
     {
-        return $this->hasMany(AuthItem::className(), ['name' => 'child'])->viaTable('auth_item_child', ['parent' => 'name']);
+        return $this->hasMany(AuthItem::class, ['name' => 'child'])->viaTable('auth_item_child', ['parent' => 'name']);
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
+     * @throws InvalidConfigException
      */
     public function getParents()
     {
-        return $this->hasMany(AuthItem::className(), ['name' => 'parent'])->viaTable('auth_item_child', ['child' => 'name']);
+        return $this->hasMany(AuthItem::class, ['name' => 'parent'])->viaTable('auth_item_child', ['child' => 'name']);
     }
 
     /**

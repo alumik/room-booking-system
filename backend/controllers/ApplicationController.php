@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use common\models\Application;
 use common\models\ApplicationSearch;
+use yii\web\Response;
 
 /**
  * @author 钟震宇 <nczzy1997@gmail.com>
@@ -25,7 +26,7 @@ class ApplicationController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -92,7 +93,7 @@ class ApplicationController extends Controller
      * 批准一条申请
      *
      * @param integer $id
-     * @return string|\yii\web\Response
+     * @return string|Response
      * @throws NotFoundHttpException
      * @throws ForbiddenHttpException
      */
@@ -119,7 +120,7 @@ class ApplicationController extends Controller
      * 拒绝一条申请
      *
      * @param integer $id
-     * @return \yii\web\Response
+     * @return Response
      * @throws ForbiddenHttpException
      * @throws NotFoundHttpException
      */

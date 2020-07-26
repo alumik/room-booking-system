@@ -20,11 +20,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('修改信息', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('修改密码', ['resetpwd', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('修改密码', ['reset-password', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <?= DetailView::widget([
-        'template' => "<tr><th width='20%'>{label}</th><td width='80%'>{value}</td></tr>",
+        'template' => "<tr><th style='width: 20%'>{label}</th><td style='width: 80%'>{value}</td></tr>",
         'model' => $model,
         'attributes' => [
             'student_id',

@@ -55,6 +55,6 @@ class LoginResetPasswordForm extends Model
         $user = User::findOne($id);
         $user->setPassword($this->password);
         
-        return $user->save() ? true : false;
+        return $user->save();
     }
 }

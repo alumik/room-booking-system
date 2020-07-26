@@ -2,7 +2,7 @@
 
 /** @noinspection PhpUnhandledExceptionInspection */
 
-/* @var $this \yii\web\View */
+/* @var $this View */
 /* @var $content string */
 
 /* @author 钟震宇 <nczzy1997@gmail.com> */
@@ -10,6 +10,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use yii\web\View;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
 use common\models\Application;

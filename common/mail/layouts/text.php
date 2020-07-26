@@ -1,9 +1,10 @@
 <?php
 
-use yii\helpers\Html;
+use yii\mail\MessageInterface;
+use yii\web\View;
 
-/** @var \yii\web\View $this view component instance */
-/** @var \yii\mail\MessageInterface $message the message being composed */
+/** @var View $this view component instance */
+/** @var MessageInterface $message the message being composed */
 /** @var string $content main view render result */
 ?>
 

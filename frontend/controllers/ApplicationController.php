@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use Yii;
+use yii\db\StaleObjectException;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -10,6 +11,7 @@ use yii\filters\AccessControl;
 use common\models\Application;
 use common\models\ApplicationSearch;
 use common\models\Room;
+use yii\web\Response;
 
 /**
  * @author 钟震宇 <nczzy1997@gmail.com>
@@ -25,17 +27,17 @@ class ApplicationController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
             ],
             'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['view', 'index', 'update', 'delete', 'applicationdetail'],
+                'class' => AccessControl::class,
+                'only' => ['view', 'index', 'update', 'delete', 'conflict-detail'],
                 'rules' => [
                     [
-                        'actions' => ['view', 'index', 'update', 'delete', 'applicationdetail'],
+                        'actions' => ['view', 'index', 'update', 'delete', 'conflict-detail'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -70,9 +72,9 @@ class ApplicationController extends Controller
      * @return string
      * @throws NotFoundHttpException
      */
-    public function actionApplicationdetail($id)
+    public function actionConflictDetail($id)
     {
-        return $this->render('application_detail', [
+        return $this->render('conflict_detail', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -137,10 +139,10 @@ class ApplicationController extends Controller
      * 如果操作成功转到我的申请列表
      *
      * @param integer $id
-     * @return \yii\web\Response
+     * @return Response
      * @throws NotFoundHttpException
      * @throws \Throwable
-     * @throws \yii\db\StaleObjectException
+     * @throws StaleObjectException
      */
     public function actionDelete($id)
     {

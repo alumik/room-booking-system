@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use yii\db\ActiveQuery;
 use yii\db\Query;
 use yii\db\ActiveRecord;
 
@@ -61,8 +62,8 @@ class Application extends ActiveRecord
             ['status', 'default', 'value' => self::STATUS_PENDING],
             ['status', 'in', 'range' => [self::STATUS_PENDING, self::STATUS_APPROVED, self::STATUS_REJECTED]],
 
-            [['applicant_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['applicant_id' => 'id']],
-            [['room_id'], 'exist', 'skipOnError' => true, 'targetClass' => Room::className(), 'targetAttribute' => ['room_id' => 'id']],
+            [['applicant_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['applicant_id' => 'id']],
+            [['room_id'], 'exist', 'skipOnError' => true, 'targetClass' => Room::class, 'targetAttribute' => ['room_id' => 'id']],
         ];
     }
 
@@ -123,19 +124,19 @@ class Application extends ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getApplicant()
     {
-        return $this->hasOne(User::className(), ['id' => 'applicant_id']);
+        return $this->hasOne(User::class, ['id' => 'applicant_id']);
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getRoom()
     {
-        return $this->hasOne(Room::className(), ['id' => 'room_id']);
+        return $this->hasOne(Room::class, ['id' => 'room_id']);
     }
 
     /**
