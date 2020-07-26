@@ -73,11 +73,12 @@ class ApplicationController extends Controller
         }
 
         $model = $this->findModel($id);
-        $conflict_id = $model->getConflictId();
+        $conflictId = $model->getConflictId();
 
-        if (!empty($conflict_id) && $model->status == Application::STATUS_PENDING && $model->canUpdate()) {
-            $conflict_id_str = implode(', ', $conflict_id);
-            Yii::$app->session->setFlash('error', '该申请与编号为 ' . $conflict_id_str . ' 的申请冲突，请检查冲突情况。');
+        if (!empty($conflictId) && $model->status == Application::STATUS_PENDING && $model->canUpdate()) {
+            Yii::$app->session->setFlash('error', '该申请与编号为 '
+                . implode(', ', $conflictId)
+                . ' 的申请冲突，请检查冲突情况。');
         }
 
         if ($model->room->available == Room::STATUS_UNAVAILABLE && $model->canUpdate()) {
@@ -109,8 +110,9 @@ class ApplicationController extends Controller
         try {
             $model->save();
         } catch (yii\db\Exception $e) {
-            $conflict_id_str = implode(', ', $model->getConflictId());
-            Yii::$app->session->setFlash('error', '操作失败。你将批准的申请与编号为 ' . $conflict_id_str . ' 的申请冲突，请检查冲突情况。');
+            Yii::$app->session->setFlash('error', '操作失败。你将批准的申请与编号为 '
+                . implode(', ', $model->getConflictId())
+                . ' 的申请冲突，请检查冲突情况。');
         }
 
         return $this->redirect(['index']);

@@ -2,7 +2,6 @@
 
 namespace app\models;
 
-use Yii;
 use yii\base\InvalidConfigException;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
@@ -114,7 +113,8 @@ class AuthItem extends ActiveRecord
      *
      * @return array
      */
-    public function getPrivileges() {
+    public function getPrivileges()
+    {
         $privileges = AuthItemChild::find()->select(['child'])
             ->where(['auth_item_child.parent' => $this->name])
             ->all();
@@ -129,56 +129,62 @@ class AuthItem extends ActiveRecord
     }
 
     /**
-     * 获取priManageRoom
+     * 获取 priManageRoom
      *
      * @return string
      */
-    public function getPriManageRoom() {
+    public function getPriManageRoom()
+    {
         return in_array('manageRoom', $this->getPrivileges()) ? '●' : '-';
     }
 
     /**
-     * 获取priManageAdmin
+     * 获取 priManageAdmin
      *
      * @return string
      */
-    public function getPriManageAdmin() {
+    public function getPriManageAdmin()
+    {
         return in_array('manageAdmin', $this->getPrivileges()) ? '●' : '-';
     }
 
     /**
-     * 获取priManageStudent
+     * 获取 priManageStudent
      *
      * @return string
      */
-    public function getPriManageStudent() {
+    public function getPriManageStudent()
+    {
         return in_array('manageStudent', $this->getPrivileges()) ? '●' : '-';
     }
 
     /**
-     * 获取priViewAdminList
+     * 获取 priViewAdminList
      *
      * @return string
      */
-    public function getPriViewAdminList() {
+    public function getPriViewAdminList()
+    {
         return in_array('viewAdminList', $this->getPrivileges()) ? '●' : '-';
     }
 
     /**
-     * 获取priViewStudentList
+     * 获取 priViewStudentList
      *
      * @return string
      */
-    public function getPriViewStudentList() {
+    public function getPriViewStudentList()
+    {
         return in_array('viewStudentList', $this->getPrivileges()) ? '●' : '-';
     }
 
     /**
-     * 获取priManagePermission
+     * 获取 priManagePermission
      *
      * @return string
      */
-    public function getPriManagePermission() {
+    public function getPriManagePermission()
+    {
         return in_array('managePermission', $this->getPrivileges()) ? '●' : '-';
     }
 }

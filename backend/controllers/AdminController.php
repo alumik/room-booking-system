@@ -127,7 +127,7 @@ class AdminController extends Controller
             }
         }
 
-        return $this->render('reset_password', [
+        return $this->render('resetPassword', [
             'model' => $model,
         ]);
     }
@@ -244,7 +244,8 @@ class AdminController extends Controller
      * @return string
      * @throws ForbiddenHttpException
      */
-    public function actionViewPrivilege() {
+    public function actionViewPrivilege()
+    {
         if (!Yii::$app->user->can('manageAdmin')) {
             throw new ForbiddenHttpException('对不起，你没有进行该操作的权限。');
         }
@@ -252,7 +253,7 @@ class AdminController extends Controller
         $searchModel = new AuthItemSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('view_privilege', [
+        return $this->render('viewPrivilege', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
