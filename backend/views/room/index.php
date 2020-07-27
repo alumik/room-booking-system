@@ -1,8 +1,5 @@
 <?php
 
-/** @noinspection PhpUnusedParameterInspection */
-/** @noinspection PhpUnhandledExceptionInspection */
-
 use yii\helpers\Html;
 use yii\grid\GridView;
 use common\models\Room;
@@ -11,20 +8,15 @@ use common\models\Room;
 /* @var $searchModel backend\models\RoomSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-/* @author 钟震宇 <nczzy1997@gmail.com> */
-
 $this->title = '房间管理';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="room-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
+    <h1><?= Html::encode($this->title); ?></h1>
     <p>
-        <?= Html::a('新增房间', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('新增房间', ['create'], ['class' => 'btn btn-success']); ?>
     </p>
-
     <div class="scrollable col-lg-9 row">
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
@@ -48,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute' => 'available',
                     'value' => 'statusStr',
                     'filter' => Room::getAllStatus(),
-                    'contentOptions' => function($model) {
+                    'contentOptions' => function ($model) {
                         /* @var $model Room */
                         $options = $model->getStatusBg();
                         $options['width'] = '80px';
@@ -60,8 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'contentOptions' => ['width' => '80px', 'align' => 'center'],
                     'template' => '{view} {update} {change-status}',
                     'buttons' => [
-                        'update' => function($url, $model, $key)
-                        {
+                        'update' => function ($url) {
                             $options = [
                                 'title' => '修改信息',
                                 'aria-label' => '修改信息',
@@ -69,8 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             ];
                             return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, $options);
                         },
-                        'change-status' => function($url, $model, $key)
-                        {
+                        'change-status' => function ($url) {
                             $options = [
                                 'title' => '切换状态',
                                 'aria-label' => '切换状态',
@@ -85,5 +75,4 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]); ?>
     </div>
-
 </div>

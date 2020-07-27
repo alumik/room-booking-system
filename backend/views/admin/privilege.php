@@ -8,10 +8,10 @@ use yii\widgets\ActiveForm;
 /* @var $roles array */
 /* @var $allRoles array */
 
-$this->title = '修改权限';
+$this->title = '修改管理员权限';
 $this->params['breadcrumbs'][] = ['label' => '管理员管理', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->admin_id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = '修改权限';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="admin-privilege">

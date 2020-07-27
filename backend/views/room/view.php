@@ -1,8 +1,5 @@
 <?php
 
-/** @noinspection PhpUnusedParameterInspection */
-/** @noinspection PhpUnhandledExceptionInspection */
-
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\grid\GridView;
@@ -11,35 +8,30 @@ use yii\grid\GridView;
 /* @var $model common\models\Room */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-/* @author 钟震宇 <nczzy1997@gmail.com> */
-
-$this->title = $model->room_number;
+$this->title = $model->campus0->campus_name . ' ' . $model->room_number;
 $this->params['breadcrumbs'][] = ['label' => '房间管理', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = $model->id;
 ?>
 
 <div class="room-view">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
+    <h1><?= Html::encode($this->title); ?></h1>
     <p>
-        <?= Html::a('修改信息', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('修改信息', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']); ?>
         <?= Html::a('切换可用状态', ['change-status', 'id' => $model->id], [
             'class' => 'btn btn-primary',
             'data' => [
                 'confirm' => '你确定要切换该房间的可用状态吗？',
                 'method' => 'post',
             ],
-        ]) ?>
+        ]); ?>
         <?= Html::a('删除', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => '你确定要删除该房间吗？',
                 'method' => 'post',
             ],
-        ]) ?>
+        ]); ?>
     </p>
-
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -59,10 +51,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions' => $model->getStatusBg(),
             ],
         ],
-    ]) ?>
-
-    <p><strong>该房间未来一个月已批准的申请</strong></p>
-
+    ]); ?>
+    <p>
+        <strong>该房间未来一个月已批准的申请</strong>
+    </p>
     <div class="scrollable">
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
@@ -97,8 +89,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'contentOptions' => ['align' => 'center'],
                     'template' => '{view}',
                     'buttons' => [
-                        'view' => function($url, $model, $key)
-                        {
+                        'view' => function ($url) {
                             $options = [
                                 'title' => '审核',
                                 'aria-label' => '审核',
@@ -111,5 +102,4 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]); ?>
     </div>
-
 </div>

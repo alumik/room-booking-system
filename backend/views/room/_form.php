@@ -8,15 +8,12 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model common\models\Room */
 /* @var $form yii\widgets\ActiveForm */
-
-/* @author 钟震宇 <nczzy1997@gmail.com> */
 ?>
 
 <div class="room-form col-lg-5 row">
-
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'room_number')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'room_number')->textInput(['maxlength' => true]); ?>
 
     <?= $form->field($model, 'type')->dropDownList(
         RoomType::find()
@@ -24,7 +21,7 @@ use yii\widgets\ActiveForm;
             ->orderBy('id')
             ->indexBy('id')
             ->column(),
-        ['prompt' => '请选择房间类型']) ?>
+        ['prompt' => '请选择房间类型']); ?>
 
     <?= $form->field($model, 'campus')->dropDownList(
         Campus::find()
@@ -32,12 +29,11 @@ use yii\widgets\ActiveForm;
             ->orderBy('id')
             ->indexBy('id')
             ->column(),
-        ['prompt' => '请选择房间所在校区']) ?>
+        ['prompt' => '请选择房间所在校区']); ?>
 
     <div class="form-group">
-        <?= Html::submitButton('保存', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('保存', ['class' => 'btn btn-success']); ?>
     </div>
 
     <?php ActiveForm::end(); ?>
-
 </div>

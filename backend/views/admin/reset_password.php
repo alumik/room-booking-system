@@ -7,7 +7,7 @@ use yii\widgets\ActiveForm;
 /* @var $model backend\models\ResetPasswordForm */
 /* @var $admin common\models\Admin */
 
-$this->title = '修改密码';
+$this->title = '修改管理员密码';
 $this->params['breadcrumbs'][] = ['label' => '管理员管理', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $admin->admin_id, 'url' => ['view', 'id' => $admin->id]];
 $this->params['breadcrumbs'][] = $this->title;

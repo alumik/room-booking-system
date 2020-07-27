@@ -6,10 +6,10 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model common\models\Admin */
 
-$this->title = '修改信息';
+$this->title = '修改管理员信息';
 $this->params['breadcrumbs'][] = ['label' => '管理员管理', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->admin_id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = '修改信息';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="admin-update">

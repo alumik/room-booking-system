@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $form->field($model, 'password2')->passwordInput(['maxlength' => true]); ?>
 
         <div class="form-group">
-            <?= Html::submitButton('新增', ['class' => 'btn btn-success']); ?>
+            <?= Html::submitButton('保存', ['class' => 'btn btn-success']); ?>
         </div>
 
         <?php ActiveForm::end(); ?>
