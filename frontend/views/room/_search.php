@@ -7,12 +7,9 @@ use kartik\datetime\DateTimePicker;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\RoomSearch */
 /* @var $form yii\widgets\ActiveForm */
-
-/* @author 钟震宇 <nczzy1997@gmail.com> */
 ?>
 
 <div class="room-search">
-
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
@@ -52,10 +49,9 @@ use kartik\datetime\DateTimePicker;
     ]); ?>
 
     <div class="form-group">
-        <?= Html::submitButton('查看可用房间', ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('重置搜索条件', ['index'], ['class' => 'btn btn-default']) ?>
+        <?= Html::submitButton('查看可用房间', ['class' => 'btn btn-primary']); ?>
+        <?= Html::a('重置搜索条件', ['index'], ['class' => 'btn btn-default']); ?>
     </div>
 
     <?php ActiveForm::end(); ?>
-
 </div>

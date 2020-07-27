@@ -1,8 +1,5 @@
 <?php
 
-/** @noinspection PhpUnusedParameterInspection */
-/** @noinspection PhpUnhandledExceptionInspection */
-
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\grid\GridView;
@@ -11,17 +8,13 @@ use yii\grid\GridView;
 /* @var $model common\models\Room */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-/* @author 钟震宇 <nczzy1997@gmail.com> */
-
 $this->title = $model->campus0->campus_name . ' ' . $model->room_number;
 $this->params['breadcrumbs'][] = ['label' => '预约房间', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $model->id;
 ?>
 
 <div class="room-view">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
+    <h1><?= Html::encode($this->title); ?></h1>
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -41,10 +34,10 @@ $this->params['breadcrumbs'][] = $model->id;
                 'contentOptions' => $model->getStatusBg(),
             ],
         ],
-    ]) ?>
-
-    <p><strong>与你申请时间相冲突且已批准的申请</strong></p>
-
+    ]); ?>
+    <p>
+        <strong>与你申请时间相冲突且已批准的申请</strong>
+    </p>
     <div class="scrollable">
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
@@ -78,8 +71,7 @@ $this->params['breadcrumbs'][] = $model->id;
                     'contentOptions' => ['align' => 'center'],
                     'template' => '{conflict-detail}',
                     'buttons' => [
-                        'conflict-detail' => function($url, $model, $key)
-                        {
+                        'conflict-detail' => function ($url) {
                             $options = [
                                 'title' => '查看详情',
                                 'aria-label' => '查看详情',
@@ -92,5 +84,4 @@ $this->params['breadcrumbs'][] = $model->id;
             ],
         ]); ?>
     </div>
-
 </div>

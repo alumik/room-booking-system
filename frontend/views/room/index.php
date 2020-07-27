@@ -1,8 +1,5 @@
 <?php
 
-/** @noinspection PhpUnusedParameterInspection */
-/** @noinspection PhpUnhandledExceptionInspection */
-
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
@@ -12,20 +9,14 @@ use common\models\Room;
 /* @var $searchModel frontend\models\RoomSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-/* @author 钟震宇 <nczzy1997@gmail.com> */
-
 $this->title = '预约房间';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="room-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>房间可预约使用时间最长为十二小时</p>
-
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
-
+    <h1><?= Html::encode($this->title); ?></h1>
+    <p>房间可预约时间最长为十二小时</p>
+    <?= $this->render('_search', ['model' => $searchModel]); ?>
     <div class="scrollable col-lg-9 row">
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
@@ -50,33 +41,33 @@ $this->params['breadcrumbs'][] = $this->title;
                     'contentOptions' => ['style' => 'vertical-align:middle'],
                 ],
                 [
-                    'value' => function($model)use($searchModel) {
+                    'value' => function ($model) use ($searchModel) {
                         /* @var $model Room */
-                        $queue_count = $model->getQueueCount($searchModel->start_time, $searchModel->end_time);
-                        return $queue_count == 0 ? '无' : $queue_count . ' 个';
+                        $queueCount = $model->getQueueCount($searchModel->start_time, $searchModel->end_time);
+                        return $queueCount == 0 ? '无' : $queueCount . ' 个';
                     },
                     'label' => '待审核申请',
                     'contentOptions' => ['style' => 'width:100px; vertical-align:middle'],
                 ],
                 [
                     'attribute' => 'approval_status',
-                    'value' => function($model)use($searchModel) {
+                    'value' => function ($model) use ($searchModel) {
                         /* @var $model Room */
-                        $s_time_str = $searchModel->start_time;
-                        $e_time_str = $searchModel->end_time;
-                        $a_status = $model->getApprovalStatus($s_time_str, $e_time_str)['text'];
+                        $startTime = $searchModel->start_time;
+                        $endTime = $searchModel->end_time;
+                        $status = $model->getApprovalStatus($startTime, $endTime)['text'];
 
-                        if ($a_status == '已分配') {
+                        if ($status == '已分配') {
                             return Html::a(
-                                $a_status,
-                                ['view', 'id' => $model->id, 'startTime' => $s_time_str, 'endTime' => $e_time_str]
+                                $status,
+                                ['view', 'id' => $model->id, 'startTime' => $startTime, 'endTime' => $endTime]
                             );
                         }
 
-                        return $a_status;
+                        return $status;
                     },
                     'label' => '分配状态',
-                    'contentOptions' => function($model)use($searchModel) {
+                    'contentOptions' => function ($model) use ($searchModel) {
                         /* @var $model Room */
                         $options = $model->getApprovalStatus($searchModel->start_time, $searchModel->end_time)['class'];
                         $options['style'] = 'width:80px; vertical-align:middle';
@@ -88,8 +79,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'class' => 'yii\grid\ActionColumn',
                     'template' => '{order}',
                     'buttons' => [
-                        'order' => function($url, $model, $key) use ($searchModel)
-                        {
+                        'order' => function ($url, $model) use ($searchModel) {
                             $s_time = strtotime($searchModel->start_time);
                             $e_time = strtotime($searchModel->end_time);
 
