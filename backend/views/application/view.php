@@ -1,7 +1,5 @@
 <?php
 
-/** @noinspection PhpUnhandledExceptionInspection */
-
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use common\models\Application;
@@ -10,17 +8,13 @@ use common\models\Room;
 /* @var $this yii\web\View */
 /* @var $model common\models\Application */
 
-/* @author 钟震宇 <nczzy1997@gmail.com> */
-
 $this->title = '预约申请详情';
 $this->params['breadcrumbs'][] = ['label' => '预约管理', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $model->id;
 ?>
 
 <div class="application-view">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
+    <h1><?= Html::encode($this->title); ?></h1>
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -29,9 +23,9 @@ $this->params['breadcrumbs'][] = $model->id;
                 'attribute' => 'room_number',
                 'label' => '房间号',
                 'value' => Html::a(
-                    $model->room->room_number,
-                    ['room/view', 'id' => $model->room_id]
-                ) . $model->room->getColoredStatusStr(),
+                        $model->room->room_number,
+                        ['room/view', 'id' => $model->room_id]
+                    ) . $model->room->getColoredStatusStr(),
                 'captionOptions' => ['width' => '20%'],
                 'format' => 'raw',
             ],
@@ -74,38 +68,30 @@ $this->params['breadcrumbs'][] = $model->id;
                 'format' => ['date', 'php: Y-m-d H:i'],
             ],
         ],
-    ]) ?>
-
-    <?PHP
-        if ($model->canUpdate()) {
-            ?>
-            <p>
-                <?PHP
-                /* @var $model common\models\Application */
-                    if ($model->status != Application::STATUS_APPROVED &&
-                        $model->room->available != Room::STATUS_UNAVAILABLE &&
-                        !$model->getConflictId()) {
-                        ?>
-                        <?= Html::a('批准', ['approve', 'id' => $model->id], [
-                            'class' => 'btn btn-primary',
-                            'data' => [
-                                'confirm' => '你确定要批准该申请吗？',
-                                'method' => 'post',
-                            ],
-                        ]) ?>
-                        <?php
-                    }
+    ]); ?>
+    <?php if ($model->canUpdate()): ?>
+        <p>
+            <?php
+            if ($model->status != Application::STATUS_APPROVED
+                && $model->room->available != Room::STATUS_UNAVAILABLE
+                && !$model->getConflictId()):
                 ?>
+                <?= Html::a('批准', ['approve', 'id' => $model->id], [
+                'class' => 'btn btn-primary',
+                'data' => [
+                    'confirm' => '你确定要批准该申请吗？',
+                    'method' => 'post',
+                ],
+            ]); ?>
+            <?php else: ?>
                 <?= Html::a('拒绝', ['reject', 'id' => $model->id], [
                     'class' => 'btn btn-danger',
                     'data' => [
                         'confirm' => '你确定要拒绝该申请吗？该操作不可撤销。',
                         'method' => 'post',
                     ],
-                ]) ?>
-            </p>
-            <?php
-        }
-    ?>
-
+                ]); ?>
+            <?php endif; ?>
+        </p>
+    <?php endif; ?>
 </div>
