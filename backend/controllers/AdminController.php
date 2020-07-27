@@ -124,6 +124,7 @@ class AdminController extends Controller
 
         return $this->render('reset_password', [
             'model' => $model,
+            'admin' => Admin::findIdentity($id),
         ]);
     }
 

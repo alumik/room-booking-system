@@ -1,8 +1,5 @@
 <?php
 
-/** @noinspection PhpUnusedParameterInspection */
-/** @noinspection PhpUnhandledExceptionInspection */
-
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -10,21 +7,16 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\AdminSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-/* @author 钟震宇 <nczzy1997@gmail.com> */
-
 $this->title = '管理员管理';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="admin-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
+    <h1><?= Html::encode($this->title); ?></h1>
     <p>
-        <?= Html::a('新增管理员', ['create'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a('权限对照表', ['view-privilege'], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('新增管理员', ['create'], ['class' => 'btn btn-success']); ?>
+        <?= Html::a('权限对照表', ['view-privilege'], ['class' => 'btn btn-primary']); ?>
     </p>
-
     <div class="scrollable">
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
@@ -74,8 +66,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'contentOptions' => ['align' => 'center'],
                     'template' => '{view} {update} {reset-password} {privilege}',
                     'buttons' => [
-                        'update' => function($url, $model, $key)
-                        {
+                        'update' => function ($url) {
                             $options = [
                                 'title' => '修改信息',
                                 'aria-label' => '修改信息',
@@ -83,28 +74,25 @@ $this->params['breadcrumbs'][] = $this->title;
                             ];
                             return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, $options);
                         },
-                        'reset-password' => function($url, $model, $key)
-                        {
+                        'reset-password' => function ($url) {
                             $options = [
                                 'title' => '修改密码',
                                 'aria-label' => '修改密码',
                                 'data-pjax' => '0',
                             ];
-                            return Html::a('<span class="glyphicon glyphicon-cog"></span>', $url, $options);
+                            return Html::a('<span class="glyphicon glyphicon-lock"></span>', $url, $options);
                         },
-                        'privilege' => function($url, $model, $key)
-                        {
+                        'privilege' => function ($url) {
                             $options = [
                                 'title' => '修改权限',
                                 'aria-label' => '修改权限',
                                 'data-pjax' => '0',
                             ];
-                            return Html::a('<span class="glyphicon glyphicon-user"></span>', $url, $options);
+                            return Html::a('<span class="glyphicon glyphicon-th-list"></span>', $url, $options);
                         }
                     ]
                 ],
             ],
         ]); ?>
     </div>
-
 </div>

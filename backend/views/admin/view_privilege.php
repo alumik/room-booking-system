@@ -1,7 +1,5 @@
 <?php
 
-/** @noinspection PhpUnhandledExceptionInspection */
-
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -9,20 +7,17 @@ use yii\grid\GridView;
 /* @var $searchModel backend\models\AuthItemSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-/* @author 钟震宇 <nczzy1997@gmail.com> */
-
 $this->title = '权限对照表';
 $this->params['breadcrumbs'][] = ['label' => '管理员管理', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="auth-item-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
+    <h1><?= Html::encode($this->title); ?></h1>
     <div class="scrollable">
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
+            'summary' => '',
             'columns' => [
                 [
                     'attribute' => 'description',
@@ -69,5 +64,4 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]); ?>
     </div>
-
 </div>
