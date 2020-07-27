@@ -5,11 +5,6 @@ namespace common\models;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
-/**
- * @author 钟震宇 <nczzy1997@gmail.com>
- *
- * 公共 申请 筛选模型
- */
 class ApplicationSearch extends Application
 {
     public $room_number;
@@ -41,7 +36,7 @@ class ApplicationSearch extends Application
     }
 
     /**
-     * 根据查询条件生成dataProvider
+     * 根据查询条件进行搜索
      *
      * @param array $params
      * @return ActiveDataProvider
@@ -92,10 +87,10 @@ class ApplicationSearch extends Application
             ->andFilterWhere(['like', 'user.student_id', $this->applicant_student_id])
             ->andFilterWhere(['like', 'user.username', $this->applicant_name]);
 
-        $s_time = strtotime($this->start_time_picker);
-        $e_time = strtotime($this->end_time_picker);
+        $startTime = strtotime($this->start_time_picker);
+        $endTime = strtotime($this->end_time_picker);
 
-        $query->andWhere("not(end_time < $s_time or start_time > $e_time)");
+        $query->andWhere("not(end_time < $startTime or start_time > $endTime)");
 
         $query->andFilterWhere(['like', 'organization_name', $this->organization_name])
             ->andFilterWhere(['like', 'event', $this->event]);

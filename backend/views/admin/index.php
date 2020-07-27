@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'super_admin',
                     'label' => '超级管理员',
-                    'value' => 'superAdminStr',
+                    'value' => 'superAdminIndicator',
                     'filter' => ['1' => '是', '0' => '否'],
                     'contentOptions' => ['align' => 'center'],
                     'headerOptions' => ['class' => 'text-center'],
@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'web_admin',
                     'label' => '网站管理员',
-                    'value' => 'webAdminStr',
+                    'value' => 'webAdminIndicator',
                     'filter' => ['1' => '是', '0' => '否'],
                     'contentOptions' => ['align' => 'center'],
                     'headerOptions' => ['class' => 'text-center'],
@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'student_admin',
                     'label' => '学生管理员',
-                    'value' => 'studentAdminStr',
+                    'value' => 'studentAdminIndicator',
                     'filter' => ['1' => '是', '0' => '否'],
                     'contentOptions' => ['align' => 'center'],
                     'headerOptions' => ['class' => 'text-center'],
@@ -63,7 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'room_admin',
                     'label' => '预约管理员',
-                    'value' => 'roomAdminStr',
+                    'value' => 'roomAdminIndicator',
                     'filter' => ['1' => '是', '0' => '否'],
                     'contentOptions' => ['align' => 'center'],
                     'headerOptions' => ['class' => 'text-center'],

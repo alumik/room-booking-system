@@ -7,9 +7,6 @@ use yii\db\Query;
 use yii\db\ActiveRecord;
 
 /**
- * @author 钟震宇 <nczzy1997@gmail.com>
- *
- * 公共 申请 模型
  *
  * @property int $id
  * @property int $applicant_id
@@ -23,6 +20,10 @@ use yii\db\ActiveRecord;
  * @property int $updated_at
  *
  * @property User $applicant
+ * @property-read array $statusBg
+ * @property-read array $conflictId
+ * @property-read null|string $statusStr
+ * @property-read array|string[] $actionBg
  * @property Room $room
  */
 class Application extends ActiveRecord
@@ -71,15 +72,14 @@ class Application extends ActiveRecord
      * 判断输入的开始时间是否合法
      *
      * @param $attribute
-     * @param $params
      */
-    public function validateStartTime($attribute, $params)
+    public function validateStartTime($attribute)
     {
         if (!$this->hasErrors()) {
-            $s_time = $this->start_time;
-            if ($s_time < time()) {
+            $startTime = $this->start_time;
+            if ($startTime < time()) {
                 $this->addError($attribute, '开始时间必须大于现在时间。');
-            } else if ($s_time > time() + 3600 * 24 * 30) {
+            } else if ($startTime > time() + 3600 * 24 * 30) {
                 $this->addError($attribute, '开始时间必须在一个月内。');
             }
         }
@@ -89,16 +89,15 @@ class Application extends ActiveRecord
      * 判断输入的结束时间是否合法
      *
      * @param $attribute
-     * @param $params
      */
-    public function validateEndTime($attribute, $params)
+    public function validateEndTime($attribute)
     {
         if (!$this->hasErrors()) {
-            $s_time = $this->start_time;
-            $e_time = $this->end_time;
-            if ($s_time > $e_time) {
+            $startTime = $this->start_time;
+            $endTime = $this->end_time;
+            if ($startTime > $endTime) {
                 $this->addError($attribute, '结束时间必须大于开始时间。');
-            } else if ($e_time - $s_time > 3600 * 12) {
+            } else if ($endTime - $startTime > 3600 * 12) {
                 $this->addError($attribute, '持续时间不能超过十二小时。');
             }
         }
@@ -156,18 +155,11 @@ class Application extends ActiveRecord
     /**
      * 获取当前申请状态字符串
      *
-     * @return string|null
+     * @return string
      */
-    public function getStatusStr() {
-        switch ($this->status) {
-            case self::STATUS_PENDING:
-                return '待审核';
-            case self::STATUS_APPROVED:
-                return '已批准';
-            case self::STATUS_REJECTED:
-                return '已拒绝';
-        }
-        return null;
+    public function getStatusStr()
+    {
+        return self::getAllStatus()[$this->status];
     }
 
     /**
@@ -175,7 +167,8 @@ class Application extends ActiveRecord
      *
      * @return int|string
      */
-    public static function getPendingApplicationCount() {
+    public static function getPendingApplicationCount()
+    {
         $time = time();
         return Application::find()
             ->where(['status' => 0])
@@ -221,7 +214,8 @@ class Application extends ActiveRecord
             ->andWhere("id != $this->id")
             ->count();
 
-        if (($overlap > 0 && $this->status == self::STATUS_PENDING) || (!$this->room->available && $this->status != self::STATUS_REJECTED)) {
+        if (($overlap > 0 && $this->status == self::STATUS_PENDING)
+            || (!$this->room->available && $this->status != self::STATUS_REJECTED)) {
             return ['class' => 'bg-warning'];
         }
 
@@ -261,23 +255,20 @@ class Application extends ActiveRecord
         return false;
     }
 
+    /**
+     * 获取冲突申请 ID
+     *
+     * @return array
+     */
     public function getConflictId()
     {
-        $conflict_id = (new Query())
+        return (new Query())
             ->select('id')
             ->from('application')
             ->where("not (start_time >= $this->end_time or end_time <= $this->start_time)")
             ->andWhere(['status' => self::STATUS_APPROVED])
             ->andWhere(['room_id' => $this->room_id])
             ->andWhere("id != $this->id")
-            ->all();
-
-        $conflict_id_array = [];
-
-        foreach ($conflict_id as $c_id) {
-            $conflict_id_array[] = $c_id['id'];
-        }
-
-        return $conflict_id_array;
+            ->column();
     }
 }

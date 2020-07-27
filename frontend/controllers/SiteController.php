@@ -163,7 +163,7 @@ class SiteController extends Controller
                 Yii::$app->session->setFlash('success', '密码重置邮件已发送至你的注册邮箱。');
                 return $this->redirect(['login']);
             } else {
-                Yii::$app->session->setFlash('error', '对不起，重置密码出错。请检查你的邮箱地址。');
+                Yii::$app->session->setFlash('error', '对不起，重置密码出错。请检查你的电子邮箱地址。');
             }
         }
 

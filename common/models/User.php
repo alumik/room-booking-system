@@ -9,9 +9,6 @@ use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
 /**
- * @author 钟震宇 <nczzy1997@gmail.com>
- *
- * 公共 学生 模型
  *
  * @property integer $id
  * @property string $student_id
@@ -23,11 +20,13 @@ use yii\web\IdentityInterface;
  * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
- * @property string $password write-only password
+ * @property-read string $statusStr
+ * @property-read string $authKey
+ * @property-write string $password write-only password
  */
 class User extends ActiveRecord implements IdentityInterface
 {
-    const STATUS_DELETED = 0;
+    const STATUS_INACTIVE = 0;
     const STATUS_ACTIVE = 10;
 
     /**
@@ -35,7 +34,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function tableName()
     {
-        return '{{%user}}';
+        return 'user';
     }
 
     /**
@@ -55,12 +54,12 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
-            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE]],
 
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => '该邮箱已注册。'],
+            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => '该电子邮箱已注册。'],
 
             ['student_id', 'required'],
             ['student_id', 'string', 'length' => 7],
@@ -80,7 +79,7 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             'student_id' => '学号',
             'username' => '姓名',
-            'email' => 'Email',
+            'email' => '电子邮箱',
             'status' => '用户状态',
             'created_at' => '注册时间',
             'updated_at' => '修改时间',
@@ -105,7 +104,7 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * 根据student_id寻找学生
+     * 根据 [[student_id]] 寻找学生
      *
      * @param string $student_id
      * @return static|null
@@ -116,7 +115,7 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * 根据password_reset_token寻找学生
+     * 根据 [[password_reset_token]] 寻找学生
      *
      * @param string $token
      * @return static|null
@@ -186,7 +185,7 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * 为密码生成散列值（password_hash）并保存
+     * 为密码生成散列值并保存
      *
      * @param string $password
      * @throws \Exception
@@ -197,7 +196,7 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * 生成“保持登录状态”用的鉴权码（auth_key）
+     * 生成保持登录状态用的鉴权码
      *
      * @throws \Exception
      */
@@ -229,9 +228,9 @@ class User extends ActiveRecord implements IdentityInterface
      *
      * @return array
      */
-    public static function allStatus()
+    public static function getAllStatus()
     {
-        return [self::STATUS_ACTIVE => '正常', self::STATUS_DELETED => '已禁用'];
+        return [self::STATUS_ACTIVE => '正常', self::STATUS_INACTIVE => '已禁用'];
     }
 
     /**
@@ -241,7 +240,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getStatusStr()
     {
-        return $this->status == self::STATUS_ACTIVE ? '正常' : '已禁用';
+        return self::getAllStatus()[$this->status];
     }
 
     /**
@@ -261,13 +260,11 @@ class User extends ActiveRecord implements IdentityInterface
 
     /**
      * 切换学生状态
-     *
-     * @return bool
      */
     public function changeStatus()
     {
         if ($this->status == self::STATUS_ACTIVE) {
-            $this->status = self::STATUS_DELETED;
+            $this->status = self::STATUS_INACTIVE;
             $applications = Application::findAll(['applicant_id' => $this->id, 'status' => Application::STATUS_PENDING]);
             foreach ($applications as $application) {
                 $application->status = Application::STATUS_REJECTED;
@@ -276,7 +273,5 @@ class User extends ActiveRecord implements IdentityInterface
         } else {
             $this->status = self::STATUS_ACTIVE;
         }
-
-        return true;
     }
 }

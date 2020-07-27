@@ -6,9 +6,8 @@ use Yii;
 use yii\base\Model;
 
 /**
- * @author 钟震宇 <nczzy1997@gmail.com>
  *
- * 公共 管理员登录 表单模型
+ * @property-read null|Admin $admin
  */
 class AdminLoginForm extends Model
 {
@@ -49,9 +48,8 @@ class AdminLoginForm extends Model
      * 验证密码是否正确
      *
      * @param string $attribute
-     * @param array $params
      */
-    public function validatePassword($attribute, $params)
+    public function validatePassword($attribute)
     {
         if (!$this->hasErrors()) {
             $admin = $this->getAdmin();
@@ -71,7 +69,7 @@ class AdminLoginForm extends Model
         if ($this->validate()) {
             return Yii::$app->user->login($this->getAdmin(), $this->rememberMe ? 3600 * 24 * 30 : 0);
         }
-        
+
         return false;
     }
 

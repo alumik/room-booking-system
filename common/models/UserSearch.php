@@ -5,11 +5,6 @@ namespace common\models;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
-/**
- * @author 钟震宇 <nczzy1997@gmail.com>
- *
- * 公共 学生 筛选模型
- */
 class UserSearch extends User
 {
     /**
@@ -32,7 +27,7 @@ class UserSearch extends User
     }
 
     /**
-     * 根据查询条件生成dataProvider
+     * 根据查询条件进行搜索
      *
      * @param array $params
      * @return ActiveDataProvider
@@ -44,7 +39,7 @@ class UserSearch extends User
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => ['defaultOrder' => ['student_id' => SORT_ASC]],
-            'pagination'=>['pageSize' => 30],
+            'pagination' => ['pageSize' => 30],
         ]);
 
         $this->load($params);

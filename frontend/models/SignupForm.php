@@ -32,7 +32,7 @@ class SignupForm extends Model
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => '该邮箱已注册。'],
+            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => '该电子邮箱已注册。'],
 
             [['password', 'password2'], 'required'],
             ['password', 'string', 'min' => 6],
@@ -48,7 +48,7 @@ class SignupForm extends Model
         return [
             'student_id' => '学号',
             'username' => '姓名',
-            'email' => 'Email',
+            'email' => '电子邮箱',
             'password' => '密码',
             'password2' => '再次输入密码',
         ];

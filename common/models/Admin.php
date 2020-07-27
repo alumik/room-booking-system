@@ -12,9 +12,6 @@ use app\models\AuthAssignment;
 use app\models\AuthItem;
 
 /**
- * @author 钟震宇 <nczzy1997@gmail.com>
- *
- * 公共 管理员 模型
  *
  * @property integer $id
  * @property string $admin_id
@@ -28,7 +25,14 @@ use app\models\AuthItem;
  * @property boolean $web_admin
  * @property boolean $student_admin
  * @property boolean $room_admin
- * @property string $password write-only password
+ * @property-read string $studentAdminIndicator
+ * @property-read mixed $rolesDescription
+ * @property-read array $roles
+ * @property-read string $webAdminIndicator
+ * @property-read string $superAdminIndicator
+ * @property-read string $roomAdminIndicator
+ * @property-read string $authKey
+ * @property-write string $password write-only password
  */
 class Admin extends ActiveRecord implements IdentityInterface
 {
@@ -37,7 +41,7 @@ class Admin extends ActiveRecord implements IdentityInterface
      */
     public static function tableName()
     {
-        return '{{%admin}}';
+        return 'admin';
     }
 
     /**
@@ -59,7 +63,7 @@ class Admin extends ActiveRecord implements IdentityInterface
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\common\models\Admin', 'message' => '该邮箱已注册。'],
+            ['email', 'unique', 'targetClass' => '\common\models\Admin', 'message' => '该电子邮箱已注册。'],
 
             ['admin_id', 'required'],
             ['admin_id', 'string', 'length' => 7],
@@ -79,7 +83,7 @@ class Admin extends ActiveRecord implements IdentityInterface
         return [
             'admin_id' => '工号',
             'admin_name' => '姓名',
-            'email' => 'Email',
+            'email' => '电子邮箱',
             'created_at' => '注册时间',
             'updated_at' => '修改时间',
         ];
@@ -103,7 +107,7 @@ class Admin extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * 根据admin_id寻找管理员
+     * 根据 [[admin_id]] 寻找管理员
      *
      * @param string $admin_id
      * @return static|null
@@ -149,7 +153,7 @@ class Admin extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * 为密码生成散列值（password_hash）并保存
+     * 为密码生成散列值并保存
      *
      * @param string $password
      * @throws \Exception
@@ -160,7 +164,7 @@ class Admin extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * 生成“保持登录状态”用的鉴权码（auth_key）
+     * 生成保持登录状态用的鉴权码
      *
      * @throws \Exception
      */
@@ -189,14 +193,15 @@ class Admin extends ActiveRecord implements IdentityInterface
      *
      * @return array
      */
-    public static function getAllRoles() {
+    public static function getAllRoles()
+    {
         $allRoles = AuthItem::find()->select(['name', 'description'])
             ->where(['type' => 1])
             ->orderBy('description')
             ->all();
 
         $allRolesArray = array();
-        foreach ($allRoles as $role) {
+        foreach ($allRoles as /* @var $role AuthItem */ $role) {
             $allRolesArray[$role->name] = $role->description;
         }
 
@@ -208,13 +213,14 @@ class Admin extends ActiveRecord implements IdentityInterface
      *
      * @return array
      */
-    public function getRoles() {
+    public function getRoles()
+    {
         $roles = AuthAssignment::find()->select(['item_name'])
             ->where(['user_id' => $this->id])
             ->all();
 
         $rolesArray = array();
-        foreach ($roles as $role) {
+        foreach ($roles as /* @var $role AuthAssignment */ $role) {
             array_push($rolesArray, $role->item_name);
         }
 
@@ -226,10 +232,11 @@ class Admin extends ActiveRecord implements IdentityInterface
      *
      * @string array
      */
-    public function getRolesDescription() {
+    public function getRolesDescription()
+    {
         $roles = (new Query())->select(['description'])
             ->from('auth_assignment')
-            ->join('INNER JOIN', 'auth_item', 'auth_item.name = auth_assignment.item_name')
+            ->join('inner join', 'auth_item', 'auth_item.name = auth_assignment.item_name')
             ->where(['user_id' => $this->id])
             ->all();
 
@@ -244,7 +251,8 @@ class Admin extends ActiveRecord implements IdentityInterface
     /**
      * 清空管理员角色
      */
-    public function resetRole() {
+    public function clearRoles()
+    {
         $this->super_admin = false;
         $this->web_admin = false;
         $this->student_admin = false;
@@ -253,42 +261,53 @@ class Admin extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * 获取SuperAdminStr
+     * 获取角色指示符
      *
+     * @param $roleName
      * @return string
      */
-    public function getSuperAdminStr()
+    private function getRoleIndicator($roleName)
     {
-        return $this->super_admin ? '●' : '-';
+        return $this->attributes[$roleName] ? '●' : '-';
     }
 
     /**
-     * 获取WebAdminStr
+     * 获取 [[superAdminIndicator]]
      *
      * @return string
      */
-    public function getWebAdminStr()
+    public function getSuperAdminIndicator()
     {
-        return $this->web_admin ? '●' : '-';
+        return $this->getRoleIndicator('super_admin');
     }
 
     /**
-     * 获取StudentAdminStr
+     * 获取 [[webAdminIndicator]]
      *
      * @return string
      */
-    public function getStudentAdminStr()
+    public function getWebAdminIndicator()
     {
-        return $this->student_admin ? '●' : '-';
+        return $this->getRoleIndicator('web_admin');
     }
 
     /**
-     * 获取RoomAdminStr
+     * 获取 [[studentAdminIndicator]]
      *
      * @return string
      */
-    public function getRoomAdminStr()
+    public function getStudentAdminIndicator()
     {
-        return $this->room_admin ? '●' : '-';
+        return $this->getRoleIndicator('student_admin');
+    }
+
+    /**
+     * 获取 [[roomAdminIndicator]]
+     *
+     * @return string
+     */
+    public function getRoomAdminIndicator()
+    {
+        return $this->getRoleIndicator('room_admin');
     }
 }

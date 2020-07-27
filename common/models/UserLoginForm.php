@@ -6,9 +6,8 @@ use Yii;
 use yii\base\Model;
 
 /**
- * @author 钟震宇 <nczzy1997@gmail.com>
  *
- * 公共 学生登陆 表单模型
+ * @property-read null|User $user
  */
 class UserLoginForm extends Model
 {
@@ -24,12 +23,11 @@ class UserLoginForm extends Model
     public function rules()
     {
         return [
-            // student_id and password are both required
             [['student_id', 'password'], 'required'],
             ['student_id', 'string', 'length' => 7],
-            // rememberMe must be a boolean value
+
             ['rememberMe', 'boolean'],
-            // password is validated by validatePassword()
+
             ['password', 'validatePassword'],
         ];
     }
@@ -50,9 +48,8 @@ class UserLoginForm extends Model
      * 验证密码是否正确
      *
      * @param string $attribute
-     * @param array $params
      */
-    public function validatePassword($attribute, $params)
+    public function validatePassword($attribute)
     {
         if (!$this->hasErrors()) {
             $user = $this->getUser();
@@ -72,7 +69,7 @@ class UserLoginForm extends Model
         if ($this->validate()) {
             return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
         }
-        
+
         return false;
     }
 

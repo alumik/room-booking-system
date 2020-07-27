@@ -200,7 +200,7 @@ class AdminController extends Controller
         $roles = $model->getRoles();
 
         if (isset($_POST['newRoles'])) {
-            $model->resetRole();
+            $model->clearRoles();
             AuthAssignment::deleteAll('user_id=:id', [':id' => $id]);
 
             $newRoles = $_POST['newRoles'];

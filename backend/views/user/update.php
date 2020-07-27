@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = '修改';
 
         <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
-        <?= $form->field($model, 'status')->dropDownList(User::allStatus(),
+        <?= $form->field($model, 'status')->dropDownList(User::getAllStatus(),
             ['prompt' => '请选择状态']) ?>
 
         <div class="form-group">

@@ -5,11 +5,6 @@ namespace common\models;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
-/**
- * @author 钟震宇 <nczzy1997@gmail.com>
- *
- * 公共 管理员 筛选模型
- */
 class AdminSearch extends Admin
 {
     /**
@@ -34,7 +29,7 @@ class AdminSearch extends Admin
     }
 
     /**
-     * 根据查询条件生成dataProvider
+     * 根据查询条件进行搜索
      *
      * @param array $params
      * @return ActiveDataProvider
@@ -46,7 +41,7 @@ class AdminSearch extends Admin
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => ['defaultOrder' => ['admin_id' => SORT_ASC]],
-            'pagination'=>['pageSize' => 30],
+            'pagination' => ['pageSize' => 30],
         ]);
 
         $this->load($params);

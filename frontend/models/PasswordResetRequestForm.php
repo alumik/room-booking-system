@@ -22,7 +22,7 @@ class PasswordResetRequestForm extends Model
             ['email', 'exist',
                 'targetClass' => '\common\models\User',
                 'filter' => ['status' => User::STATUS_ACTIVE],
-                'message' => '该 Email 未注册或无效。',
+                'message' => '该电子邮箱未注册或无效。',
             ],
         ];
     }
@@ -33,7 +33,7 @@ class PasswordResetRequestForm extends Model
     public function attributeLabels()
     {
         return [
-            'email' => 'Email',
+            'email' => '电子邮箱',
         ];
     }
 

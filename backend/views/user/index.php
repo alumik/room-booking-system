@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'status',
                     'value' => 'statusStr',
-                    'filter' => User::allStatus(),
+                    'filter' => User::getAllStatus(),
                 ],
                 [
                     'attribute' => 'created_at',

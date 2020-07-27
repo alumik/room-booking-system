@@ -7,9 +7,6 @@ use yii\db\Query;
 use yii\db\ActiveRecord;
 
 /**
- * @author 钟震宇 <nczzy1997@gmail.com>
- *
- * 公共 房间 模型
  *
  * @property int $id
  * @property string $room_number
@@ -19,6 +16,9 @@ use yii\db\ActiveRecord;
  *
  * @property Application[] $applications
  * @property RoomType $type0
+ * @property-read array $statusBg
+ * @property-read null|string $coloredStatusStr
+ * @property-read null|string $statusStr
  * @property Campus $campus0
  */
 class Room extends ActiveRecord
@@ -138,16 +138,11 @@ class Room extends ActiveRecord
     /**
      * 获取当前房间状态字符串
      *
-     * @return string|null
+     * @return string
      */
-    public function getStatusStr() {
-        switch ($this->available) {
-            case self::STATUS_AVAILABLE:
-                return '可用';
-            case self::STATUS_UNAVAILABLE:
-                return '不可用';
-        }
-        return null;
+    public function getStatusStr()
+    {
+        return self::getAllStatus()[$this->available];
     }
 
     /**
@@ -155,12 +150,14 @@ class Room extends ActiveRecord
      *
      * @return string|null
      */
-    public function getColoredStatusStr() {
+    public function getColoredStatusStr()
+    {
+        $statusStr = $this->getStatusStr();
         switch ($this->available) {
             case self::STATUS_AVAILABLE:
-                return '<span class="text-success">（可用）</span>';
+                return "<span class=\"text-success\">（{$statusStr}）</span>";
             case self::STATUS_UNAVAILABLE:
-                return '<span class="text-danger">（不可用）</span>';
+                return "<span class=\"text-danger\">（{$statusStr}）</span>";
         }
         return null;
     }
@@ -180,36 +177,28 @@ class Room extends ActiveRecord
 
     /**
      * 切换房间状态
-     *
-     * @return bool
      */
     public function changeStatus()
     {
-        if ($this->available == self::STATUS_AVAILABLE) {
-            $this->available = self::STATUS_UNAVAILABLE;
-        } else {
-            $this->available = self::STATUS_AVAILABLE;
-        }
-
-        return true;
+        $this->available = !$this->available;
     }
 
     /**
      * 获取相应时间内某房间的排队人数
      *
-     * @param string $s_time_str
-     * @param string $e_time_str
+     * @param string $startTime
+     * @param string $endTime
      * @return int|string
      */
-    public function getQueueCount($s_time_str, $e_time_str)
+    public function getQueueCount($startTime, $endTime)
     {
-        $s_time = strtotime($s_time_str);
-        $e_time = strtotime($e_time_str);
+        $startTime = strtotime($startTime);
+        $endTime = strtotime($endTime);
 
         return (new Query())
             ->select('id')
             ->from('application')
-            ->where("not (start_time >= $e_time or end_time <= $s_time)")
+            ->where("not (start_time >= $endTime or end_time <= $startTime)")
             ->andWhere(['status' => Application::STATUS_PENDING])
             ->andWhere(['room_id' => $this->id])
             ->count();
@@ -218,19 +207,19 @@ class Room extends ActiveRecord
     /**
      * 获取相应时间内某房间是否已被分配及背景颜色
      *
-     * @param string $s_time_str
-     * @param string $e_time_str
+     * @param string $startTime
+     * @param string $endTime
      * @return array
      */
-    public function getApprovalStatus($s_time_str, $e_time_str)
+    public function getApprovalStatus($startTime, $endTime)
     {
-        $s_time = strtotime($s_time_str);
-        $e_time = strtotime($e_time_str);
+        $startTime = strtotime($startTime);
+        $endTime = strtotime($endTime);
 
         $overlap = (new Query())
             ->select('id')
             ->from('application')
-            ->where("not (start_time >= $e_time or end_time <= $s_time)")
+            ->where("not (start_time >= $endTime or end_time <= $startTime)")
             ->andWhere(['status' => Application::STATUS_APPROVED])
             ->andWhere(['room_id' => $this->id])
             ->count();

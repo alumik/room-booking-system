@@ -6,9 +6,6 @@ use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
 /**
- * @author 钟震宇 <nczzy1997@gmail.com>
- *
- * 公共 房间类型 模型
  *
  * @property int $id
  * @property string $type_name

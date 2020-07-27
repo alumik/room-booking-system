@@ -37,7 +37,7 @@ class SignupForm extends Model
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\common\models\Admin', 'message' => '该邮箱已注册。'],
+            ['email', 'unique', 'targetClass' => '\common\models\Admin', 'message' => '该电子邮箱已注册。'],
 
             [['password', 'password2'], 'required'],
             ['password', 'string', 'min' => 6],
@@ -54,7 +54,7 @@ class SignupForm extends Model
         return [
             'admin_id' => '工号',
             'admin_name' => '姓名',
-            'email' => 'Email',
+            'email' => '电子邮箱',
             'password' => '密码',
             'password2' => '重新输入密码',
         ];
