@@ -9,12 +9,8 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use common\models\User;
 use common\models\UserSearch;
+use yii\web\Response;
 
-/**
- * @author 钟震宇 <nczzy1997@gmail.com>
- *
- * 后台 学生 控制器
- */
 class UserController extends Controller
 {
     /**
@@ -26,7 +22,7 @@ class UserController extends Controller
             'verbs' => [
                 'class' => VerbFilter::class,
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => ['post'],
                 ],
             ],
         ];
@@ -35,7 +31,7 @@ class UserController extends Controller
     /**
      * 列出所有学生
      *
-     * @return mixed
+     * @return string
      * @throws ForbiddenHttpException
      */
     public function actionIndex()
@@ -45,11 +41,10 @@ class UserController extends Controller
         }
 
         $searchModel = new UserSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'dataProvider' => $searchModel->search(Yii::$app->request->queryParams),
         ]);
     }
 
@@ -58,7 +53,7 @@ class UserController extends Controller
      * 如果操作成功则跳转至学生列表
      *
      * @param integer $id
-     * @return mixed
+     * @return Response
      * @throws ForbiddenHttpException
      * @throws NotFoundHttpException
      */
@@ -81,7 +76,7 @@ class UserController extends Controller
      *
      * @param integer $id
      * @return User
-     * @throws NotFoundHttpException 如果模型找不到
+     * @throws NotFoundHttpException
      */
     protected function findModel($id)
     {

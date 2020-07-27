@@ -4,13 +4,7 @@ namespace backend\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\AuthItem;
 
-/**
- * @author 钟震宇 <nczzy1997@gmail.com>
- *
- * 后台 权限项目 筛选模型
- */
 class AuthItemSearch extends AuthItem
 {
     /**
@@ -32,7 +26,7 @@ class AuthItemSearch extends AuthItem
     }
 
     /**
-     * 根据查询条件生成dataProvider
+     * 根据查询条件进行搜索
      *
      * @param array $params
      * @return ActiveDataProvider

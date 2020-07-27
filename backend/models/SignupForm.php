@@ -5,11 +5,6 @@ namespace backend\models;
 use yii\base\Model;
 use common\models\Admin;
 
-/**
- * @author 钟震宇 <nczzy1997@gmail.com>
- *
- * 后台 管理员注册 表单模型
- */
 class SignupForm extends Model
 {
     public $admin_id;
@@ -41,7 +36,6 @@ class SignupForm extends Model
 
             [['password', 'password2'], 'required'],
             ['password', 'string', 'min' => 6],
-
             ['password2', 'compare', 'compareAttribute' => 'password', 'message' => '两次输入密码不一致。'],
         ];
     }
@@ -56,7 +50,7 @@ class SignupForm extends Model
             'admin_name' => '姓名',
             'email' => '电子邮箱',
             'password' => '密码',
-            'password2' => '重新输入密码',
+            'password2' => '再次输入密码',
         ];
     }
 
@@ -71,14 +65,14 @@ class SignupForm extends Model
         if (!$this->validate()) {
             return null;
         }
-        
+
         $admin = new Admin();
         $admin->admin_id = $this->admin_id;
         $admin->admin_name = $this->admin_name;
         $admin->email = $this->email;
         $admin->setPassword($this->password);
         $admin->generateAuthKey();
-        
+
         return $admin->save() ? $admin : null;
     }
 }

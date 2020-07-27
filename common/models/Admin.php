@@ -8,8 +8,8 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\db\Query;
 use yii\web\IdentityInterface;
-use app\models\AuthAssignment;
-use app\models\AuthItem;
+use backend\models\AuthAssignment;
+use backend\models\AuthItem;
 
 /**
  *
@@ -195,17 +195,12 @@ class Admin extends ActiveRecord implements IdentityInterface
      */
     public static function getAllRoles()
     {
-        $allRoles = AuthItem::find()->select(['name', 'description'])
+        return AuthItem::find()
+            ->select(['description', 'name'])
             ->where(['type' => 1])
             ->orderBy('description')
-            ->all();
-
-        $allRolesArray = array();
-        foreach ($allRoles as /* @var $role AuthItem */ $role) {
-            $allRolesArray[$role->name] = $role->description;
-        }
-
-        return $allRolesArray;
+            ->indexBy('name')
+            ->column();
     }
 
     /**
@@ -215,16 +210,10 @@ class Admin extends ActiveRecord implements IdentityInterface
      */
     public function getRoles()
     {
-        $roles = AuthAssignment::find()->select(['item_name'])
+        return AuthAssignment::find()
+            ->select('item_name')
             ->where(['user_id' => $this->id])
-            ->all();
-
-        $rolesArray = array();
-        foreach ($roles as /* @var $role AuthAssignment */ $role) {
-            array_push($rolesArray, $role->item_name);
-        }
-
-        return $rolesArray;
+            ->column();
     }
 
     /**
@@ -234,18 +223,14 @@ class Admin extends ActiveRecord implements IdentityInterface
      */
     public function getRolesDescription()
     {
-        $roles = (new Query())->select(['description'])
+        $roles = (new Query())
+            ->select('description')
             ->from('auth_assignment')
             ->join('inner join', 'auth_item', 'auth_item.name = auth_assignment.item_name')
             ->where(['user_id' => $this->id])
-            ->all();
+            ->column();
 
-        $rolesArray = array();
-        foreach ($roles as $role) {
-            array_push($rolesArray, $role['description']);
-        }
-
-        return implode('，', $rolesArray);
+        return implode('，', $roles);
     }
 
     /**

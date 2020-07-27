@@ -1,15 +1,12 @@
 <?php
 
-namespace app\models;
+namespace backend\models;
 
 use yii\base\InvalidConfigException;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
 /**
- * @author 钟震宇 <nczzy1997@gmail.com>
- *
- * 后台 权限项目 模型
  *
  * @property string $name
  * @property int $type
@@ -23,6 +20,13 @@ use yii\db\ActiveRecord;
  * @property AuthItemChild[] $authItemChildren
  * @property AuthItemChild[] $authItemChildren0
  * @property AuthItem[] $children
+ * @property-read string $priManageRoom
+ * @property-read string $priManageStudent
+ * @property-read string $priViewAdminList
+ * @property-read string $priManagePermission
+ * @property-read string $priViewStudentList
+ * @property-read array $privileges
+ * @property-read string $priManageAdmin
  * @property AuthItem[] $parents
  */
 class AuthItem extends ActiveRecord
@@ -115,76 +119,80 @@ class AuthItem extends ActiveRecord
      */
     public function getPrivileges()
     {
-        $privileges = AuthItemChild::find()->select(['child'])
+        return AuthItemChild::find()
+            ->select('child')
             ->where(['auth_item_child.parent' => $this->name])
-            ->all();
-
-        $privilegesArray = array();
-        foreach ($privileges as $privilege) {
-            /* @var AuthItemChild $privilege */
-            array_push($privilegesArray, $privilege->child);
-        }
-
-        return $privilegesArray;
+            ->column();
     }
 
     /**
-     * 获取 priManageRoom
+     * 获取权限标识符
+     *
+     * @param $privilege
+     * @return string
+     */
+    private function getPrivilegeIndicator($privilege)
+    {
+        return in_array($privilege, $this->getPrivileges()) ? '●' : '-';
+    }
+
+    /**
+     * 获取 [[priManageRoom]]
      *
      * @return string
      */
     public function getPriManageRoom()
     {
-        return in_array('manageRoom', $this->getPrivileges()) ? '●' : '-';
+        return $this->getPrivilegeIndicator('manageRoom');
     }
 
     /**
-     * 获取 priManageAdmin
+     * 获取 [[priManageAdmin]]
      *
      * @return string
      */
     public function getPriManageAdmin()
     {
-        return in_array('manageAdmin', $this->getPrivileges()) ? '●' : '-';
+        return $this->getPrivilegeIndicator('manageAdmin');
     }
 
     /**
-     * 获取 priManageStudent
+     * 获取 [[priManageStudent]]
      *
      * @return string
      */
     public function getPriManageStudent()
     {
-        return in_array('manageStudent', $this->getPrivileges()) ? '●' : '-';
+        return $this->getPrivilegeIndicator('manageStudent');
     }
 
     /**
-     * 获取 priViewAdminList
+     * 获取 [[priViewAdminList]]
      *
      * @return string
      */
     public function getPriViewAdminList()
     {
-        return in_array('viewAdminList', $this->getPrivileges()) ? '●' : '-';
+        return $this->getPrivilegeIndicator('viewAdminList');
     }
 
     /**
-     * 获取 priViewStudentList
+     * 获取 [[priViewStudentList]]
      *
      * @return string
      */
     public function getPriViewStudentList()
     {
-        return in_array('viewStudentList', $this->getPrivileges()) ? '●' : '-';
+        return $this->getPrivilegeIndicator('viewStudentList');
     }
 
     /**
-     * 获取 priManagePermission
+     * 获取 [[priManagePermission]]
      *
      * @return string
      */
     public function getPriManagePermission()
     {
-        return in_array('managePermission', $this->getPrivileges()) ? '●' : '-';
+        return $this->getPrivilegeIndicator('managePermission');
     }
 }

@@ -8,11 +8,6 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\AdminLoginForm;
 
-/**
- * @author 钟震宇 <nczzy1997@gmail.com>
- *
- * 后台 网站 控制器
- */
 class SiteController extends Controller
 {
     /**
@@ -23,11 +18,8 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::class,
+                'only' => ['logout', 'index'],
                 'rules' => [
-                    [
-                        'actions' => ['login', 'error', 'about', 'guiding'],
-                        'allow' => true,
-                    ],
                     [
                         'actions' => ['logout', 'index'],
                         'allow' => true,
@@ -69,7 +61,7 @@ class SiteController extends Controller
     /**
      * 关于页面
      *
-     * @return mixed
+     * @return string
      */
     public function actionAbout()
     {
@@ -81,9 +73,9 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function actionGuiding()
+    public function actionInstruction()
     {
-        return $this->render('guiding');
+        return $this->render('instruction');
     }
 
     /**
@@ -103,7 +95,6 @@ class SiteController extends Controller
             return $this->goBack();
         } else {
             $model->password = '';
-
             return $this->render('login', [
                 'model' => $model,
             ]);

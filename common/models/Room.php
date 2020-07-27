@@ -3,7 +3,6 @@
 namespace common\models;
 
 use yii\db\ActiveQuery;
-use yii\db\Query;
 use yii\db\ActiveRecord;
 
 /**
@@ -195,9 +194,8 @@ class Room extends ActiveRecord
         $startTime = strtotime($startTime);
         $endTime = strtotime($endTime);
 
-        return (new Query())
+        return Application::find()
             ->select('id')
-            ->from('application')
             ->where("not (start_time >= $endTime or end_time <= $startTime)")
             ->andWhere(['status' => Application::STATUS_PENDING])
             ->andWhere(['room_id' => $this->id])
@@ -216,9 +214,8 @@ class Room extends ActiveRecord
         $startTime = strtotime($startTime);
         $endTime = strtotime($endTime);
 
-        $overlap = (new Query())
+        $overlap = Application::find()
             ->select('id')
-            ->from('application')
             ->where("not (start_time >= $endTime or end_time <= $startTime)")
             ->andWhere(['status' => Application::STATUS_APPROVED])
             ->andWhere(['room_id' => $this->id])

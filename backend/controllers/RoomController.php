@@ -14,11 +14,6 @@ use common\models\ApplicationSearch;
 use backend\models\RoomSearch;
 use yii\web\Response;
 
-/**
- * @author 钟震宇 <nczzy1997@gmail.com>
- *
- * 后台 房间 控制器
- */
 class RoomController extends Controller
 {
     /**
@@ -30,7 +25,7 @@ class RoomController extends Controller
             'verbs' => [
                 'class' => VerbFilter::class,
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => ['post'],
                 ],
             ],
         ];
@@ -39,7 +34,7 @@ class RoomController extends Controller
     /**
      * 列出所有房间
      *
-     * @return mixed
+     * @return string
      * @throws ForbiddenHttpException
      */
     public function actionIndex()
@@ -49,11 +44,10 @@ class RoomController extends Controller
         }
 
         $searchModel = new RoomSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'dataProvider' => $searchModel->search(Yii::$app->request->queryParams),
         ]);
     }
 
@@ -72,15 +66,14 @@ class RoomController extends Controller
         }
 
         $searchModel = new ApplicationSearch();
-        $searchModel->start_time_picker = date('Y-m-d H:i', time());
+        $searchModel->start_time_picker = date('Y-m-d H:i');
         $searchModel->end_time_picker = date('Y-m-d H:i', time() + 3600 * 24 * 30);
         $searchModel->room_id = $id;
         $searchModel->status = Application::STATUS_APPROVED;
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('view', [
             'model' => $this->findModel($id),
-            'dataProvider' => $dataProvider,
+            'dataProvider' => $searchModel->search(Yii::$app->request->queryParams),
         ]);
     }
 
@@ -88,7 +81,7 @@ class RoomController extends Controller
      * 创建一个新房间
      * 如果操作成功则跳转至详情页
      *
-     * @return mixed
+     * @return string|Response
      * @throws ForbiddenHttpException
      */
     public function actionCreate()
@@ -113,7 +106,7 @@ class RoomController extends Controller
      * 如果操作成功则跳转至详情页
      *
      * @param integer $id
-     * @return mixed
+     * @return string|Response
      * @throws NotFoundHttpException
      * @throws ForbiddenHttpException
      */
@@ -139,7 +132,7 @@ class RoomController extends Controller
      * 如果操作成功则跳转至房间列表
      *
      * @param integer $id
-     * @return mixed
+     * @return Response
      * @throws NotFoundHttpException
      * @throws ForbiddenHttpException
      * @throws StaleObjectException
@@ -182,8 +175,8 @@ class RoomController extends Controller
      * 如果未找到模型，抛出404异常
      *
      * @param integer $id
-     * @return Room the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
+     * @return Room
+     * @throws NotFoundHttpException
      */
     protected function findModel($id)
     {

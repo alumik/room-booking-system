@@ -5,11 +5,6 @@ namespace backend\models;
 use yii\base\Model;
 use common\models\Admin;
 
-/**
- * @author 钟震宇 <nczzy1997@gmail.com>
- *
- * 后台 管理员修改密码 表单模型
- */
 class ResetPasswordForm extends Model
 {
     public $password;
@@ -23,7 +18,6 @@ class ResetPasswordForm extends Model
         return [
             [['password', 'password2'], 'required'],
             ['password', 'string', 'min' => 6],
-
             ['password2', 'compare', 'compareAttribute' => 'password', 'message' => '两次输入密码不一致。'],
         ];
     }
@@ -35,7 +29,7 @@ class ResetPasswordForm extends Model
     {
         return [
             'password' => '密码',
-            'password2' => '重新输入密码',
+            'password2' => '再次输入密码',
         ];
     }
 
@@ -51,10 +45,10 @@ class ResetPasswordForm extends Model
         if (!$this->validate()) {
             return null;
         }
-        
+
         $admin = Admin::findOne($id);
         $admin->setPassword($this->password);
-        
+
         return $admin->save();
     }
 }

@@ -3,7 +3,6 @@
 namespace common\models;
 
 use yii\db\ActiveQuery;
-use yii\db\Query;
 use yii\db\ActiveRecord;
 
 /**
@@ -205,9 +204,8 @@ class Application extends ActiveRecord
      */
     public function getActionBg()
     {
-        $overlap = (new Query())
+        $overlap = Application::find()
             ->select('id')
-            ->from('application')
             ->where("not (start_time >= $this->end_time or end_time <= $this->start_time)")
             ->andWhere(['status' => self::STATUS_APPROVED])
             ->andWhere(['room_id' => $this->room_id])
@@ -262,9 +260,8 @@ class Application extends ActiveRecord
      */
     public function getConflictId()
     {
-        return (new Query())
+        return Application::find()
             ->select('id')
-            ->from('application')
             ->where("not (start_time >= $this->end_time or end_time <= $this->start_time)")
             ->andWhere(['status' => self::STATUS_APPROVED])
             ->andWhere(['room_id' => $this->room_id])

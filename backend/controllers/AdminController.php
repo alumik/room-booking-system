@@ -8,18 +8,14 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\ForbiddenHttpException;
-use app\models\AuthAssignment;
+use backend\models\AuthAssignment;
 use common\models\Admin;
 use common\models\AdminSearch;
 use backend\models\ResetPasswordForm;
 use backend\models\SignupForm;
 use backend\models\AuthItemSearch;
+use yii\web\Response;
 
-/**
- * @author 钟震宇 <nczzy1997@gmail.com>
- *
- * 后台 管理员 控制器
- */
 class AdminController extends Controller
 {
     /**
@@ -31,7 +27,7 @@ class AdminController extends Controller
             'verbs' => [
                 'class' => VerbFilter::class,
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => ['post'],
                 ],
             ],
         ];
@@ -40,7 +36,7 @@ class AdminController extends Controller
     /**
      * 列出所有管理员
      *
-     * @return mixed
+     * @return string
      * @throws ForbiddenHttpException
      */
     public function actionIndex()
@@ -50,11 +46,10 @@ class AdminController extends Controller
         }
 
         $searchModel = new AdminSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'dataProvider' => $searchModel->search(Yii::$app->request->queryParams),
         ]);
     }
 
@@ -62,7 +57,7 @@ class AdminController extends Controller
      * 查看一个管理员的详细信息
      *
      * @param integer $id
-     * @return mixed
+     * @return string
      * @throws ForbiddenHttpException
      * @throws NotFoundHttpException
      */
@@ -81,7 +76,7 @@ class AdminController extends Controller
      * 创建一个新管理员
      * 如果操作成功则跳转至详情页
      *
-     * @return mixed
+     * @return string|Response
      * @throws ForbiddenHttpException
      * @throws \Exception
      */
@@ -109,7 +104,7 @@ class AdminController extends Controller
      * 如果操作成功则跳转至管理员列表
      *
      * @param integer $id
-     * @return mixed
+     * @return string|Response
      * @throws ForbiddenHttpException
      * @throws \Exception
      */
@@ -137,7 +132,7 @@ class AdminController extends Controller
      * 如果操作成功则跳转至详情页
      *
      * @param integer $id
-     * @return mixed
+     * @return string|Response
      * @throws ForbiddenHttpException
      * @throws NotFoundHttpException
      */
@@ -163,7 +158,7 @@ class AdminController extends Controller
      * 如果操作成功则跳转至管理员列表
      *
      * @param integer $id
-     * @return mixed
+     * @return Response
      * @throws ForbiddenHttpException
      * @throws NotFoundHttpException
      * @throws StaleObjectException
@@ -185,7 +180,7 @@ class AdminController extends Controller
      * 如果操作成功则跳转至管理员列表
      *
      * @param integer $id
-     * @return mixed
+     * @return string|Response
      * @throws ForbiddenHttpException
      * @throws NotFoundHttpException
      */
@@ -251,11 +246,10 @@ class AdminController extends Controller
         }
 
         $searchModel = new AuthItemSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('view_privilege', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'dataProvider' => $searchModel->search(Yii::$app->request->queryParams),
         ]);
     }
 
@@ -265,7 +259,7 @@ class AdminController extends Controller
      *
      * @param integer $id
      * @return Admin
-     * @throws NotFoundHttpException 如果模型找不到
+     * @throws NotFoundHttpException
      */
     protected function findModel($id)
     {

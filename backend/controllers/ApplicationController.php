@@ -12,11 +12,6 @@ use common\models\Application;
 use common\models\ApplicationSearch;
 use yii\web\Response;
 
-/**
- * @author 钟震宇 <nczzy1997@gmail.com>
- *
- * 后台 申请 控制器
- */
 class ApplicationController extends Controller
 {
     /**
@@ -28,7 +23,7 @@ class ApplicationController extends Controller
             'verbs' => [
                 'class' => VerbFilter::class,
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => ['post'],
                 ],
             ],
         ];
@@ -38,7 +33,7 @@ class ApplicationController extends Controller
      * 列出所有申请列表
      * 默认显示时间范围为从现在起30天内
      *
-     * @return mixed
+     * @return string
      * @throws ForbiddenHttpException
      */
     public function actionIndex()
@@ -48,13 +43,12 @@ class ApplicationController extends Controller
         }
 
         $searchModel = new ApplicationSearch();
-        $searchModel->start_time_picker = date('Y-m-d H:i', time());
+        $searchModel->start_time_picker = date('Y-m-d H:i');
         $searchModel->end_time_picker = date('Y-m-d H:i', time() + 3600 * 24 * 30);
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'dataProvider' => $searchModel->search(Yii::$app->request->queryParams),
         ]);
     }
 
@@ -62,7 +56,7 @@ class ApplicationController extends Controller
      * 显示一个申请详情
      *
      * @param integer $id
-     * @return mixed
+     * @return string
      * @throws NotFoundHttpException
      * @throws ForbiddenHttpException
      */
@@ -144,8 +138,8 @@ class ApplicationController extends Controller
      * 如果未找到模型，抛出404异常
      *
      * @param integer $id
-     * @return Application the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
+     * @return Application
+     * @throws NotFoundHttpException
      */
     protected function findModel($id)
     {

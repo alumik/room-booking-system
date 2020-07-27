@@ -6,11 +6,6 @@ use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\Room;
 
-/**
- * @author 钟震宇 <nczzy1997@gmail.com>
- *
- * 后台 房间 筛选模型
- */
 class RoomSearch extends Room
 {
     /**
@@ -33,7 +28,7 @@ class RoomSearch extends Room
     }
 
     /**
-     * 根据查询条件生成dataProvider
+     * 根据查询条件进行搜索
      *
      * @param array $params
      * @return ActiveDataProvider
