@@ -1,25 +1,20 @@
 <?php
 
-/** @noinspection PhpUnhandledExceptionInspection */
-
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Application */
 
-/* @author 钟震宇 <nczzy1997@gmail.com> */
-
-$this->title = '预约申请详情';
+$this->title = '冲突申请详情';
 $this->params['breadcrumbs'][] = ['label' => '预约房间', 'url' => ['room/index']];
-$this->params['breadcrumbs'][] = $model->room->room_number;
-$this->params['breadcrumbs'][] = '预约申请详情';
+$this->params['breadcrumbs'][] = $model->room->id;
+$this->params['breadcrumbs'][] = '冲突申请';
+$this->params['breadcrumbs'][] = $model->id;
 ?>
 
 <div class="application-view">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
+    <h1><?= Html::encode($this->title); ?></h1>
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -69,8 +64,6 @@ $this->params['breadcrumbs'][] = '预约申请详情';
                 'format' => ['date', 'php: Y-m-d H:i'],
             ],
         ],
-    ]) ?>
-
-    <?= Html::a('返回', Yii::$app->request->referrer, ['class' => 'btn btn-primary']) ?>
-
+    ]); ?>
+    <?= Html::a('返回', Yii::$app->request->referrer, ['class' => 'btn btn-primary']); ?>
 </div>
