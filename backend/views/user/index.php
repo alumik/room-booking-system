@@ -1,8 +1,5 @@
 <?php
 
-/** @noinspection PhpUnusedParameterInspection */
-/** @noinspection PhpUnhandledExceptionInspection */
-
 use yii\helpers\Html;
 use yii\grid\GridView;
 use common\models\User;
@@ -11,16 +8,12 @@ use common\models\User;
 /* @var $searchModel common\models\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-/* @author 钟震宇 <nczzy1997@gmail.com> */
-
 $this->title = '学生管理';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="user-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
+    <h1><?= Html::encode($this->title); ?></h1>
     <div class="scrollable">
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
@@ -53,8 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'contentOptions' => ['align' => 'center'],
                     'template' => '{change-status}',
                     'buttons' => [
-                        'change-status' => function($url, $model, $key)
-                        {
+                        'change-status' => function ($url, $model) {
                             if ($model->status == User::STATUS_ACTIVE) {
                                 $options = [
                                     'title' => '禁用学生',
@@ -78,5 +70,4 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]); ?>
     </div>
-
 </div>
